@@ -18,3 +18,9 @@ Route::prefix('admin')->namespace('Admin')->group(function(){
     Route::post('{filial}/processos/{processo}/alunos/importar', 'AlunoController@importar')->name('alunos.importar');
     Route::resource('{filial}/processos/{processo}/alunos', 'AlunoController');
 });
+
+Route::get('/{filial}/{processo}/','Publico\PublicoAlunoController@index')->name('FilialProcesso.index');
+Route::post('/{filial}/{processo}/login','Publico\PublicoAlunoController@login')->name('pAluno.login');
+Route::resource('/{filial}/{processo}/pAluno','Publico\PublicoAlunoController');
+Route::resource('/{filial}/{processo}/pFiliacao','Publico\PublicoFiliacaoController');
+Route::resource('/{filial}/{processo}/pRespFin','Publico\PublicoRespFinController');

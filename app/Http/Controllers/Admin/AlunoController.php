@@ -90,7 +90,6 @@ class AlunoController extends Controller
     {
         try {
             $arquivo = $this->fileUpload($request->arquivo,$request->processo_id);
-            //dd($arquivo,$arquivo->id);
             Excel::import(new AlunosImport($request->processo_id,$arquivo->id), $arquivo->url);
             return redirect()->back()->with('message','Os dados foram salvos com sucesso!');
         } catch (\Exception $e) {
@@ -104,11 +103,11 @@ class AlunoController extends Controller
             $doc = new Importacao();
             $namefile = rand(0,9999).'_'.date('d-m-Y_H-m-s').'_'.Str::kebab($upload->getClientOriginalName());
             $up = $upload->storeAs('/'.'/public/upload/importacao/'.$id,$namefile);
-            /*if(PHP_OS != 'WINNT'){
-                chmod(storage_path('/app/public/upload/documentos/'),0777);
-                chmod(storage_path('/app/public/upload/documentos/'.$id),0777);
+            if(PHP_OS != 'WINNT'){
+                chmod(storage_path('/app/public/upload/importacao/'),0777);
+                chmod(storage_path('/app/public/upload/importacao/'.$id),0777);
                 chmod(storage_path('app/public/'.$up),0777);
-            }*/
+            }
             //dd(storage_path(),$up);
             $doc->nome = $namefile;
             $doc->url = $up;

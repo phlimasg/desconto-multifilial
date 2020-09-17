@@ -1,0 +1,167 @@
+<?php
+
+namespace App\Http\Controllers\Publico;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\PublicAlunoRequest;
+use App\Models\Admin\Filial;
+use App\Models\Admin\Processo;
+use App\Models\Publico\PublicAluno;
+use Illuminate\Support\Facades\Session;
+
+class PublicoAlunoController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index($filial,$processo)
+    {
+        $processo = Filial::where('url',$filial)->first()
+                    ->ListarProcessos()->where('url',$processo)->first();
+        $processo ? '': abort('404','Processo não encontrado');
+        return view('publico.aluno.index',compact('filial','processo'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(PublicAlunoRequest $request)
+    {
+        try {            
+            $aluno = PublicAluno::updateOrCreate($request->all());
+            return redirect()->route('seila',[
+                'filial'=> $request->filial,
+                'processo' => $request->processo,
+                'ra'=>$aluno->ra,
+                ]);
+            dd($request->all());
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($filial,$processo,$pAluno)
+    {   
+        if(Session::get('ra') != $pAluno)
+        return redirect()->route('FilialProcesso.index',[
+            'filial'=> $filial,
+            'processo' =>$processo
+            ]);        
+        $processo = Filial::where('url',$filial)->first()
+                    ->ListarProcessos()->where('url',$processo)->first();
+        $processo ? '': abort('404','Processo não encontrado');
+        $dados = $processo->pAlunos()->where('ra',$pAluno)->latest()->first();
+        if(!$dados){
+            $dados = $processo->alunos()->where('ra',$pAluno)->latest()->first();        
+            $dados->nome ?? $dados->nome = $dados->nome_aluno; 
+            $dados->serie ?? $dados->serie = $dados->ano;
+            $dados->email ?? $dados->email = $dados->email_aluno;
+            $dados->sexo ?? $dados->sexo = $dados->sexo;  
+        } 
+        //dd('dd',Session::get('ra'),$dados, $filial,$processo,$pAluno);
+        return view('publico.aluno.show',compact('filial','processo','dados'))->with('aluno',$pAluno);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(PublicAlunoRequest $request, $filial, $processo,$pAluno)
+    {
+        
+        $url = Processo::select('url')->find($request->processo);
+        try {            
+            $aluno = PublicAluno::updateOrCreate([
+                'ra' => $pAluno,
+                'processo_id'=>$processo,
+            ],
+                $request->except('_token','_method','irmao_select')
+             );
+
+            //dd($request->all(),$aluno,$pAluno,$processo, Session::get('ra'));
+            return redirect()->route('pFiliacao.show',[
+                'filial'=> $request->filial,
+                'processo' => $url->url,
+                'pFiliacao'=>$pAluno,
+                ]);
+            Session::put('ra',$pAluno);
+            
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+    public function login(Request $request)
+    {
+        try {
+            $processo = Filial::where('url',$request->filial)->first()
+                ->ListarProcessos()->where('url',$request->processo)
+                ->where('periodo_ini','<=',date('Y-m-d H:i:s'))
+                ->where('periodo_fim','>=',date('Y-m-d H:i:s'))
+                ->first();                
+            if(!$processo) 
+                return redirect()->back()->with('message','Prazo finalizado.');
+            $aluno = $processo->alunos()->where('ra',$request->ra)->first();
+            if(!$aluno)
+                return redirect()->back()->with('message','Aluno não encontrado');
+            //session('ra',$aluno->ra);
+            Session::put('ra',$aluno->ra);
+            return redirect()
+            ->route('pAluno.show',
+            [
+                'filial'=>$request->filial,
+                'processo'=>$request->processo,
+                'pAluno' => $aluno->ra
+                ]);
+
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+}
