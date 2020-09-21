@@ -172,6 +172,9 @@ a.article:hover {
     background: #054fae !important;
     color: #fff !important;
 }
+.modal-lg{
+    max-width: 80% !important;
+}
 
 /* ---------------------------------------------------
     CONTENT STYLE
@@ -189,6 +192,9 @@ a.article:hover {
 ----------------------------------------------------- */
 
 @media (max-width: 768px) {
+    .modal-lg{
+        max-width: 80% !important;
+    }
     #conteudo{
         padding-left: 0px;
     }

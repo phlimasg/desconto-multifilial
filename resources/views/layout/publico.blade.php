@@ -48,19 +48,19 @@
                 <li @if (Request::segment(3) == 'pRespFin') class="active" @endif>
                     <a href="#">Responsável Financeiro</a>
                 </li>
-                <li @if (Request::segment(3) == 'pFiliacao') class="active" @endif>
+                <li @if (Request::segment(3) == 'pComposicaoFamiliar') class="active" @endif>
                     <a href="#">Composição Familiar</a>
                 </li>
-                <li @if (Request::segment(3) == 'pFiliacao') class="active" @endif>
+                <li @if (Request::segment(3) == 'pSituacaoHabitacional') class="active" @endif>
                     <a href="#">Situação Habitacional</a>
                 </li>
-                <li @if (Request::segment(3) == 'pFiliacao') class="active" @endif>
+                <li @if (Request::segment(3) == 'pRededeAbastecimento') class="active" @endif>
                     <a href="#">Rede de Abastecimento</a>
                 </li>
-                <li @if (Request::segment(3) == 'pFiliacao') class="active" @endif>
+                <li @if (Request::segment(3) == 'pBensMoveis') class="active" @endif>
                     <a href="#">Bens Móveis</a>
                 </li>
-                <li @if (Request::segment(3) == 'pFiliacao') class="active" @endif>
+                <li @if (Request::segment(3) == 'pDespesaseReceitas') class="active" @endif>
                     <a href="#">Despesas e Receitas</a>
                 </li>                
             </ul>

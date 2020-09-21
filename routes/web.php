@@ -24,3 +24,6 @@ Route::post('/{filial}/{processo}/login','Publico\PublicoAlunoController@login')
 Route::resource('/{filial}/{processo}/pAluno','Publico\PublicoAlunoController');
 Route::resource('/{filial}/{processo}/pFiliacao','Publico\PublicoFiliacaoController');
 Route::resource('/{filial}/{processo}/pRespFin','Publico\PublicoRespFinController');
+Route::resource('/{filial}/{processo}/pComposicaoFamiliar','Publico\PublicoComposicaoFamiliarController');
+Route::resource('/{filial}/{processo}/pDocumentos','Publico\PublicReceitasDocumentosController');
+Route::resource('/{filial}/{processo}/pSituacaoHabitacional','Publico\PublicSituacaoHabitacionalController');

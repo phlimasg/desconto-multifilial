@@ -43,4 +43,12 @@ class PublicAluno extends Model
     {
         return $this->hasMany(PublicFiliacao::class);
     }
+    public function pComposicaoFamiliar()
+    {
+        return $this->hasMany(PublicComposicaoFamiliar::class);
+    }
+    public function pResponsavelFinanceiro()
+    {
+        return $this->hasOne(PublicRespFin::class,'public_aluno_id','id');
+    }
 }
