@@ -47,42 +47,29 @@
       border-radius: 5px;     
     }
   </style>
-    <div class="wrapper">
+    <div class="">
         
-        <div id="content">
-
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid ">
-                    <button type="button" id="sidebarCollapse" class="btn btn-primary btn-fixed d-inline-block ml-auto">
-                        <i class="fas fa-align-justify"></i>
-                    </button>                    
+      <div style="width: 100%; background-color: #004aba; padding: 10px" cla>
+        <div class="container">
+          <img src="http://lasalle.edu.br/public/uploads/images/abel/5af5fc44d4812(BRANCA-HORIZONTAL)_Abel.png" alt="" width="200px">
+        </div>
+      </div>
+        
+          <div class="container " style="color: white;">
+            <br>
+            <div>
+                <h3>Dados recebidos com sucesso!</h3>
+    
+                <p style="color: white;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Informamos que recebemos todos os seus dados e em breve retornaremos com mais informações para que você acompanhe o passo a passo do andamento da sua solicitação.</p>
+                <br>
+                <p style="color: white;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Agradecemos a confiança e parceria.</p>
+    
+                <div style="text-align: right">
+                    <p style="color: white;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Atenciosamente,<br>
+    
+                        Colégio La Salle Abel</p>
                 </div>
-            </nav>
-            <form action="{{ route('pAluno.login', ['filial'=>$filial,'processo'=>$processo->url]) }}" method="post">
-              @csrf
-            <input type="hidden" name="filial" value="{{$filial}}">
-            <input type="hidden" name="processo" value="{{$processo->url}}">
-              <div class="login_ra">
-                <div class="login_box text-center">
-                  
-                  <img src="https://lasalle.edu.br/public/uploads/images/abel/5af5fc44d4812(BRANCA-HORIZONTAL)_Abel.png" alt="" srcset="" style="max-width: 450px;  max-height: 100px">    
-                  <div class="row">
-                    <div class="col-sm-12 ">
-                      <label for="">Ra/Matricula/Id:</label>
-                    <input type="text" name="ra" id="" class="form-control" placeholder="Somente Números" value="{{old('ra')}}">
-                    @if (session('message'))
-                      <span class="text-danger">*{{session('message')}}</span>
-                    @endif
-                    </div>
-                  </div>  
-                  <div class="row">
-                    <div class="col-sm-12 ">
-                      <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-key"></i> Entrar</button>
-                    </div>
-                  </div>  
-                </div>
-              </div>
-            </form>
+            </div>        
             
         </div>
     </div>

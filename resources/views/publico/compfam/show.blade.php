@@ -12,22 +12,45 @@
   <div><a href="#"  data-toggle="modal" data-target="#AddMembro" class="btn btn-primary" style="float: right"><i class="fa fa-plus"></i> Adicionar membro</a>
     <h3>Dados da Composição Familiar</h3>
   </div>
+  @php
+      $doc = false;
+  @endphp
   <hr>
-          <form action="{{ route('pComposicaoFamiliar.store', ['filial'=>$filial,'processo'=>$processo->url]) }}" method="post" enctype="multipart/form-data">
-            @csrf  
+  
+  <div class="modal fade" id="AddMembro">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Adicionar Membro</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">       
+  
+          <form id="formulario" action="{{ route('pComposicaoFamiliar.store', ['filial'=>$filial,'processo'=>$processo->url]) }}" method="post" enctype="multipart/form-data">
+            @csrf
           <input type="hidden" name="public_aluno_id" value="{{$dados->id}}">          
           <input type="hidden" name="processo_id" value="{{ $processo->id}}">
             <div class="row">      
               <div class="col-sm-6">
                 <label for="">Nome:</label>
-                <input type="text" name="nome" id="nome" class="form-control" placeholder="" value="{{old('nome') ? old('nome') : ''}}">
+                <input type="text" name="nome" id="nome" class="form-control" placeholder="" value="
+                @if ($dados->parentesco == "Aluno")
+                {{old('nome') ? old('nome') : $dados->nome}}
+                @else
+                {{old('nome') ? old('nome') : ''}}
+                @endif
+                ">
                 @error('nome')
                   <span class="text-danger">{{$message}}</span>
                 @enderror
               </div>
               <div class="col-sm-2">
                 <label for="">Parentesco:</label>
-                <input type="text" name="parentesco" id="" class="form-control {{$dados->parentesco == 'Aluno' ? 'disabled' : '' }}" placeholder="" value="{{old('parentesco') ? old('parentesco') : ''}}">
+                <input type="text" name="parentesco" id="" class="form-control" placeholder="" value="{{old('parentesco') ? old('parentesco') : $dados->parentesco}}">
                 @error('parentesco')
                   <span class="text-danger">{{$message}}</span>
                 @enderror
@@ -57,7 +80,20 @@
             <div class="row">
               <div class="col-sm-2">
                 <label for="">Escolaridade:</label>
-                <input type="text" name="escolaridade" id="" class="form-control" placeholder="" value="{{old('escolaridade') ? old('escolaridade') : ''}}">
+                <select name="escolaridade" id="" class="form-control">
+                  <option value=""></option>
+                  <option value="Analfabeto" {{$dados->escolaridade == 'Aluno' ? 'selected' : '' }}>Analfabeto</option>
+                  <option value="Até 5º Ano Incompleto">Até 5º Ano Incompleto</option>
+                  <option value="5º Ano Completo">5º Ano Completo</option>
+                  <option value="6º ao 9º Ano do Fundamental">6º ao 9º Ano do Fundamental</option>
+                  <option value="Fundamental Completo">Fundamental Completo</option>
+                  <option value="Médio Incompleto">Médio Incompleto</option>
+                  <option value="Médio Completo">Médio Completo</option>
+                  <option value="Superior Incompleto">Superior Incompleto</option>
+                  <option value="Superior Completo">Superior Completo</option>
+                  <option value="Mestrado">Mestrado</option>
+                  <option value="Doutorado">Doutorado</option>
+                </select>
                 @error('escolaridade')
                   <span class="text-danger">{{$message}}</span>
                 @enderror
@@ -90,7 +126,7 @@
           <div class="modal-footer">
             <div class="row">
               <div class="col-sm-12">
-                <button type="submit" class="btn btn-block btn-danger btn-lg"><i class="fa fa-floppy-o"></i> Adicionar</button>
+                <button type="submit" id="btnsubmit" class="btn btn-block btn-danger btn-lg"><i class="fa fa-floppy-o"></i> Adicionar</button>
               </div>
             </div>
           </div>
@@ -98,7 +134,7 @@
       </div>
   
     </div>
-  </div>  
+  </div> 
     @forelse ($dados->pComposicaoFamiliar()->get() as $i)
     <div class="card" style="background-color: beige">   
       <div class="card-body"> 
@@ -141,7 +177,7 @@
                 <h4 class="modal-title">Adicionar Documentos</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
-              <form action="{{ route('pDocumentos.store', ['filial'=>$filial,'processo'=>$processo->url]) }}" method="POST" enctype="multipart/form-data">
+              <form id="formdoc" action="{{ route('pDocumentos.store', ['filial'=>$filial,'processo'=>$processo->url]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                   <h5>Adicione mais documentos para {{$i->nome}}.</h5>
@@ -150,7 +186,7 @@
                 </div>  
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                  <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>Enviar</button>
+                  <button type="submit" id="btnsubmitdoc" class="btn btn-primary"><i class="fa fa-plus"></i>Enviar</button>
                 </div>
               </form>
               <!-- Modal body -->
@@ -193,10 +229,7 @@
                     </div>              
                   </div>
                 @empty
-                  Nenhum Documento...
-                  @php
-                    $doc = false;
-                  @endphp
+                  Nenhum Documento...                  
                 @endforelse
               </div>
             </div>
@@ -213,12 +246,11 @@
   @endif
 </div>
 <script>
-  
   $('#nome').change(function(){    
     $('#legenda').text('Anexe todos os documentos de: '+$('#nome').val())
-  });
-  
+  });  
 </script>
+
 @stop
 
 @section('css')
@@ -226,5 +258,20 @@
 @stop
 
 @section('js')
-    
+<script>
+  $('#formulario').submit(function(){
+    $('#btnsubmit').prop('disabled', true);
+  });
+  $('#formdoc').submit(function(){
+    $('#btnsubmitdoc').prop('disabled', true);
+  });  
+</script>
+  @if ($errors->any())  
+    <script>
+      $(document).ready(function(){
+        $("#addMembro").modal("show");    
+        console.log('modalOpen');
+      });
+    </script>
+  @endif 
 @stop

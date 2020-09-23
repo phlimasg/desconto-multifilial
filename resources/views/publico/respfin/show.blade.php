@@ -12,11 +12,10 @@
     @csrf
     @method('put')
   <input type="hidden" name="processo_id" value="{{ $processo->id}}">
-    <h3>Dados do Responsável Financeiro</h3>
-    <h5>Dados da Mãe</h5>
+    <h3>Dados do Responsável Financeiro</h3>    
     <div class="row">      
       <div class="col-sm-6">
-        <label for="">Nome da Mãe:</label>
+        <label for="">Nome:</label>
         <input type="text" name="nome" id="" class="form-control" placeholder="" value="{{old('nome') ? old('nome') : $dados->nome}}">
         @error('nome')
           <span class="text-danger">{{$message}}</span>
@@ -105,8 +104,15 @@
         @enderror
       </div>
       <div class="col-sm-2">
-        <label for="">Estado Civil:</label>
-        <input type="text" name="estado_civil" id="" class="form-control" placeholder="" min="1920-01-01" value="{{old('estado_civil') ? old('estado_civil') : $dados->estado_civil}}">
+        <label for="">Estado Civil:</label>        
+        <select name="estado_civil" id="" class="form-control">
+          <option value=""></option>
+          <option value="Solteiro(a)" {{$dados->estado_civil == 'Solteiro(a)' ? 'selected' : '' }}>Solteiro(a)</option>
+          <option value="Casado(a)">Casado(a)</option>
+          <option value="Divorciado(a)">Divorciado(a) </option>
+          <option value="Viúvo(a)">Viúvo(a)</option>
+          <option value="Separado(a)">Separado(a) </option>
+        </select>
         @error('estado_civil')
           <span class="text-danger">{{$message}}</span>
         @enderror
@@ -115,15 +121,28 @@
 
   <div class="row">
       <div class="col-sm-2">
-        <label for="">Escolaridade:</label>
-        <input type="text" name="escolaridade" id="" class="form-control" placeholder="" data-mask="000.000.000-00" value="{{old('escolaridade') ? old('escolaridade') : $dados->escolaridade}}">
+        <label for="">Escolaridade:</label>        
+        <select name="escolaridade" id="" class="form-control">
+          <option value=""></option>
+          <option value="Analfabeto" {{$dados->escolaridade == 'Aluno' ? 'selected' : '' }}>Analfabeto</option>
+          <option value="Até 5º Ano Incompleto">Até 5º Ano Incompleto</option>
+          <option value="5º Ano Completo">5º Ano Completo</option>
+          <option value="6º ao 9º Ano do Fundamental">6º ao 9º Ano do Fundamental</option>
+          <option value="Fundamental Completo">Fundamental Completo</option>
+          <option value="Médio Incompleto">Médio Incompleto</option>
+          <option value="Médio Completo">Médio Completo</option>
+          <option value="Superior Incompleto">Superior Incompleto</option>
+          <option value="Superior Completo">Superior Completo</option>
+          <option value="Mestrado">Mestrado</option>
+          <option value="Doutorado">Doutorado</option>
+        </select>
         @error('escolaridade')
           <span class="text-danger">{{$message}}</span>
         @enderror
       </div>
       <div class="col-sm-2">
         <label for="">Profissão:</label>
-        <input type="text" name="profissao" id="" class="form-control" placeholder="" data-mask="########0" value="{{old('profissao') ? old('profissao') : $dados->profissao}}">
+        <input type="text" name="profissao" id="" class="form-control" placeholder=""  value="{{old('profissao') ? old('profissao') : $dados->profissao}}">
         @error('profissao')
           <span class="text-danger">{{$message}}</span>
         @enderror

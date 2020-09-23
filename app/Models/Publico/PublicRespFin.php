@@ -31,4 +31,9 @@ class PublicRespFin extends Model
         'dt_emissor',
         'public_aluno_id',
     ];
+
+    public function pSituacaohabitacional()
+    {
+        return $this->hasOne(PublicSituacaoHabitacional::class,'public_resp_fin_id','id');
+    }
 }

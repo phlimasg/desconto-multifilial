@@ -102,12 +102,11 @@ class PublicSituacaoHabitacionalController extends Controller
             );
 
 
-            return redirect()->back(); 
-            /*route('pRespFin.show', [
+            return redirect()->route('pRedeDeAbastecimento.show', [
                 'filial' => $request->filial,
                 'processo' => $processo->url,
-                'pRespFin' => $pAluno,
-            ]);    */       
+                'pRedeDeAbastecimento' => $pAluno,
+            ]);      
         } catch (\Exception $e) {
             return $e->getMessage();
         }

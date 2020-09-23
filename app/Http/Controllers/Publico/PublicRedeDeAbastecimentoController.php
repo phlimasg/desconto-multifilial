@@ -3,16 +3,15 @@
 namespace App\Http\Controllers\Publico;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PublicRespFinRequest;
+use App\Http\Requests\PublicRedeDeAbastecimentoRequest;
 use App\Models\Admin\Filial;
 use App\Models\Admin\Processo;
 use App\Models\Publico\PublicAluno;
-use App\Models\Publico\PublicFiliacao;
-use App\Models\Publico\PublicRespFin;
+use App\Models\Publico\PublicRedeDeAbastecimento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class PublicoRespFinController extends Controller
+class PublicRedeDeAbastecimentoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -51,24 +50,20 @@ class PublicoRespFinController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($filial, $processo, $pAluno)
-    {
-        //dd(Session::get('ra'));
-        if (Session::get('ra') != $pAluno)
+    public function show($filial, $processo, $pPublicRedeDeAbastecimento)
+    {        
+        if (Session::get('ra') != $pPublicRedeDeAbastecimento)
             return redirect()->route('FilialProcesso.index', [
                 'filial' => $filial,
                 'processo' => $processo
             ]);
         $processo = Filial::where('url', $filial)->first()
             ->ListarProcessos()->where('url', $processo)->first();
+        $dados = $processo;
         $processo ? '' : abort('404', 'Processo não encontrado');
-        $aluno = $processo->pAlunos()->where('ra', $pAluno)->latest()->first();
-        $dados = PublicRespFin::where('public_aluno_id', $aluno->id)->first();        
-        if(!$dados){
-            $dados = $processo;
-            $dados->nome = '';
-        }        
-        return view('publico.respfin.show', compact('filial', 'processo', 'dados'))->with('aluno', $pAluno);
+        $aluno = $processo->pAlunos()->where('ra', $pPublicRedeDeAbastecimento)->latest()->first();
+       
+        return view('publico.rededeabastecimento.show', compact('filial', 'processo', 'dados'))->with('aluno', $pPublicRedeDeAbastecimento);        
     }
 
     /**
@@ -89,18 +84,15 @@ class PublicoRespFinController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PublicRespFinRequest $request, $filial, $processo, $pAluno)
+    public function update($filial, $processo, $pAluno, PublicRedeDeAbastecimentoRequest $request)
     {
-        //dd($request->all());
-        //dd($pAluno,$processo,Processo::select('url')->find($request->processo))->url;
         try {
-            //dd($request->all());
             $processo = Processo::find($request->processo);
+            $filial = Filial::where('url',$filial)->first();
             $aluno = PublicAluno::where('ra', $pAluno)
                 ->where('processo_id', $processo->id)
-                ->first();
-
-            $filiacao = PublicRespFin::updateOrCreate(
+                ->first();            
+            $SituacaoHabitacional = PublicRedeDeAbastecimento::updateOrCreate(
                 [
                     'public_aluno_id' => $aluno->id,
                 ],
@@ -108,12 +100,11 @@ class PublicoRespFinController extends Controller
             );
 
 
-            return redirect()->route('pComposicaoFamiliar.show', [
+            return redirect()->route('pVeiculos.show', [
                 'filial' => $request->filial,
                 'processo' => $processo->url,
-                'pComposicaoFamiliar' => $pAluno,
-            ]);
-            Session::put('ra', $pAluno);
+                'pVeiculo' => $pAluno,
+            ]);        
         } catch (\Exception $e) {
             return $e->getMessage();
         }

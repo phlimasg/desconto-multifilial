@@ -63,14 +63,10 @@ class PublicoFiliacaoController extends Controller
         $processo ? '': abort('404','Processo não encontrado');
         $aluno = $processo->pAlunos()->where('ra',$pAluno)->latest()->first();
         $dados = PublicFiliacao::where('public_aluno_id',$aluno->id)->first();
-        /*
         if(!$dados){
-            $dados = $processo->alunos()->first();        
-            $dados->nome ?? $dados->nome = $dados->nome_aluno; 
-            $dados->serie ?? $dados->serie = $dados->ano;
-            $dados->email ?? $dados->email = $dados->email_aluno;
-            $dados->sexo ?? $dados->sexo = $dados->sexo;  
-        } */
+            $dados = $processo;
+            $dados->nome = '';
+        }  
         //dd($aluno->ra);
         return view('publico.filiacao.show',compact('filial','processo','dados'))->with('aluno',$pAluno);
     }

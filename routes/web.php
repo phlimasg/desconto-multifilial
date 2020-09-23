@@ -27,3 +27,10 @@ Route::resource('/{filial}/{processo}/pRespFin','Publico\PublicoRespFinControlle
 Route::resource('/{filial}/{processo}/pComposicaoFamiliar','Publico\PublicoComposicaoFamiliarController');
 Route::resource('/{filial}/{processo}/pDocumentos','Publico\PublicReceitasDocumentosController');
 Route::resource('/{filial}/{processo}/pSituacaoHabitacional','Publico\PublicSituacaoHabitacionalController');
+Route::resource('/{filial}/{processo}/pRedeDeAbastecimento','Publico\PublicRedeDeAbastecimentoController');
+Route::resource('/{filial}/{processo}/pVeiculos','Publico\PublicVeiculosController');
+Route::resource('/{filial}/{processo}/pDespesasEReceitas','Publico\PublicDespesasEReceitasController');
+Route::resource('/{filial}/{processo}/pFinalizar','Publico\PublicFinalizarController');
+
+
+

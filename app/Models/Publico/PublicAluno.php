@@ -51,4 +51,13 @@ class PublicAluno extends Model
     {
         return $this->hasOne(PublicRespFin::class,'public_aluno_id','id');
     }
+    public function pRedeDeAbastecimento()
+    {
+        return $this->hasOne(PublicRedeDeAbastecimento::class,'public_aluno_id','id');
+    }
+    public function pDespesasEReceitas()
+    {
+        return $this->hasMany(PublicDespesasEReceitas::class);
+    }
+    
 }
