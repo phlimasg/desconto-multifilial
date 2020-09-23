@@ -119,7 +119,7 @@ class PublicReceitasDocumentosController extends Controller
                 $up = $i->storeAs('/'.'/public/upload/documentos/'.$processo->id.'/'.$id,$namefile);
                 if(PHP_OS != 'WINNT'){
                     chmod(storage_path('/app/public/upload/documentos/'),0777);
-                    chmod(storage_path('/app/public/upload/documentos/processo/'.$processo->id.'/'.$id),0777);
+                    chmod(storage_path('/app/public/upload/documentos/'.$processo->id.'/'.$id),0777);
                     chmod(storage_path('app/'.$up),0777);
                 }
                 $doc->nome = $i->getClientOriginalName();
@@ -127,7 +127,7 @@ class PublicReceitasDocumentosController extends Controller
                 $doc->url = $up;
                 $doc->public_composicao_familiar_id = $id;
                 $doc->save();
-                dd($upload, $i,$id,$processo,$doc,$up);
+                //dd($upload, $i,$id,$processo,$doc,$up);
                 if (!$up)
                     return redirect()
                         ->back()
