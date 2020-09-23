@@ -127,7 +127,7 @@ class PublicReceitasDocumentosController extends Controller
                 $doc->url = $up;
                 $doc->public_composicao_familiar_id = $id;
                 $doc->save();
-                //dd($upload, $i,$id,$processo,$doc,$up);
+                dd($upload, $i,$id,$processo,$doc,$up);
                 if (!$up)
                     return redirect()
                         ->back()
