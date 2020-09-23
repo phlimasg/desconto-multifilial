@@ -157,7 +157,7 @@ class PublicDespesasEReceitasController extends Controller
                 if(PHP_OS != 'WINNT'){
                     chmod(storage_path('/app/public/upload/documentos/despesasereceitas/'),0777);
                     chmod(storage_path('/app/public/upload/documentos/despesasereceitas/'.$processo->id.'/'.$id),0777);
-                    chmod(storage_path('app/public/'.$up),0777);
+                    chmod(storage_path('app/'.$up),0777);
                 }
                 $doc->nome = $i->getClientOriginalName();
                 $doc->nome_novo = $namefile;

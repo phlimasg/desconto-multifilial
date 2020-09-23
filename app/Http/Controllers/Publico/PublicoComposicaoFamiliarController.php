@@ -135,7 +135,7 @@ class PublicoComposicaoFamiliarController extends Controller
                 if(PHP_OS != 'WINNT'){
                     chmod(storage_path('/app/public/upload/documentos/'),0777);
                     chmod(storage_path('/app/public/upload/documentos/processo/'.$processo->id.'/'.$id),0777);
-                    chmod(storage_path('app/public/'.$up),0777);
+                    chmod(storage_path('app/'.$up),0777);
                 }
                 $doc->nome = $i->getClientOriginalName();
                 $doc->nome_novo = $namefile;
