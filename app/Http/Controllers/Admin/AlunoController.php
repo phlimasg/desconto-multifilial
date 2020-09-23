@@ -102,11 +102,12 @@ class AlunoController extends Controller
         
             $doc = new Importacao();
             $namefile = rand(0,9999).'_'.date('d-m-Y_H-m-s').'_'.Str::kebab($upload->getClientOriginalName());
-            $up = $upload->storeAs('/'.'/public/upload/importacao/'.$id,$namefile);
+            $up = $upload->storeAs('/'.'/public/upload/importacao/'.$id,$namefile);            
+            
             if(PHP_OS != 'WINNT'){
                 chmod(storage_path('/app/public/upload/importacao/'),0777);
                 chmod(storage_path('/app/public/upload/importacao/'.$id),0777);
-                chmod(storage_path('app/public/'.$up),0777);
+                chmod(storage_path('app/'.$up),0777);
             }
             //dd(storage_path(),$up);
             $doc->nome = $namefile;
