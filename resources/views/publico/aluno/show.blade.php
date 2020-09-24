@@ -86,8 +86,8 @@
         <label for="">Sexo:</label>
         <select name="sexo" id="" class="form-control">
           <option value="" ></option>
-          <option value="M" {{old('sexo')=='M' ? 'selected' : ''}}>Masculino</option>
-          <option value="F" {{old('sexo')=='F' ? 'selected' : ''}}>Feminino</option>
+          <option value="M" {{$dados->sexo =='M' || old('sexo')=='M' ? 'selected' : ''}}>Masculino</option>
+          <option value="F" {{$dados->sexo =='F' || old('sexo')=='F' ? 'selected' : ''}}>Feminino</option>
         </select>
         @error('sexo')
           <span class="text-danger">{{$message}}</span>
@@ -129,8 +129,8 @@
         <label for="">Escola de Origem Tipo:</label>
         <select name="esc_origem_tipo" id="" class="form-control">
           <option value=""></option>
-          <option value="Escola pública" {{old('esc_origem_tipo')=="Escola pública" ? 'selected': ''}}>Escola pública</option>
-          <option value="Escola Particular" {{old('esc_origem_tipo')=="Escola Particular" ? 'selected': ''}}>Escola Particular</option>
+          <option value="Escola pública" {{$dados->esc_origem_tipo =='Escola pública' || old('esc_origem_tipo')=='pública' ? 'selected' : ''}}>Escola pública</option>
+          <option value="Escola Particular" {{$dados->esc_origem_tipo =='Escola Particular' || old('esc_origem_tipo')=='Escola Particular' ? 'selected' : ''}}>Escola Particular</option>
         </select>
         @error('esc_origem_tipo')
           <span class="text-danger">{{$message}}</span>
@@ -148,9 +148,9 @@
       <div class="col-sm-3">
         <label for="">Reside próximo ao Colégio?</label>
         <select name="reside_proximo" id="" class="form-control">
-          <option value=""></option>
-          <option value="S" {{old('reside_proximo')=="S" ? 'selected': ''}}>Sim</option>
-          <option value="N" {{old('reside_proximo')=="N" ? 'selected': ''}}>Não</option>
+          <option value=""></option>          
+          <option value="S" {{$dados->reside_proximo =='S' ||old('reside_proximo')=="S" ? 'selected': ''}}>Sim</option>
+          <option value="N" {{$dados->reside_proximo =='N' ||old('reside_proximo')=="N" ? 'selected': ''}}>Não</option>
         </select>
         @error('reside_proximo')
           <span class="text-danger">{{$message}}</span>
@@ -160,11 +160,11 @@
         <label for="">Tipo de transporte utilizado:</label>
         <select name="transp_utilizado" id="" class="form-control">
           <option value="" ></option>
-          <option value="Carro próprio" {{old('transp_utilizado')=="Carro próprio" ? 'selected': ''}}>Carro próprio</option>
-          <option value="Carona" {{old('transp_utilizado')=="Carona" ? 'selected': ''}}>Carona</option>
-          <option value="Ônibus" {{old('transp_utilizado')=="Ônibus" ? 'selected': ''}}>Ônibus</option>
-          <option value="Van" {{old('transp_utilizado')=="Van" ? 'selected': ''}}>Van</option>
-          <option value="Não utiliza transporte (vai à escola a pé)" {{old('transp_utilizado')=="Não utiliza transporte (vai à escola a pé)" ? 'selected': ''}}>Não utiliza transporte (vai à escola a pé)</option>
+          <option value="Carro próprio" {{$dados->transp_utilizado =='Carro próprio' || old('transp_utilizado')=="Carro próprio" ? 'selected': ''}}>Carro próprio</option>
+          <option value="Carona" {{$dados->transp_utilizado =='Carona' || old('transp_utilizado')=="Carona" ? 'selected': ''}}>Carona</option>
+          <option value="Ônibus" {{$dados->transp_utilizado =='Ônibus' || old('transp_utilizado')=="Ônibus" ? 'selected': ''}}>Ônibus</option>
+          <option value="Van" {{$dados->transp_utilizado =='Van' || old('transp_utilizado')=="Van" ? 'selected': ''}}>Van</option>
+          <option value="Não utiliza transporte (vai à escola a pé)" {{$dados->transp_utilizado =='Não utiliza transporte (vai à escola a pé' || old('transp_utilizado')=="Não utiliza transporte (vai à escola a pé)" ? 'selected': ''}}>Não utiliza transporte (vai à escola a pé)</option>
         </select>
         @error('transp_utilizado')
           <span class="text-danger">{{$message}}</span>
@@ -173,11 +173,11 @@
     </div>
     <div class="row">
       <div class="col-sm-2">
-        <label for="">Possui deficiência?</label>
+        <label for="">Deficiência?</label>
         <select name="deficiencia" id="" class="form-control">
           <option value=""></option>
-          <option value="S" {{old('deficiencia')=="S" ? 'selected': ''}}>Sim</option>
-          <option value="N" {{old('deficiencia')=="N" ? 'selected': ''}}>Não</option>
+          <option value="S" {{$dados->deficiencia =='S' || old('deficiencia')=="S" ? 'selected': ''}}>Sim</option>
+          <option value="N" {{$dados->deficiencia =='N' || old('deficiencia')=="N" ? 'selected': ''}}>Não</option>
         </select>
         @error('deficiencia')
           <span class="text-danger">{{$message}}</span>
@@ -196,8 +196,8 @@
         <label for="">Possui irmão(s) estudando nesta unidade?</label>
         <select name="irmao_select" id="" class="form-control">
           <option value=""></option>
-          <option value="S" {{old('irmao_select')=="S" ? 'selected': ''}}>Sim</option>
-          <option value="N" {{old('irmao_select')=="N" ? 'selected': ''}}>Não</option>
+          <option value="S" {{$dados->irmao_ra || old('irmao_select')=="S" ? 'selected': ''}}>Sim</option>
+          <option value="N" {{!$dados->irmao_ra || old('irmao_select')=="N" ? 'selected': ''}}>Não</option>
         </select>
         @error('irmao_select')
           <span class="text-danger">{{$message}}</span>
@@ -210,7 +210,7 @@
           <span class="text-danger">{{$message}}</span>
         @enderror
       </div>
-      <div class="col-sm-2">
+      <div class="col-sm-6">
         <label for="">Nome do irmão:</label>
         <input type="text" name="irmao" id="" class="form-control" placeholder="" value="{{old('irmao') ? old('irmao') : $dados->irmao}}">
         @error('irmao')

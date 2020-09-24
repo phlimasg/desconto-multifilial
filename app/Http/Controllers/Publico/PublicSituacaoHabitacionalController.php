@@ -60,8 +60,9 @@ class PublicSituacaoHabitacionalController extends Controller
             ]);
         $processo = Filial::where('url', $filial)->first()
             ->ListarProcessos()->where('url', $processo)->first();
-        $dados = $processo;
-        $processo ? '' : abort('404', 'Processo não encontrado');
+        $processo ? '' : abort('404', 'Processo não encontrado');        
+        $dados = PublicAluno::where('ra',$pSituacaoHabitacional)->where('processo_id',$processo->id)->first()->pResponsavelFinanceiro->pSituacaohabitacional;
+        !$dados ? $dados = $processo : '';        
         $aluno = $processo->pAlunos()->where('ra', $pSituacaoHabitacional)->latest()->first();
        
         return view('publico.situhabita.show', compact('filial', 'processo', 'dados'))->with('aluno', $pSituacaoHabitacional);

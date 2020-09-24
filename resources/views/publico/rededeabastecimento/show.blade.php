@@ -17,8 +17,8 @@
         <label for="">A localidade da moradia possui rede de esgoto?</label>
         <select name="esgoto" id="" class="form-control">
           <option value=""></option>
-          <option value="Sim" {{old('esgoto')=="Sim" ? 'selected': ''}}>Sim</option>
-          <option value="Não" {{old('esgoto')=="Não" ? 'selected': ''}}>Não</option>
+          <option value="Sim" {{$dados->esgoto == "Sim" || old('esgoto')=="Sim" ? 'selected': ''}}>Sim</option>
+          <option value="Não" {{$dados->esgoto == "Não" || old('esgoto')=="Não" ? 'selected': ''}}>Não</option>
         </select>
         @error('esgoto')
           <span class="text-danger">{{$message}}</span>
@@ -28,8 +28,8 @@
         <label for="">A moradia possui itens de instalação sanitaria?</label>
         <select name="sanitaria" id="" class="form-control">
           <option value=""></option>
-          <option value="Sim" {{old('sanitaria')=="Sim" ? 'selected': ''}}>Sim</option>
-          <option value="Não" {{old('sanitaria')=="Não" ? 'selected': ''}}>Não</option>
+          <option value="Sim" {{$dados->sanitaria == "Sim" || old('sanitaria')=="Sim" ? 'selected': ''}}>Sim</option>
+          <option value="Não" {{$dados->sanitaria == "Não" || old('sanitaria')=="Não" ? 'selected': ''}}>Não</option>
         </select>
         @error('sanitaria')
           <span class="text-danger">{{$message}}</span>
@@ -39,9 +39,9 @@
         <label for="">Como é o abastecimento de água no local?</label>
         <select name="agua" id="" class="form-control">
           <option value=""></option>
-          <option value="Água encanada" {{old('agua')=="Água encanada" ? 'selected': ''}}>Água encanada</option>
-          <option value="Poço" {{old('agua')=="Poço" ? 'selected': ''}}>Poço</option>
-          <option value="Outro" {{old('agua')=="Outro" ? 'selected': ''}}>Outro</option>
+          <option value="Água encanada" {{$dados->agua == "Água encanada" || old('agua')=="Água encanada" ? 'selected': ''}}>Água encanada</option>
+          <option value="Poço" {{$dados->agua == "Poço" || old('agua')=="Poço" ? 'selected': ''}}>Poço</option>
+          <option value="Outro" {{$dados->agua == "Outro" || old('agua')=="Outro" ? 'selected': ''}}>Outro</option>
         </select>
         @error('agua')
           <span class="text-danger">{{$message}}</span>
@@ -52,9 +52,9 @@
         <label for="">Como é abastecimento por energia elétrica?</label>
         <select name="energia" id="" class="form-control">
           <option value=""></option>
-          <option value="Energia Elétrica Regularizada" {{old('energia')=="Energia Elétrica Regularizada" ? 'selected': ''}}>Casa</option>
-          <option value="Energia Solar" {{old('energia')=="Energia Solar" ? 'selected': ''}}>Energia Solar</option>                   
-          <option value="Outro" {{old('energia')=="Outro" ? 'selected': ''}}>Outro</option>  
+          <option value="Energia Elétrica Regularizada" {{$dados->energia == "Energia Elétrica Regularizada" || old('energia')=="Energia Elétrica Regularizada" ? 'selected': ''}}>Casa</option>
+          <option value="Energia Solar" {{$dados->energia == "Energia Solar" || old('energia')=="Energia Solar" ? 'selected': ''}}>Energia Solar</option>                   
+          <option value="Outro" {{$dados->energia == "Outro" || old('energia')=="Outro" ? 'selected': ''}}>Outro</option>  
         </select>
         @error('energia')
           <span class="text-danger">{{$message}}</span>

@@ -34,7 +34,7 @@ class PublicAlunoRequest extends FormRequest
             'dt_nasc'=> 'required|date_format:Y-m-d|max:15',
             'email'=> 'required|email|max:250',
             'rua'=> 'required|string|max:250',
-            'numero'=> 'required|numeric|max:250',
+            'numero'=> 'required|numeric',
             'complemento'=> 'required|string|max:250',
             'bairro'=> 'required|string|max:250',
             'cidade'=> 'required|string|max:250',

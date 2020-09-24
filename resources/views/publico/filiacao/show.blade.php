@@ -26,11 +26,11 @@
         <label for="">Situação:</label>
         <select name="mae_tipo_guarda" id="" class="form-control">
           <option value=""></option>
-          <option value="Reside com o(a) aluno(a)" {{old('mae_tipo_guarda')=="Reside com o(a) aluno(a)" ? 'selected': ''}}>Reside com o(a) aluno(a)</option>
-          <option value="Falecida" {{old('mae_tipo_guarda')=="Falecida" ? 'selected': ''}}>Falecida</option>
-          <option value="Separada do genitor" {{old('mae_tipo_guarda')=="Separada do genitor" ? 'selected': ''}}>Separada do genitor</option>
-          <option value="Guarda compartilhada" {{old('mae_tipo_guarda')=="Guarda compartilhada" ? 'selected': ''}}>Guarda compartilhada</option>
-          <option value="Outro" {{old('mae_tipo_guarda')=="Outro" ? 'selected': ''}}>Outro</option>
+          <option value="Reside com o(a) aluno(a)" {{$dados->mae_tipo_guarda == "Reside com o(a) aluno(a)"|| old('mae_tipo_guarda')=="Reside com o(a) aluno(a)" ? 'selected': ''}}>Reside com o(a) aluno(a)</option>
+          <option value="Falecida" {{$dados->mae_tipo_guarda == "Falecida" || old('mae_tipo_guarda')=="Falecida" ? 'selected': ''}}>Falecida</option>
+          <option value="Separada do genitor" {{$dados->mae_tipo_guarda == "Separada do genitor" || old('mae_tipo_guarda')=="Separada do genitor" ? 'selected': ''}}>Separada do genitor</option>
+          <option value="Guarda compartilhada" {{$dados->mae_tipo_guarda == "Guarda compartilhada" || old('mae_tipo_guarda')=="Guarda compartilhada" ? 'selected': ''}}>Guarda compartilhada</option>
+          <option value="Outro" {{$dados->mae_tipo_guarda == "Outro" || old('mae_tipo_guarda')=="Outro" ? 'selected': ''}}>Outro</option>
         </select>
         @error('mae_tipo_guarda')
           <span class="text-danger">{{$message}}</span>
@@ -81,11 +81,11 @@
         <label for="">Situação:</label>
         <select name="pai_tipo_guarda" id="" class="form-control">
           <option value=""></option>
-          <option value="Reside com o(a) aluno(a)" {{old('pai_tipo_guarda')=="Reside com o(a) aluno(a)" ? 'selected': ''}}>Reside com o(a) aluno(a)</option>
-          <option value="Falecida" {{old('pai_tipo_guarda')=="Falecida" ? 'selected': ''}}>Falecida</option>
-          <option value="Separada do genitor" {{old('pai_tipo_guarda')=="Separada do genitor" ? 'selected': ''}}>Separada do genitor</option>
-          <option value="Guarda compartilhada" {{old('pai_tipo_guarda')=="Guarda compartilhada" ? 'selected': ''}}>Guarda compartilhada</option>
-          <option value="Outro" {{old('pai_tipo_guarda')=="Outro" ? 'selected': ''}}>Outro</option>
+          <option value="Reside com o(a) aluno(a)" {{$dados->pai_tipo_guarda == "Reside com o(a) aluno(a)" || old('pai_tipo_guarda')=="Reside com o(a) aluno(a)" ? 'selected': ''}}>Reside com o(a) aluno(a)</option>
+          <option value="Falecido" {{$dados->pai_tipo_guarda == "Falecido" || old('pai_tipo_guarda')=="Falecida" ? 'selected': ''}}>Falecida</option>
+          <option value="Separado do genitora" {{$dados->pai_tipo_guarda == "Separado do genitora" || old('pai_tipo_guarda')=="Separada do genitor" ? 'selected': ''}}>Separada do genitor</option>
+          <option value="Guarda compartilhada" {{$dados->pai_tipo_guarda == "Guarda compartilhada" || old('pai_tipo_guarda')=="Guarda compartilhada" ? 'selected': ''}}>Guarda compartilhada</option>
+          <option value="Outro" {{$dados->pai_tipo_guarda == "Outro" || old('pai_tipo_guarda')=="Outro" ? 'selected': ''}}>Outro</option>
         </select>
         @error('pai_tipo_guarda')
           <span class="text-danger">{{$message}}</span>
@@ -109,14 +109,14 @@
       </div>
       <div class="col-sm-3">
         <label for="">Data de Nascimento:</label>
-        <input type="date" name="pai_dt_nasc" id="" class="form-control" placeholder="" min="1920-01-01" value="{{old('pai_dt_nasc') ? old('pai_dt_nasc') : $dados->dt_emissor}}">
+        <input type="date" name="pai_dt_nasc" id="" class="form-control" placeholder="" min="1920-01-01" value="{{old('pai_dt_nasc') ? old('pai_dt_nasc') : $dados->pai_dt_nasc}}">
         @error('pai_dt_nasc')
           <span class="text-danger">{{$message}}</span>
         @enderror
       </div>    
       <div class="col-sm-3">
         <label for="">Telefone:</label>
-        <input type="text" name="pai_telefone" id="" class="form-control" placeholder="" data-mask="(00)#0000-0000" value="{{old('pai_telefone') ? old('pai_telefone') : $dados->telefone}}">    
+        <input type="text" name="pai_telefone" id="" class="form-control" placeholder="" data-mask="(00)#0000-0000" value="{{old('pai_telefone') ? old('pai_telefone') : $dados->pai_telefone}}">    
         @error('pai_telefone')
           <span class="text-danger">{{$message}}</span>
         @enderror    

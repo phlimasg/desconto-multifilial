@@ -25,11 +25,11 @@
         <label for="">Vinculo com aluno:</label>
         <select name="resp_vinculo" id="" class="form-control">
           <option value=""></option>
-          <option value="É o(a) próprio(a) aluno(a)" {{old('resp_vinculo')=="É o(a) próprio(a) aluno(a)" ? 'selected': ''}}>É o(a) próprio(a) aluno(a)</option>
-          <option value="Pai" {{old('resp_vinculo')=="Pai" ? 'selected': ''}}>Pai</option>
-          <option value="Mãe" {{old('resp_vinculo')=="Mãe" ? 'selected': ''}}>Mãe</option>
-          <option value="Responsável/Tutor" {{old('resp_vinculo')=="Responsável/Tutor" ? 'selected': ''}}>Responsável/Tutor</option>
-          <option value="Outro" {{old('resp_vinculo')=="Outro" ? 'selected': ''}}>Outro</option>
+          <option value="É o(a) próprio(a) aluno(a)" {{$dados->resp_vinculo == "É o(a) próprio(a) aluno(a)" || old('resp_vinculo')=="É o(a) próprio(a) aluno(a)" ? 'selected': ''}}>É o(a) próprio(a) aluno(a)</option>
+          <option value="Pai" {{$dados->resp_vinculo == "Pai" || old('resp_vinculo')=="Pai" ? 'selected': ''}}>Pai</option>
+          <option value="Mãe" {{$dados->resp_vinculo == "Mãe" || old('resp_vinculo')=="Mãe" ? 'selected': ''}}>Mãe</option>
+          <option value="Responsável/Tutor" {{$dados->resp_vinculo == "Responsável/Tutor" || old('resp_vinculo')=="Responsável/Tutor" ? 'selected': ''}}>Responsável/Tutor</option>
+          <option value="Outro" {{$dados->resp_vinculo == "Outro" || old('resp_vinculo')=="Outro" ? 'selected': ''}}>Outro</option>
         </select>
         @error('resp_vinculo')
           <span class="text-danger">{{$message}}</span>
@@ -124,17 +124,17 @@
         <label for="">Escolaridade:</label>        
         <select name="escolaridade" id="" class="form-control">
           <option value=""></option>
-          <option value="Analfabeto" {{$dados->escolaridade == 'Aluno' ? 'selected' : '' }}>Analfabeto</option>
-          <option value="Até 5º Ano Incompleto">Até 5º Ano Incompleto</option>
-          <option value="5º Ano Completo">5º Ano Completo</option>
-          <option value="6º ao 9º Ano do Fundamental">6º ao 9º Ano do Fundamental</option>
-          <option value="Fundamental Completo">Fundamental Completo</option>
-          <option value="Médio Incompleto">Médio Incompleto</option>
-          <option value="Médio Completo">Médio Completo</option>
-          <option value="Superior Incompleto">Superior Incompleto</option>
-          <option value="Superior Completo">Superior Completo</option>
-          <option value="Mestrado">Mestrado</option>
-          <option value="Doutorado">Doutorado</option>
+          <option value="Analfabeto" {{$dados->escolaridade == "Analfabeto" || old('escolaridade')=="Analfabeto" ? 'selected': ''}}>Analfabeto</option>
+          <option value="Até 5º Ano Incompleto" {{$dados->escolaridade == "Até 5º Ano Incompleto" || old('escolaridade')=="Até 5º Ano Incompleto" ? 'selected': ''}}>Até 5º Ano Incompleto</option>
+          <option value="5º Ano Completo" {{$dados->escolaridade == "5º Ano Completo" || old('escolaridade')=="5º Ano Completo" ? 'selected': ''}}>5º Ano Completo</option>
+          <option value="6º ao 9º Ano do Fundamental" {{$dados->escolaridade == "6º ao 9º Ano do Fundamental" || old('escolaridade')=="6º ao 9º Ano do Fundamental" ? 'selected': ''}}>6º ao 9º Ano do Fundamental</option>
+          <option value="Fundamental Completo" {{$dados->escolaridade == "Fundamental Completo" || old('escolaridade')=="Fundamental Completo" ? 'selected': ''}}>Fundamental Completo</option>
+          <option value="Médio Incompleto" {{$dados->escolaridade == "Médio Incompleto" || old('escolaridade')=="Médio Incompleto" ? 'selected': ''}}>Médio Incompleto</option>
+          <option value="Médio Completo" {{$dados->escolaridade == "Médio Completo" || old('escolaridade')=="Médio Completo" ? 'selected': ''}}>Médio Completo</option>
+          <option value="Superior Incompleto" {{$dados->escolaridade == "Superior Incompleto" || old('escolaridade')=="Superior Incompleto" ? 'selected': ''}}>Superior Incompleto</option>
+          <option value="Superior Completo" {{$dados->escolaridade == "Superior Completo" || old('escolaridade')=="Superior Completo" ? 'selected': ''}}>Superior Completo</option>
+          <option value="Mestrado" {{$dados->escolaridade == "Mestrado" || old('escolaridade')=="Mestrado" ? 'selected': ''}}>Mestrado</option>
+          <option value="Doutorado" {{$dados->escolaridade == "Doutorado" || old('escolaridade')=="Doutorado" ? 'selected': ''}}>Doutorado</option>
         </select>
         @error('escolaridade')
           <span class="text-danger">{{$message}}</span>

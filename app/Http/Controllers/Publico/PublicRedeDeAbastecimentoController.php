@@ -59,8 +59,9 @@ class PublicRedeDeAbastecimentoController extends Controller
             ]);
         $processo = Filial::where('url', $filial)->first()
             ->ListarProcessos()->where('url', $processo)->first();
-        $dados = $processo;
-        $processo ? '' : abort('404', 'Processo não encontrado');
+        $processo ? '' : abort('404', 'Processo não encontrado');        
+        $dados = PublicAluno::where('ra',$pPublicRedeDeAbastecimento)->where('processo_id',$processo->id)->first()->pRedeDeAbastecimento;
+        !$dados ? $dados = $processo : '';
         $aluno = $processo->pAlunos()->where('ra', $pPublicRedeDeAbastecimento)->latest()->first();
        
         return view('publico.rededeabastecimento.show', compact('filial', 'processo', 'dados'))->with('aluno', $pPublicRedeDeAbastecimento);        

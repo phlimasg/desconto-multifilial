@@ -37,8 +37,7 @@
             <div class="row">      
               <div class="col-sm-6">
                 <label for="">Nome:</label>
-                <input type="text" name="nome" id="nome" class="form-control" placeholder="" value="
-                @if ($dados->parentesco == "Aluno")
+                <input type="text" name="nome" id="nome" class="form-control" placeholder="" value="@if ($dados->parentesco == "Aluno")
                 {{old('nome') ? old('nome') : $dados->nome}}
                 @else
                 {{old('nome') ? old('nome') : ''}}
@@ -57,7 +56,7 @@
               </div>
               <div class="col-sm-1">
                 <label for="">Idade:</label>
-                <input type="text" name="idade" id="" class="form-control" placeholder="" value="{{old('idade') ? old('idade') :  '' }}">
+                <input type="text" name="idade" id="" class="form-control" placeholder="" value="{{old('idade') ? old('idade') :  '' }}" data-mask="#00" data-mask-reverse="true">
                 @error('idade')
                   <span class="text-danger">{{$message}}</span>
                 @enderror
@@ -114,7 +113,7 @@
               </div> 
               <div class="col-sm-6">
                 <label for="" id="legenda" class="text-danger">Documentos:</label>
-                <input type="file" name="documentos[]" id="" class="form-control" placeholder="" accept="image/jpg, image/jpeg, application/pdf" multiple>
+                <input type="file" name="documentos[]" id="" required class="form-control" placeholder="" accept="image/jpg, image/jpeg, application/pdf" multiple>
                 <small>Documentos e renda. Ex.: Imposto de renda, contra-cheque, Rg, Cfp e etc...</small>
                 @error('documentos.*')
                   <span class="text-danger">{{$message}}</span>
