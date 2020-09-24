@@ -108,10 +108,10 @@
         <select name="estado_civil" id="" class="form-control">
           <option value=""></option>
           <option value="Solteiro(a)" {{$dados->estado_civil == 'Solteiro(a)' ? 'selected' : '' }}>Solteiro(a)</option>
-          <option value="Casado(a)">Casado(a)</option>
-          <option value="Divorciado(a)">Divorciado(a) </option>
-          <option value="Viúvo(a)">Viúvo(a)</option>
-          <option value="Separado(a)">Separado(a) </option>
+          <option value="Casado(a)" {{$dados->estado_civil == 'Casado(a)' ? 'selected' : '' }}>Casado(a)</option>
+          <option value="Divorciado(a)" {{$dados->estado_civil == 'Divorciado(a)' ? 'selected' : '' }}>Divorciado(a) </option>
+          <option value="Viúvo(a)" {{$dados->estado_civil == 'Viúvo(a)' ? 'selected' : '' }}>Viúvo(a)</option>
+          <option value="Separado(a)" {{$dados->estado_civil == 'Separado(a)' ? 'selected' : '' }}>Separado(a) </option>
         </select>
         @error('estado_civil')
           <span class="text-danger">{{$message}}</span>
