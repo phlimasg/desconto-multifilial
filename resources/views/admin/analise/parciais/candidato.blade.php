@@ -42,7 +42,7 @@
                 <b>Localização aproximada</b>
                 <div class="row">
                     <div class="col-sm-12">
-                        <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAJoo7VgzjxM4BPcD3QNy0S3AX21_XzGhA&q={{htmlspecialchars($dados->rua.','.$dados->numero.','.$dados->bairro.','.$dados->cidade.','.$dados->estado.','.$dados->cep)}}" 
+                        <iframe src="https://www.google.com/maps/embed/v1/place?key={{env('GOOGLE_MAPS_KEY')}}&q={{htmlspecialchars($dados->rua.','.$dados->numero.','.$dados->bairro.','.$dados->cidade.','.$dados->estado.','.$dados->cep)}}" 
                           width="100%" height="350" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>        
                       </div>
                 </div>            
