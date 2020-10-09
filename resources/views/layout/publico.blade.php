@@ -29,6 +29,9 @@
 </head>
 
 <body>
+    @php
+        $processo = App\Models\Admin\Processo::where('url',Request::segment(2))->first();
+    @endphp
     @yield('css')
     <div class="wrapper">
         <!-- Sidebar  -->
@@ -74,6 +77,7 @@
                         'pComposicaoFamiliar'=> Request::segment(4),
                         ]) }}">Composição Familiar</a>
                 </li>
+                @if($processo->tipo == 'bolsa' )
                 <li @if (Request::segment(3) == 'pSituacaoHabitacional') class="active" @endif>
                     <a href="{{ route('pSituacaoHabitacional.show', [
                         'filial'=>Request::segment(1),
@@ -88,6 +92,7 @@
                         'pRedeDeAbastecimento'=> Request::segment(4),
                         ]) }}">Rede de Abastecimento</a>
                 </li>
+                @endif
                 @if (App\Models\Publico\PublicAluno::where('ra',
                 Request::segment(4))
                     ->where('processo_id',
@@ -124,19 +129,25 @@
                     @php
                     $aluno = App\Models\Publico\PublicAluno::where('ra',Request::segment(4))->where('processo_id',App\Models\Admin\Processo::where('url',Request::segment(2))->first()->id)->first();                    
                     @endphp
-
-                    @if ($aluno && 
-                    $aluno->pResponsavelFinanceiro() && 
-                    $aluno->pFiliacao()->first() && 
-                    $aluno->pComposicaoFamiliar()->first() && 
-                    $aluno->pResponsavelFinanceiro->pSituacaohabitacional && 
-                    $aluno->pRedeDeAbastecimento                    
-                    && $aluno->pDespesasEReceitas()->where('tipo','despesa')->count() > 0)
-                    
-                    
-                    <a href="#" class="btn btn-warning btn-block" data-toggle="modal" data-target="#finalizar"><i class="fas fa-save"></i> Finalizar Processo</a>
-
-                @endif
+                    @if ($processo->tipo == 'bolsa')
+                        @if ($aluno && 
+                        $aluno->pResponsavelFinanceiro() && 
+                        $aluno->pFiliacao()->first() && 
+                        $aluno->pComposicaoFamiliar()->first() && 
+                        $aluno->pResponsavelFinanceiro->pSituacaohabitacional && 
+                        $aluno->pRedeDeAbastecimento                    
+                        && $aluno->pDespesasEReceitas()->where('tipo','despesa')->count() > 0)
+                        <a href="#" class="btn btn-warning btn-block" data-toggle="modal" data-target="#finalizar"><i class="fas fa-save"></i> Finalizar Processo</a>                        
+                        @endif
+                        @elseif(
+                            $aluno && 
+                            $aluno->pResponsavelFinanceiro() && 
+                            $aluno->pFiliacao()->first() && 
+                            $aluno->pComposicaoFamiliar()->first()                 
+                            && $aluno->pDespesasEReceitas()->where('tipo','despesa')->count() > 0 )
+                            <a href="#" class="btn btn-warning btn-block" data-toggle="modal" data-target="#finalizar"><i class="fas fa-save"></i> Finalizar Processo</a>
+                        
+                    @endif
             </li>
         </ul>        
         

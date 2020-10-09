@@ -22,7 +22,7 @@
           <span class="text-danger">{{$message}}</span>
         @enderror
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-4">
         <label for="">Situação:</label>
         <select name="mae_tipo_guarda" id="" class="form-control">
           <option value=""></option>

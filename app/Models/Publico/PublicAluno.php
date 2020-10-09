@@ -2,6 +2,7 @@
 
 namespace App\Models\Publico;
 
+use App\Models\Admin\Analise;
 use Illuminate\Database\Eloquent\Model;
 
 class PublicAluno extends Model
@@ -41,7 +42,7 @@ class PublicAluno extends Model
     ];
     public function pFiliacao()
     {
-        return $this->hasMany(PublicFiliacao::class);
+        return $this->hasOne(PublicFiliacao::class);
     }
     public function pComposicaoFamiliar()
     {
@@ -57,7 +58,11 @@ class PublicAluno extends Model
     }
     public function pDespesasEReceitas()
     {
-        return $this->hasMany(PublicDespesasEReceitas::class);
+        return $this->hasMany(PublicDespesasEReceitas::class)->orderBy('tipo');
+    }
+    public function Analise()
+    {
+        return $this->hasOne(Analise::class,'public_aluno_id','id');
     }
     
 }

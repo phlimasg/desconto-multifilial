@@ -1,6 +1,6 @@
 @extends('layout.publico')
 
-@section('title', 'Desconto')
+@section('title', 'Bolsa/Desconto')
 
 @section('content_header')
     
@@ -45,7 +45,7 @@
           <span class="text-danger">{{$message}}</span>
         @enderror
       </div>
-      <div class="col-sm-2">
+      <div class="col-sm-3">
         <label for="">Data de Emissão:</label>
         <input type="date" name="dt_emissor" id="" class="form-control" placeholder="" min="1920-01-01" value="{{old('dt_emissor') ? old('dt_emissor') : $dados->dt_emissor}}">
         @error('dt_emissor')
@@ -95,7 +95,7 @@
       </div>
     </div>
     <div class="row">      
-      <div class="col-sm-2">
+      <div class="col-sm-3">
         <label for="dt_nasc">Data de Nascimento:</label>
         <input type="date" name="dt_nasc" id="" class="form-control" placeholder="" value="{{old('dt_nasc') ? old('dt_nasc') : $dados->dt_nasc}}">     
         @error('dt_nasc')
@@ -137,7 +137,7 @@
         @enderror
       </div>
       <div class="col-sm-2">
-        <label for="">Desconto que possui:</label>
+        <label for="">Bolsa/Desconto:</label>
         <input type="text" name="esc_origem_desconto" id="" class="form-control" placeholder="" data-mask="#00%" data-mask-reverse="true" value="{{old('esc_origem_desconto') ? old('esc_origem_desconto') : $dados->esc_origem_desconto}}">
         @error('esc_origem_desconto')
           <span class="text-danger">{{$message}}</span>

@@ -22,7 +22,7 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Filiais cadastradas</h3>
+          <h3 class="card-title">Processos cadastrados</h3>
 
           <div class="card-tools">
             <div class="input-group input-group-sm" style="width: 150px;">
@@ -54,15 +54,16 @@
                 <td>{{$i->nome}}</td>
                 <td>{{date('d/m/Y H:i',strtotime($i->periodo_ini))}}</td>
                 <td>{{date('d/m/Y H:i',strtotime($i->periodo_fim))}}</td>                
-                <td><a href="{{ route('processos.show', ['filial'=> $filial,'processo'=> $i->id]) }}" class="btn btn-primary"><i class="fa fa-pen"></i> Editar</a></td>
+                <td><a href="{{ route('processos.show', ['filial'=> $filial,'processo'=> $i->url]) }}" class="btn btn-primary"><i class="fa fa-pen"></i> Editar</a></td>
                 <td>
                   <div class="btn-group">
                     <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
                       <i class="fa fa-cog"></i> Opções
                     </button>
                     <div class="dropdown-menu">
-                      <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Alunos adicionados</a>
+                      <a class="dropdown-item" href="{{ route('analisar.index', ['filial'=> $filial,'processo'=> $i->url]) }}"><i class="fa fa-eye"></i> Analisar</a>
                       <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Alunos adicionados</a>                      
                       <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalImportar{{$i->id}}"><i class="fa fa-file-excel"></i> Importar Alunos</a>
                       <a class="dropdown-item" href="#"><i class="fa fa-graduation-cap"></i> Adicionar Aluno</a>
                     </div>

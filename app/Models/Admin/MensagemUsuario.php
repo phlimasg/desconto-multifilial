@@ -4,12 +4,11 @@ namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Profile extends Model
+class MensagemUsuario extends Model
 {
     protected $fillable = [
-        'nome',
-        'descricao',
+        'msg_usuario',
+        'public_aluno_id',
         'user_create',
-        'user_update'
     ];
 }

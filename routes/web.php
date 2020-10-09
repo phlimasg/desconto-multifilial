@@ -7,16 +7,21 @@ Route::get('/', function () {
 
 //Rotas de Login
 Route::prefix('google')->namespace('Auth')->group(function(){
-    Route::get('login','GoogleController@login');
+    Route::get('login','GoogleController@login')->name('google.login');
     Route::get('redirect','GoogleController@redirect');
 });
-
-Route::prefix('admin')->namespace('Admin')->group(function(){
-    Route::resource('filial', 'FilialController');
-    Route::resource('usuarios', 'UsersController');        
-    Route::resource('{filial}/processos', 'ProcessoController');
-    Route::post('{filial}/processos/{processo}/alunos/importar', 'AlunoController@importar')->name('alunos.importar');
-    Route::resource('{filial}/processos/{processo}/alunos', 'AlunoController');
+Route::group(['middleware' => ['auth']], function () { 
+    Route::prefix('admin')->namespace('Admin')->group(function(){
+        Route::resource('filial', 'FilialController');
+        Route::resource('usuarios', 'UsersController');        
+        Route::resource('{filial}/processos', 'ProcessoController');
+    
+        Route::prefix('{filial}/{processo}')->group(function(){
+            Route::post('alunos/importar', 'AlunoController@importar')->name('alunos.importar');
+            Route::resource('alunos', 'AlunoController');
+            Route::resource('analisar', 'AnalisarController');
+        });
+    });
 });
 
 Route::get('/{filial}/{processo}/','Publico\PublicoAlunoController@index')->name('FilialProcesso.index');
@@ -31,6 +36,3 @@ Route::resource('/{filial}/{processo}/pRedeDeAbastecimento','Publico\PublicRedeD
 Route::resource('/{filial}/{processo}/pVeiculos','Publico\PublicVeiculosController');
 Route::resource('/{filial}/{processo}/pDespesasEReceitas','Publico\PublicDespesasEReceitasController');
 Route::resource('/{filial}/{processo}/pFinalizar','Publico\PublicFinalizarController');
-
-
-

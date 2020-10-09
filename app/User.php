@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Admin\Profile;
 use App\Models\Admin\UserFilial;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -41,6 +42,11 @@ class User extends Authenticatable
     public function userFilial()
     {
         return $this->hasMany(UserFilial::class);
+    }
+
+    public function Filial()
+    {
+        return $this->hasMany(userFilial::class);
     }
     
 }

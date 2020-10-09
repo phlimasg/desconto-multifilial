@@ -36,4 +36,8 @@ class PublicRespFin extends Model
     {
         return $this->hasOne(PublicSituacaoHabitacional::class,'public_resp_fin_id','id');
     }
+    public function pBensMoveis()
+    {
+        return $this->hasMany(PublicVeiculos::class,'public_resp_fin_id','id');
+    }
 }

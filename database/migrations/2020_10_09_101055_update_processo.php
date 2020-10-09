@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdatePublicAluno extends Migration
+class UpdateProcesso extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class UpdatePublicAluno extends Migration
      */
     public function up()
     {
-        Schema::table('public_alunos', function (Blueprint $table) {
-            $table->string('status')->after('irmao_ra')->nullable();
+        Schema::table('processos', function (Blueprint $table) {
+            $table->string('tipo')->after('url');
         });
     }
 
@@ -25,8 +25,8 @@ class UpdatePublicAluno extends Migration
      */
     public function down()
     {
-        Schema::table('public_alunos', function (Blueprint $table) {
-            $table->dropColumn('status');
+        Schema::table('processos', function (Blueprint $table) {
+            $table->dropColumn('tipo');
         });
     }
 }

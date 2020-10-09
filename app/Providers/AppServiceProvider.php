@@ -3,12 +3,18 @@
 namespace App\Providers;
 
 use App\Models\Admin\Aluno;
+use App\Models\Admin\Analise;
 use App\Models\Admin\Filial;
 use App\Models\Admin\Importacao;
+use App\Models\Admin\MensagemInterna;
+use App\Models\Admin\MensagemUsuario;
 use App\Models\Admin\Processo;
 use App\Observers\AlunoObserver;
+use App\Observers\AnaliseObserver;
 use App\Observers\FilialObserver;
 use App\Observers\ImportacaoObserver;
+use App\Observers\MensagemInternaObserver;
+use App\Observers\MensagemUsuarioObserver;
 use App\Observers\ProcessoObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Schema;
@@ -37,6 +43,9 @@ class AppServiceProvider extends ServiceProvider
         Processo::observe(ProcessoObserver::class);
         Importacao::observe(ImportacaoObserver::class);
         Aluno::observe(AlunoObserver::class);
+        Analise::observe(AnaliseObserver::class);
+        MensagemInterna::observe(MensagemInternaObserver::class);
+        MensagemUsuario::observe(MensagemUsuarioObserver::class);
         Schema::defaultStringLength(191);
     }
 }

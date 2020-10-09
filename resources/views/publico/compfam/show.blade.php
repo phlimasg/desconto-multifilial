@@ -241,7 +241,11 @@
     @endforelse
   
   @if($doc != false)
+    @if ($processo->tipo == 'bolsa')
     <a href="{{ route('pSituacaoHabitacional.show', ['filial'=>$filial,'processo'=>$processo->url, 'pSituacaoHabitacional'=>$aluno]) }}" class="btn btn-danger btn-block"><i class="fa fa-floppy-o"></i> Salvar</a>
+    @else
+    <a href="{{ route('pVeiculos.show', ['filial'=>$filial,'processo'=>$processo->url, 'pVeiculo'=>$aluno]) }}" class="btn btn-danger btn-block"><i class="fa fa-floppy-o"></i> Salvar</a>
+    @endif
   @endif
 </div>
 <script>
