@@ -139,14 +139,14 @@
                         && $aluno->pDespesasEReceitas()->where('tipo','despesa')->count() > 0)
                         <a href="#" class="btn btn-warning btn-block" data-toggle="modal" data-target="#finalizar"><i class="fas fa-save"></i> Finalizar Processo</a>                        
                         @endif
-                        @elseif(
-                            $aluno && 
-                            $aluno->pResponsavelFinanceiro() && 
-                            $aluno->pFiliacao()->first() && 
-                            $aluno->pComposicaoFamiliar()->first()                 
-                            && $aluno->pDespesasEReceitas()->where('tipo','despesa')->count() > 0 )
-                            <a href="#" class="btn btn-warning btn-block" data-toggle="modal" data-target="#finalizar"><i class="fas fa-save"></i> Finalizar Processo</a>
-                        
+                    @elseif(
+                        $aluno && 
+                        $aluno->pResponsavelFinanceiro() && 
+                        $aluno->pFiliacao()->first() && 
+                        $aluno->pComposicaoFamiliar()->first()                 
+                        && $aluno->pDespesasEReceitas()->where('tipo','despesa')->count() > 0 )
+                        <a href="#" class="btn btn-warning btn-block" data-toggle="modal" data-target="#finalizar"><i class="fas fa-save"></i> Finalizar Processo</a>
+                    
                     @endif
             </li>
         </ul>        

@@ -13,6 +13,12 @@ class ProfileSeeder extends Seeder
     public function run()
     {
         Profile::create([
+            'nome'=>'Root',
+            'descricao'=>'Gerencia tudo e todos!',
+            'user_create'=>'sistema',
+            'user_update'=>'sistema',
+        ]);
+        Profile::create([
             'nome'=>'Administrador',
             'descricao'=>'Acesso total ao sistema.',
             'user_create'=>'sistema',
