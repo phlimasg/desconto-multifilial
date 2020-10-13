@@ -28,12 +28,12 @@ class AnaliseAsRequest extends FormRequest
             'reside_proximo' => 'string|sometimes|required|max:240',
 
             'programa_renda_chk' => 'string|sometimes|required|max:240',
-            'programa_renda' => 'string|sometimes|required_if:programa_renda_chk,==,S|max:240|nullable',
+            'programa_renda' => 'nullable|string|sometimes|required_if:programa_renda_chk,==,S|max:240|nullable',
 
             'deficiencia' => 'string|nullable|max:240',
             
             'irmao' => 'string|sometimes|required|max:240',
-            'irmao_nome' => 'string|required_if:irmao,==,S|max:240',
+            'irmao_nome' => 'nullable|required_if:irmao,=,S|string|max:240',
             
             'irmao_desconto' => 'string|sometimes|required|max:240',
             'irmao_bolsa' => 'string|required_if:irmao_desconto,==,S|max:240',

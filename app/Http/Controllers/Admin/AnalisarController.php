@@ -44,8 +44,7 @@ class AnalisarController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store($filial, $processo,AnaliseAsRequest $request)
-    {
-        
+    {        
         $filial = Filial::where('url',$filial)->first();
         $processo = $filial->ListarProcessos->where('url',$processo)->first();
         

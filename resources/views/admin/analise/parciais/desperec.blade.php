@@ -26,11 +26,13 @@ $receita = 0;
       <div class="col-sm-2 bg-light">
         <div class="row">
           <div class="col-sm-12 text-center">
-            @if (strpos($j->nome,'.pdf'))
+            <a href="{{Storage::url($j->url)}}" target="_blank">
+              @if (strpos($j->nome,'.pdf'))
               <img src="{{asset('img/pdf.png')}}" alt="" width="100%">                            
             @else
             <img src="{{Storage::url($j->url)}}" alt="" style="max-height: 136px; max-width: 100%;">
             @endif
+            </a>
           </div>
         </div>
         <div class="row">
