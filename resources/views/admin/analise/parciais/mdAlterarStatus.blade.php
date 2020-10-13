@@ -250,10 +250,10 @@
                         </div>
                     </div>
                 </div>                
-                <div class="row">
+                <div class="row">                    
                     <div class="col-md-2">
                         <label for="">Renda Bruta Familiar:</label>
-                        <input type="text" class="form-control @error('renda_bruta') is-invalid @enderror" name="renda_bruta" placeholder="" data-mask="#.000,00" data-mask-reverse="true"
+                        <input type="text" id="renda_bruta" class="form-control @error('renda_bruta') is-invalid @enderror" name="renda_bruta" placeholder="" data-mask="#.000,00" data-mask-reverse="true"
                         @if (old('renda_bruta'))
                             value="{{old('renda_bruta')}}"
                         @elseif(!empty($dados->Analise->renda_bruta) && $dados->Analise->renda_bruta != null)
@@ -261,21 +261,10 @@
                         @endif
                         >
                         @error('renda_bruta') <div class="alert alert-danger">{{ $message }}</div>@enderror
-                    </div>
-                    <div class="col-md-2">
-                        <label for="">Renda per capita:</label>
-                        <input type="text" class="form-control @error('renda_capita') is-invalid @enderror" name="renda_capita" placeholder="" data-mask="#.000,00" data-mask-reverse="true"
-                        @if (old('renda_capita'))
-                            value="{{old('renda_capita')}}"
-                        @elseif(!empty($dados->Analise->renda_capita) && $dados->Analise->renda_capita != null)
-                            value="{{$dados->Analise->renda_capita}}"                         
-                        @endif
-                        >
-                        @error('renda_capita') <div class="alert alert-danger">{{ $message }}</div>@enderror
-                    </div>
+                    </div>                    
                     <div class="col-md-2">
                         <label for="">Nº de familiares:</label>
-                        <input type="text" class="form-control @error('numero_familiares') is-invalid @enderror" name="numero_familiares" placeholder="" data-mask="00"
+                        <input type="text" id="numero_familiares" class="form-control @error('numero_familiares') is-invalid @enderror" name="numero_familiares" placeholder="" data-mask="00"
                         @if (old('numero_familiares'))
                             value="{{old('numero_familiares')}}"
                         @elseif(!empty($dados->Analise->numero_familiares) && $dados->Analise->numero_familiares != null)
@@ -283,6 +272,17 @@
                         @endif
                         >
                         @error('numero_familiares') <div class="alert alert-danger">{{ $message }}</div>@enderror
+                    </div>
+                    <div class="col-md-2">
+                        <label for="">Renda per capita:</label>
+                        <input type="text" id="renda_capita" class="form-control @error('renda_capita') is-invalid @enderror" name="renda_capita" 
+                        @if (old('renda_capita'))
+                            value="{{old('renda_capita')}}"
+                        @elseif(!empty($dados->Analise->renda_capita) && $dados->Analise->renda_capita != null)
+                            value="{{$dados->Analise->renda_capita}}"                         
+                        @endif
+                        >
+                        @error('renda_capita') <div class="alert alert-danger">{{ $message }}</div>@enderror
                     </div>
                     <div class="col-md-2">
                         <label for="">Faixa de benefício:</label>
@@ -370,9 +370,22 @@
 @if ($errors->any())
     <script>$('#alterarStatus').modal('show');</script>
 @endif
-<script>    
-    CKEDITOR.replace('obsAssintente');
-    CKEDITOR.replace('msg_interna');
-    CKEDITOR.replace('msg_usuario');      
+<script>
+    $(document).ready(function(){
+        $('#numero_familiares').change(function(){            
+            $('#renda_capita').unmask();
+            $('#renda_capita').val('');
+            var renda_bruta = $('#renda_bruta').val().replace(',', '');
+            var renda_percapita;
+            renda_bruta = renda_bruta.replace('.','');
+            renda_percapita = renda_bruta / $('#numero_familiares').val();
+            $('#renda_capita').val(renda_percapita.toFixed(0));
+            //alert($('#renda_capita').val() + renda_percapita)
+            $('#renda_capita').mask('#.##0,00', {reverse: true});
+        })
+        CKEDITOR.replace('obsAssintente');
+        CKEDITOR.replace('msg_interna');
+        CKEDITOR.replace('msg_usuario');  
+    });    
 </script>  
 @endsection
