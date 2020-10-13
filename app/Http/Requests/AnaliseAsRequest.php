@@ -36,7 +36,7 @@ class AnaliseAsRequest extends FormRequest
             'irmao_nome' => 'nullable|required_if:irmao,=,S|string|max:240',
             
             'irmao_desconto' => 'string|sometimes|required|max:240',
-            'irmao_bolsa' => 'string|required_if:irmao_desconto,==,S|max:240',
+            'irmao_bolsa' => 'string|required_if:irmao_desconto,=,S|max:240',
 
             'renda_bruta' => 'string|sometimes|required|max:240',
             'renda_capita' => 'string|sometimes|required|max:240',
