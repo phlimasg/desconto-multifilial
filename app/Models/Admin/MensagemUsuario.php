@@ -10,5 +10,6 @@ class MensagemUsuario extends Model
         'msg_usuario',
         'public_aluno_id',
         'user_create',
+        'processo_id'
     ];
 }

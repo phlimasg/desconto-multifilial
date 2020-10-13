@@ -3,6 +3,8 @@
 namespace App\Models\Publico;
 
 use App\Models\Admin\Analise;
+use App\Models\Admin\MensagemUsuario;
+use App\Models\Admin\Processo;
 use Illuminate\Database\Eloquent\Model;
 
 class PublicAluno extends Model
@@ -63,6 +65,14 @@ class PublicAluno extends Model
     public function Analise()
     {
         return $this->hasOne(Analise::class,'public_aluno_id','id');
+    }
+    public function Processo()
+    {
+        return $this->hasOne(Processo::class,'id','processo_id');
+    }
+    public function MensagemUsuario()
+    {
+        return $this->hasOne(MensagemUsuario::class,'public_aluno_id','id')->latest();
     }
     
 }

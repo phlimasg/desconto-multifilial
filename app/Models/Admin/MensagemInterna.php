@@ -10,5 +10,6 @@ class MensagemInterna extends Model
         'msg_interna',
         'public_aluno_id',
         'user_create',
+        'processo_id'
     ];
 }
