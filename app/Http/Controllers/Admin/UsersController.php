@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use App\Models\Admin\UserFilial;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -90,7 +91,18 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        foreach ($request->filial as $i) {
+            foreach ($request->perfil as $j) {
+                UserFilial::create([
+                    'user_id' => $id,
+                    'filial_id'=> $i,
+                    'profile_id' => $j
+                ]);
+            }
+        }
+        //UserFilial::create();
+        return redirect()->back()->with('message','Perfil adicionado com sucesso!');
+        dd($request->all(),$id);
     }
 
     /**

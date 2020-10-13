@@ -14,38 +14,47 @@ class UserProfile
      *
      * @return void
      */
+    public function Root(User $user)
+    {        
+        foreach ($user->userFilial as $i) {
+            foreach($i->Profiles as $j){
+                if($j->nome == 'Root')
+                return true;
+            }
+        }
+    }
     public function Administrador(User $user)
     {        
-        foreach ($user->Filial as $i) {
-            foreach($i->Profile as $j){
-                if($j->nome == 'Administrador')
+        foreach ($user->userFilial as $i) {
+            foreach($i->Profiles as $j){
+                if($j->nome == 'Administrador' || $j->nome == 'Root')
                 return true;
             }
         }
     }
     public function AssistenteSocial(User $user)
     {        
-        foreach ($user->Filial as $i) {
-            foreach($i->Profile as $j){
-                if($j->nome == 'Assistente Social' || $j->nome == 'Administrador')
+        foreach ($user->userFilial as $i) {
+            foreach($i->Profiles as $j){
+                if($j->nome == 'Assistente Social' || $j->nome == 'Administrador' || $j->nome == 'Root')
                 return true;
             }
         }
     }
     public function Comissao(User $user)
     {        
-        foreach ($user->Filial as $i) {
-            foreach($i->Profile as $j){
-                if($j->nome == 'Comissão de desconto' || $j->nome == 'Administrador')
+        foreach ($user->userFilial as $i) {
+            foreach($i->Profiles as $j){
+                if($j->nome == 'Comissão de desconto' || $j->nome == 'Administrador' || $j->nome == 'Root')
                 return true;
             }
         }
     }
     public function Supervisao(User $user)
     {        
-        foreach ($user->Filial as $i) {
-            foreach($i->Profile as $j){
-                if($j->nome == 'Supervisão Administrativa' || $j->nome == 'Administrador')
+        foreach ($user->userFilial as $i) {
+            foreach($i->Profiless as $j){
+                if($j->nome == 'Supervisão Administrativa' || $j->nome == 'Administrador' || $j->nome == 'Root')
                 return true;
             }
         }

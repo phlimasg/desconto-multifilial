@@ -29,14 +29,14 @@
 
         <ul class="list-group list-group-unbordered mb-3">
           <li class="list-group-item">
-            <b>Data de criação</b> <a class="float-right">{{$user->created_at}}</a>
+            <b>Criado em</b> <a class="float-right">{{date('d/m/Y H:i',strtotime($user->created_at))}}</a>
           </li>
           <li class="list-group-item">
-            <b>Último acesso</b> <a class="float-right">{{$user->updated_at}}</a>
+            <b>Acessou em</b> <a class="float-right">{{date('d/m/Y H:i',strtotime($user->updated_at))}}</a>
           </li>
         </ul>
 
-        <a href="#" class="btn btn-danger btn-block"><b><i class="fa fa-trash"></i> Remover usuário</b></a>
+        <a href="#" class="btn btn-danger btn-block"><b><i class="fa fa-times"></i> Desativar usuário</b></a>
       </div>
       <!-- /.card-body -->
     </div>
@@ -45,17 +45,31 @@
   <div class="col-md-9">
     <div class="card card-primary card-outline">
       <div class="card-header">
-        Filiais com acesso
+        Acessos
         <div class="card-tools">
-          <a href="http://" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Adicionar acesso</a>
+          <a href="#" data-toggle="modal" data-target="#permissoes" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Adicionar acesso</a>
+          @include('admin.user.parciais.mdProfile')
         </div>
       </div>
       <div class="card-body">
-            @forelse ($user->userFilial as $i)
-                
-            @empty
-                Nenhuma filial cadastrada para esse usuário.
-            @endforelse 
+        <table class="table" id="table"> 
+          <thead>
+            <th scope="col">#</th>
+            <th scope="col">Filial</th>
+            <th scope="col">Perfil</th> 
+          </thead>
+          <tbody>                 
+          @forelse ($user->userFilial as $i)
+          <tr>
+            <td>{{$i->Filial->codigo}}</td>
+            <td>{{$i->Filial->nome}}</td>
+            <td>{{$i->Profile->nome}}</td>
+          </tr>  
+          @empty
+          Nenhuma filial cadastrada para esse usuário.
+          @endforelse 
+          </tbody>
+        </table>
       </div>
       <!-- /.card-body -->
     </div>
@@ -69,4 +83,11 @@
 
 @section('js')
   @include('parciais.alert')
+  <script>
+    $('#table').DataTable({
+      "language": {
+        "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese.json"
+      }
+    });    
+  </script>
 @stop

@@ -43,10 +43,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserFilial::class);
     }
-
+/*
     public function Filial()
     {
         return $this->hasMany(userFilial::class);
     }
-    
+  */  
 }

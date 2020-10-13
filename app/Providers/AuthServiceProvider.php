@@ -28,5 +28,6 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('AssistenteSocial','App\Policies\UserProfile@AssistenteSocial');
         Gate::define('Comissao','App\Policies\UserProfile@Comissao');
         Gate::define('Supervisao','App\Policies\UserProfile@Supervisao');
+        Gate::define('Root','App\Policies\UserProfile@Root');
     }
 }
