@@ -53,7 +53,7 @@ class UserProfile
     public function Supervisao(User $user)
     {        
         foreach ($user->userFilial as $i) {
-            foreach($i->Profiless as $j){
+            foreach($i->Profiles as $j){
                 if($j->nome == 'Supervisão Administrativa' || $j->nome == 'Administrador' || $j->nome == 'Root')
                 return true;
             }
