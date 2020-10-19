@@ -147,7 +147,7 @@ class PublicoAlunoController extends Controller
            
             if(!$aluno)
                 return redirect()->back()->with('message','Aluno não encontrado');
-            elseif(!empty($processo->pAlunos->where('ra',$request->ra)->first()->status) || $processo->pAlunos->where('ra',$request->ra)->first()->status=='Falta Documento'){
+            elseif(!empty($processo->pAlunos->where('ra',$request->ra)->first()->status) && $processo->pAlunos->where('ra',$request->ra)->first()->status=='Falta Documento'){
                 Session::put('ra',$aluno->ra);
                 return redirect()
                 ->route('pAluno.show',
