@@ -163,6 +163,8 @@ class PublicoAlunoController extends Controller
                 ->first();
             if(!$processo) 
                 return redirect()->back()->with('message','Prazo finalizado.'); 
+            
+            Session::put('ra',$aluno->ra);
             return redirect()
             ->route('pAluno.show',
             [
