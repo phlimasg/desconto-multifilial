@@ -58,7 +58,7 @@
                     </button>                    
                 </div>
             </nav>
-            <form action="{{ route('pAluno.login', ['filial'=>$filial,'processo'=>$processo->url]) }}" method="post">
+            <form action="{{ route('pAluno.login', ['filial'=>$filial,'processo'=>$processo->url]) }}" method="post" id="login">
               @csrf
             <input type="hidden" name="filial" value="{{$filial}}">
             <input type="hidden" name="processo" value="{{$processo->url}}">
@@ -79,7 +79,7 @@
                   </div>  
                   <div class="row">
                     <div class="col-sm-12 ">
-                      <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-key"></i> Entrar</button>
+                      <button type="submit" id="submit" class="btn btn-primary btn-block"><i class="fa fa-key"></i> Entrar</button>
                     </div>
                   </div>  
                 </div>
@@ -113,6 +113,13 @@
             });
         });
     </script>
+    <script>
+      $('#login').submit(function() {
+        $('#submit').prop('disabled',true);
+        $('#submit').html('<i class="fa fa-refresh fa-spin"></i> Aguarde...');
+      });
+    </script>
+
 </body>
 
 </html>

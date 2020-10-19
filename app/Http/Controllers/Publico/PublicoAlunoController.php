@@ -162,7 +162,14 @@ class PublicoAlunoController extends Controller
                 ->where('periodo_fim','>=',date('Y-m-d H:i:s'))
                 ->first();
             if(!$processo) 
-                return redirect()->back()->with('message','Prazo finalizado.');                  
+                return redirect()->back()->with('message','Prazo finalizado.'); 
+            return redirect()
+            ->route('pAluno.show',
+            [
+                'filial'=>$request->filial,
+                'processo'=>$request->processo,
+                'pAluno' => $aluno->ra
+                ]);                 
 
         } catch (\Exception $e) {
             return $e->getMessage();
