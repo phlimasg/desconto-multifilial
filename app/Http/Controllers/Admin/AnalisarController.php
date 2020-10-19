@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AnaliseAsRequest;
+use App\Http\Requests\AnaliseComissaoRequest;
 use App\Mail\StatusMail;
 use App\Models\Admin\Analise;
+use App\Models\Admin\DescontoHistorico;
 use App\Models\Admin\Filial;
 use App\Models\Admin\MensagemInterna;
 use App\Models\Admin\MensagemUsuario;
@@ -112,9 +114,48 @@ class AnalisarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($filial, $processo, AnaliseComissaoRequest $request, $id)
     {
-        //
+        try {
+            //dd($request->all());
+        $filial = Filial::where('url',$filial)->first();
+        $processo = $filial->ListarProcessos->where('url',$processo)->first();
+        
+        if($processo){
+            $aluno = PublicAluno::where('id',$request->public_aluno_id)->update(
+                ['status'=>$request->status]
+            );
+            $descHistorico = DescontoHistorico::create([
+                'percentual' => $request->desconto_sugerido,
+                'analise_id'=> $id,
+                'public_aluno_id'=>$request->public_aluno_id,
+                'processo_id'=>$processo->id
+            ]);
+            if($request->msg_usuario){
+                $mensagem = MensagemUsuario::create([
+                    'msg_usuario' => $request->msg_usuario,
+                    'public_aluno_id' => $request->public_aluno_id,
+                    'processo_id' => $processo->id,
+                ]);
+            }
+            if($request->msg_interna){
+                $mensagem = MensagemInterna::create([
+                    'msg_interna' => $request->msg_interna,
+                    'public_aluno_id' => $request->public_aluno_id,
+                    'processo_id' => $processo->id,
+                ]);
+            }
+            $aluno = PublicAluno::find($request->public_aluno_id);
+            
+            if($request->status == 'Falta Documento' && !empty($request->msg_usuario) || $request->status == 'Deferido'){
+                empty($mensagem) ? $mensagem = null : '';
+                Mail::to($aluno->pResponsavelFinanceiro->email)->send(new StatusMail($aluno, $mensagem));
+            }
+            return redirect()->back()->with('message','Dados salvos/atualizados com sucesso!');
+        }  
+        } catch (\Exception $e) {
+            redirect()->back()->with('message',$e->getMessage());
+        }
     }
 
     /**

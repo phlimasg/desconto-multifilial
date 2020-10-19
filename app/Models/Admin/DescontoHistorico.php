@@ -5,12 +5,13 @@ namespace App\Models\Admin;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
-class MensagemUsuario extends Model
+class DescontoHistorico extends Model
 {
     protected $fillable = [
-        'msg_usuario',
-        'public_aluno_id',
+        'percentual',
         'user_create',
+        'analise_id',
+        'public_aluno_id',
         'processo_id'
     ];
 

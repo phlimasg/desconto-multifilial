@@ -3,6 +3,8 @@
 namespace App\Models\Publico;
 
 use App\Models\Admin\Analise;
+use App\Models\Admin\DescontoHistorico;
+use App\Models\Admin\MensagemInterna;
 use App\Models\Admin\MensagemUsuario;
 use App\Models\Admin\Processo;
 use Illuminate\Database\Eloquent\Model;
@@ -73,6 +75,18 @@ class PublicAluno extends Model
     public function MensagemUsuario()
     {
         return $this->hasOne(MensagemUsuario::class,'public_aluno_id','id')->latest();
+    }
+    public function MensagensUsuario()
+    {
+        return $this->hasMany(MensagemUsuario::class,'public_aluno_id','id')->latest();
+    }
+    public function MensagensInternas()
+    {
+        return $this->hasMany(MensagemInterna::class,'public_aluno_id','id')->latest();
+    }
+    public function DescontoHistorico()
+    {
+        return $this->hasMany(DescontoHistorico::class,'public_aluno_id','id')->orderBy('id','desc');
     }
     
 }

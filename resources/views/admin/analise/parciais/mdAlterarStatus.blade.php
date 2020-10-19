@@ -1,5 +1,13 @@
  <!-- Modal -->
-<form action="{{ route('analisar.store', ['filial'=>$filial->url, 'processo'=>$processo->url]) }}" method="POST">
+<form 
+@can('AssistenteSocial', Auth::user())
+    action="{{ route('analisar.store', ['filial'=>$filial->url, 'processo'=>$processo->url]) }}" 
+    method="POST"
+@else
+    action="{{ route('analisar.update', ['filial'=>$filial->url, 'processo'=>$processo->url,'analisar'=>$dados->Analise->id]) }}"     
+    method="post">
+    @method('PUT')
+@endcan
     @csrf
     <input type="hidden" name="public_aluno_id" value="{{$dados->id}}">
     <div class="modal fade" id="alterarStatus" role="dialog">
@@ -69,11 +77,16 @@
                                     selected
                                 @elseif(!empty($dados->Analise->desconto_sugerido) && $dados->Analise->desconto_sugerido == 'Fora de critério de renda')
                                     selected
-                                @endif>100%</option>
-                                >Fora de critério de renda</option>
+                                @endif>Fora de critério de renda</option>
                             </select>
                             @error('desconto_sugerido') <div class="alert alert-danger">{{ $message }}</div>@enderror
                         @endcannot
+                    </div>
+                    <div class="col-md-3">
+                        <br>
+                        <button type="button" data-toggle="modal" data-target="#historico" class="btn btn-primary">Histórico de sugestões</button>
+                        
+                        @include('admin.analise.parciais.mdHistorico')
                     </div>
                 </div>
                 @can('AssistenteSocial', Auth::user())                

@@ -5,12 +5,26 @@
 @section('content_header')
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-6">
           <h1>Dados da Solicitação</h1>
         </div>
-        <div class="col-sm-4">
-          <ol class="breadcrumb float-sm-right">
-            <a href="#" data-toggle="modal" data-target="#alterarStatus"  class="btn btn-block btn-info"><i class="fa fa-plus"></i> Alterar Status e Parecer descritivo</a>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">            
+            <div class="btn-group">
+              <div class="btn-group">
+              <button type="button" data-toggle="modal" data-target="#alterarStatus"  class="btn btn-block btn-warning"><i class="fa fa-plus"></i> Alterar Status e Parecer descritivo</button>
+              
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                   <i class="fa fa-envelope"></i> Mensagens
+                </button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#mdMsgUsuario">Mensagens para o usuário</a>
+                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#mdMsgInterna">Mensagens Internas</a>
+                </div>
+              </div>
+            </div>
+            @include('admin.analise.parciais.mdMsgUsuario')
+            @include('admin.analise.parciais.mdMsgInterna')
             @include('admin.analise.parciais.mdAlterarStatus')
           </ol>
         </div>

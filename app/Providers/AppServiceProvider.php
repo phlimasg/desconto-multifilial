@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Admin\Aluno;
 use App\Models\Admin\Analise;
+use App\Models\Admin\DescontoHistorico;
 use App\Models\Admin\Filial;
 use App\Models\Admin\Importacao;
 use App\Models\Admin\MensagemInterna;
@@ -12,6 +13,7 @@ use App\Models\Admin\Processo;
 use App\Models\Admin\UserFilial;
 use App\Observers\AlunoObserver;
 use App\Observers\AnaliseObserver;
+use App\Observers\DescontoHistoricoObserver;
 use App\Observers\FilialObserver;
 use App\Observers\ImportacaoObserver;
 use App\Observers\MensagemInternaObserver;
@@ -49,6 +51,7 @@ class AppServiceProvider extends ServiceProvider
         MensagemInterna::observe(MensagemInternaObserver::class);
         MensagemUsuario::observe(MensagemUsuarioObserver::class);
         UserFilial::observe(UserFilialObserver::class);
+        DescontoHistorico::observe(DescontoHistoricoObserver::class);
         Schema::defaultStringLength(191);
     }
 }
