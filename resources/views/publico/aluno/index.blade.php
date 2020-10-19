@@ -71,7 +71,9 @@
                       <label for="">Ra/Matricula/Id:</label>
                     <input type="text" name="ra" id="" class="form-control" placeholder="Somente Números" value="{{old('ra')}}">
                     @if (session('message'))
-                      <span class="text-danger">*{{session('message')}}</span>
+                    <div class="alert alert-danger">
+                      <span >*{{session('message')}}</span>
+                    </div>
                     @endif
                     </div>
                   </div>  

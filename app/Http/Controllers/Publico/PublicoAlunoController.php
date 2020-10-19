@@ -140,25 +140,29 @@ class PublicoAlunoController extends Controller
     public function login(Request $request)
     {
         try {
-            $processo = Filial::where('url',$request->filial)->first()
-                ->ListarProcessos()->where('url',$request->processo)
-                ->where('periodo_ini','<=',date('Y-m-d H:i:s'))
-                ->where('periodo_fim','>=',date('Y-m-d H:i:s'))
-                ->first();                
-            if(!$processo) 
-                return redirect()->back()->with('message','Prazo finalizado.');
+            $filial = Filial::where('url',$request->filial)->first();
+            $processo = $filial->ListarProcessos()->where('url',$request->processo)                
+                ->first();
             $aluno = $processo->alunos()->where('ra',$request->ra)->first();
+           
             if(!$aluno)
                 return redirect()->back()->with('message','Aluno não encontrado');
-            //session('ra',$aluno->ra);
-            Session::put('ra',$aluno->ra);
-            return redirect()
-            ->route('pAluno.show',
-            [
-                'filial'=>$request->filial,
-                'processo'=>$request->processo,
-                'pAluno' => $aluno->ra
-                ]);
+            elseif($processo->pAlunos->where('ra',$request->ra)->first()->status=='Falta Documento'){
+                Session::put('ra',$aluno->ra);
+                return redirect()
+                ->route('pAluno.show',
+                [
+                    'filial'=>$request->filial,
+                    'processo'=>$request->processo,
+                    'pAluno' => $aluno->ra
+                    ]);
+            }
+            $processo = $filial->ListarProcessos()->where('url',$request->processo)    
+                ->where('periodo_ini','<=',date('Y-m-d H:i:s'))
+                ->where('periodo_fim','>=',date('Y-m-d H:i:s'))
+                ->first();
+            if(!$processo) 
+                return redirect()->back()->with('message','Prazo finalizado.');                  
 
         } catch (\Exception $e) {
             return $e->getMessage();
