@@ -11,7 +11,7 @@
     @csrf
     <input type="hidden" name="public_aluno_id" value="{{$dados->id}}">
     <div class="modal fade" id="alterarStatus" role="dialog">
-        <div class="modal-dialog modal-lg" style="max-width: 98%">
+        <div class="modal-dialog modal-md  modal-dialog-scrollable" style="min-width: 100vw; margin:0 auto; height: 100vh">
             <div class="modal-content">
             <div class="modal-header">
             <h4 class="modal-title">Alterar Status</h4>
@@ -45,18 +45,27 @@
                                 @can('Supervisao', Auth::user())
                                     <option value="Deferido" @if (old('status') == 'Deferido') selected @endif>Deferido</option>                                    
                                 @endcan    
-                                <option value="Indeferido" @if (old('status') == 'Indeferido') selected @endif>Indeferido</option>
+                                <option value="Indeferido" 
+                                @if (old('status') == 'Indeferido') 
+                                selected 
+                                @elseif(!empty($dados->Analise->desconto_sugerido) && $dados->Analise->desconto_sugerido == 'Fora de critério de renda')
+                                    selected
+                                
+                                @endif>Indeferido</option>
                         </select>
                         @error('status') <div class="alert alert-danger">{{ $message }}</div>@enderror
                     </div>
+                    <div class="col-md-4">
+                        <label for="">Sugerido por AS: <span class="text-danger"> {{!empty($dados->Analise->desconto_sugerido)?$dados->Analise->desconto_sugerido:''}}</span></label>
+                            <button type="button" onclick="modalHistoricoOpen()" class="btn btn-primary">Histórico de sugestões</button>
+                            
+                            
+                    </div>
                     <div class="col-md-3">
-                        @cannot('AssistenteSocial', Auth::user())
-                            @can('Comissao', Auth::user())
-                            <label for="">Percentual sugerido - AS</label>
-                            @endcan
-                            @can('Supervisao', Auth::user())
-                            <label for="">Percentual sugerido - CD</label>
-                            @endcan
+                        @cannot('AssistenteSocial', Auth::user())                           
+                            
+                            <label for="">Sugerir/Deferir</label>
+                            
                             <select name="desconto_sugerido" id="" class="form-control @error('desconto_sugerido') is-invalid @enderror">                            
                                 <option value="" ></option>
                                 <option value="50%"
@@ -81,14 +90,18 @@
                             </select>
                             @error('desconto_sugerido') <div class="alert alert-danger">{{ $message }}</div>@enderror
                         @endcannot
-                    </div>
-                    <div class="col-md-3">
-                        <br>
-                        <button type="button" data-toggle="modal" data-target="#historico" class="btn btn-primary">Histórico de sugestões</button>
-                        
-                        @include('admin.analise.parciais.mdHistorico')
-                    </div>
+                    </div>                    
                 </div>
+                @cannot('AssistenteSocial', Auth::user())
+                <hr>
+                <div class="row">
+                    <div class="col-sm-12 callout callout-warning">
+                        <label for="">Parecer AS:</label>
+                        {!! !empty($dados->Analise->parecer)?$dados->Analise->parecer:'' !!}
+                    </div>
+                </div>                    
+                @endcannot
+
                 @can('AssistenteSocial', Auth::user())                
                 <div class="row">
                     <div class="col-md-6">
@@ -378,6 +391,11 @@
         </div>
     </div>
 </form>
+@section('css')
+<style>
+    html, body{ margin: 0 !important}
+</style>    
+@endsection
 @section('js')
 @include('parciais.alert')
 @if ($errors->any())
@@ -399,6 +417,14 @@
         CKEDITOR.replace('obsAssintente');
         CKEDITOR.replace('msg_interna');
         CKEDITOR.replace('msg_usuario');  
-    });    
+    }); 
+    function modalHistoricoOpen()   {
+        $('#alterarStatus').modal('hide'); 
+        setTimeout(() => { $('#historico').modal('show'); }, 150);
+    }
+    function modalHistoricoClose()   {
+        $('#historico').modal('hide');
+        setTimeout(() => { $('#alterarStatus').modal('show'); }, 150);
+    }
 </script>  
 @endsection

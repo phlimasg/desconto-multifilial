@@ -1,9 +1,9 @@
 <div class="modal fade" id="historico" role="dialog">
-    <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-dialog  modal-dialog-scrollable modal-lg">
         <div class="modal-content">
         <div class="modal-header">
         <h4 class="modal-title">Histórico de Sugestões</h4>
-            <button type="button" class="close" onclick="$('#historico').modal('hide');">&times;</button>
+            <button type="button" class="close" onclick="modalHistoricoClose()">&times;</button>
         </div>
         <div class="modal-body">
             <div class="row">

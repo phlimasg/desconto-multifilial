@@ -26,6 +26,7 @@
             @include('admin.analise.parciais.mdMsgUsuario')
             @include('admin.analise.parciais.mdMsgInterna')
             @include('admin.analise.parciais.mdAlterarStatus')
+            @include('admin.analise.parciais.mdHistorico')
           </ol>
         </div>
       </div>

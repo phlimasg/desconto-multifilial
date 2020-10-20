@@ -29,7 +29,7 @@
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Status</th>
-                <th></th>                
+                <th>Concedido</th>                
                 <th></th>
                 <th></th>
               </tr>
@@ -40,7 +40,7 @@
                 <td>{{$i->id}}</td>
                 <td>{{$i->nome}}</td>
                 <td>{{$i->status}}</td>
-                <td></td>                
+                <td>{{$i->desconto_deferido}}</td>                
                 <td><a href="{{ route('analisar.show', ['filial'=>$filial->url,'processo'=>$processo->url,'analisar'=>$i->id]) }}" class="btn btn-primary"><i class="fa fa-eye"></i> Analisar</a></td>
                 <td>                 
                 </td>
