@@ -8,11 +8,13 @@
         <div class="col-sm-6">
           <h1>Listagem de Filiais</h1>
         </div>
+        @can('Administrador', Auth::user())
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <a href="{{ route('filial.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Adicionar Filial</a>
           </ol>
-        </div>
+        </div>          
+        @endcan
       </div>
     </div><!-- /.container-fluid -->  
 @stop

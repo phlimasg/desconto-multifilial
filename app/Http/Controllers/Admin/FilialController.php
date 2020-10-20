@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\FilialRequest;
 use App\Models\Admin\Filial;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FilialController extends Controller
 {
@@ -14,7 +15,7 @@ class FilialController extends Controller
 
     public function __construct(Filial $filial)
     {
-        $this->repository = $filial;   
+        $this->repository = $filial;           
     }
     /**
      * Display a listing of the resource.
@@ -45,7 +46,8 @@ class FilialController extends Controller
      */
     public function store(FilialRequest $request)
     {
-        try {              
+        try {   
+            $this->authorize('Administrador', Auth::user());           
             $this->repository->create($request->all());
             return redirect()->back()->with('message','Os dados foram salvos com sucesso!');
         } catch (\Exception $e) {
@@ -90,7 +92,8 @@ class FilialController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try {         
+        try { 
+            $this->authorize('Administrador', Auth::user());        
             Filial::findOrFail($id)->update($request->except('_token','_method'));   
             return redirect()->back()->with('message','Os dados foram salvos com sucesso!');
         } catch (\Exception $e) {
