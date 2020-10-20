@@ -3,10 +3,11 @@
 @section('title', 'Solicitação')
 
 @section('content_header')
+
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-6">
-          <h1>Dados da Solicitação</h1>
+          <h1><a href="{{ route('analisar.index', ['filial'=> $filial->url,'processo'=> $processo->url]) }}" class="btn btn-sm btn-dark"><i class="fa fa-chevron-left"></i></a>Dados da Solicitação</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">            
@@ -53,6 +54,7 @@
           <li class="nav-item">
             <a class="nav-link" id="custom-tabs-two-settings-tab" data-toggle="pill" href="#custom-tabs-two-settings" role="tab" aria-controls="custom-tabs-two-settings" aria-selected="false"> <i class="fa fa-home"></i> Comp. Fam.</a>
           </li>          
+          @if($processo->tipo == 'bolsa')
           <li class="nav-item">
             <a class="nav-link" id="custom-tabs-two-hab-tab" data-toggle="pill" href="#custom-tabs-two-hab" role="tab" aria-controls="custom-tabs-two-hab" aria-selected="false"> <i class="fa fa-igloo"></i> Sit. Habit.</a>
           </li>
@@ -65,6 +67,7 @@
           <li class="nav-item">
             <a class="nav-link" id="custom-tabs-two-desperec-tab" data-toggle="pill" href="#custom-tabs-two-desperec" role="tab" aria-controls="custom-tabs-two-desperec" aria-selected="false"> <i class="fa fa-dollar-sign"></i> Desp. e Rec.</a>
           </li>
+          @endif
         </ul>
       </div>
       <div class="card-body">
@@ -81,6 +84,7 @@
           <div class="tab-pane fade" id="custom-tabs-two-settings" role="tabpanel" aria-labelledby="custom-tabs-two-settings-tab">
             @include('admin.analise.parciais.compfam')
           </div>
+          @if($processo->tipo == 'bolsa')
           <div class="tab-pane fade" id="custom-tabs-two-hab" role="tabpanel" aria-labelledby="custom-tabs-two-hab-tab">
             @include('admin.analise.parciais.sithabit')
           </div>
@@ -93,6 +97,7 @@
           <div class="tab-pane fade" id="custom-tabs-two-desperec" role="tabpanel" aria-labelledby="custom-tabs-two-desperec-tab">
             @include('admin.analise.parciais.desperec')
           </div>
+          @endif
         </div>
       </div>
       <!-- /.card -->
