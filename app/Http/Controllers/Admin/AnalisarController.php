@@ -49,8 +49,7 @@ class AnalisarController extends Controller
     public function store($filial, $processo,AnaliseAsRequest $request)
     {        
         $filial = Filial::where('url',$filial)->first();
-        $processo = $filial->ListarProcessos->where('url',$processo)->first();
-        
+        $processo = $filial->ListarProcessos->where('url',$processo)->first();        
         if($processo){
             $aluno = PublicAluno::where('id',$request->public_aluno_id)->update(
                 ['status'=>$request->status]
@@ -60,20 +59,20 @@ class AnalisarController extends Controller
                 $request->except(['_token','msg_interna','msg_usuario','irmao','status'])
             );
             if($request->msg_usuario){
-                $mensagem = MensagemUsuario::create([
+                MensagemUsuario::create([
                     'msg_usuario' => $request->msg_usuario,
                     'public_aluno_id' => $request->public_aluno_id,
                     'processo_id' => $processo->id,
                 ]);
             }
             if($request->msg_interna){
-                $mensagem = MensagemInterna::create([
+                MensagemInterna::create([
                     'msg_interna' => $request->msg_interna,
                     'public_aluno_id' => $request->public_aluno_id,
                     'processo_id' => $processo->id,
                 ]);
             }
-            $aluno = PublicAluno::find($request->public_aluno_id);
+            $aluno = PublicAluno::find($request->public_aluno_id);            
             
             if($request->status == 'Falta Documento' && !empty($request->msg_usuario) || $request->status == 'Deferido'){
                 empty($mensagem) ? $mensagem = null : '';
