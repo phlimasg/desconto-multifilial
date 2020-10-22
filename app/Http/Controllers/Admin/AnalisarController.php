@@ -68,7 +68,7 @@ class AnalisarController extends Controller
             }
             if($request->msg_interna){
                 $mensagem = MensagemInterna::create([
-                    'msg_usuario' => $request->msg_interna,
+                    'msg_interna' => $request->msg_interna,
                     'public_aluno_id' => $request->public_aluno_id,
                     'processo_id' => $processo->id,
                 ]);
