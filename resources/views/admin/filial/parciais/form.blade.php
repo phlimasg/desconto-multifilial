@@ -33,7 +33,7 @@
                 <div class="row">
                   <div class="col-sm-12">
                     <label for="">Descrição</label>  
-                    <textarea name="descricao" id="" cols="30" rows="10" class="form-control">{{$data['filial'] ? $data['filial']->descricao : ''}}</textarea>
+                    <textarea name="descricao" id="" cols="30" rows="2" class="form-control">{{$data['filial'] ? $data['filial']->descricao : ''}}</textarea>
                     @error('descricao')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
