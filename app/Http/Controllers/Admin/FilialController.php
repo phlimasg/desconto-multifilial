@@ -65,7 +65,7 @@ class FilialController extends Controller
     {
         try {        
             //dd($id);
-            $filial = $this->repository->findOrFail($id);
+            $filial = $this->repository->findOrFail($id);                        
             return view('admin.filial.show', compact('filial'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error',$e->getMessage());            

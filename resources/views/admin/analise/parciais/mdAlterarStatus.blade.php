@@ -56,10 +56,8 @@
                         @error('status') <div class="alert alert-danger">{{ $message }}</div>@enderror
                     </div>
                     <div class="col-md-4">
-                        <label for="">Sugerido por AS: <span class="text-danger"> {{!empty($dados->Analise->desconto_sugerido)?$dados->Analise->desconto_sugerido:''}}</span></label>
-                            <button type="button" onclick="modalHistoricoOpen()" class="btn btn-primary">Histórico de sugestões</button>
-                            
-                            
+                        <label for="">Sugerido por AS: <span class="text-danger"> {{!empty($dados->Analise->desconto_sugerido)?$dados->Analise->desconto_sugerido:''}}</span></label> <br>
+                        <button type="button" onclick="modalHistoricoOpen()" class="btn btn-primary">Histórico de sugestões</button>
                     </div>
                     <div class="col-md-3">
                         @cannot('AssistenteSocial', Auth::user())                           

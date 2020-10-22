@@ -7,7 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class Filial extends Model
 {    
     protected $fillable = [
-        'codigo','nome','descricao','url','user_create','user_update'
+        'codigo',
+        'nome',
+        'descricao',
+        'url',
+        'logo_url',
+        'rua',
+        'numero',
+        'bairro',
+        'cidade',
+        'estado',
+        'cep',
+        'user_create','user_update'
     ];
 
     public function ListarProcessos()

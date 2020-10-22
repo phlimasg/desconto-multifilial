@@ -10,8 +10,19 @@
                   @error('nome')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
-                  </div>                 
-                </div>     
+                  </div> 
+                  <div class="col-sm-6">
+                    <label for="">Tipo</label>                  
+                  <select name="tipo" id="" class="form-control">
+                    <option value=""></option>
+                    <option {{old('tipo')=='bolsa' ? 'selected' : $data['input']=='bolsa' ? 'selected' : ''}} value="bolsa">Bolsa Social</option>
+                    <option {{old('tipo')=='comercial' ? 'selected' : $data['input']=='comercial' ? 'selected' : ''}} value="comercial">Desconto Comercial</option>
+                  </select>
+                  @error('tipo')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                  </div>
+            </div>       
                 <div class="row">
                   <div class="col-sm-2">
                     <label for="">Data de liberação:</label>  

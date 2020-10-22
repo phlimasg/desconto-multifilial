@@ -27,6 +27,14 @@ class FilialRequest extends FormRequest
             'codigo' => 'required|numeric|unique:App\Models\Admin\Filial,codigo|max:250',
             'nome' => 'required|string|unique:App\Models\Admin\Filial,nome|max:250',
             'descricao' => 'nullable|string|required|max:240',
+            'rua'=> 'required|string|max:250',
+            'numero'=> 'required|numeric',
+            'complemento'=> 'required|string|max:250',
+            'bairro'=> 'required|string|max:250',
+            'cidade'=> 'required|string|max:250',
+            'estado'=> 'required|string|max:250',
+            'cep'=> 'required|string|max:250',
+            'logo_url'=> 'required|string|max:250',
         ];
     }
 }

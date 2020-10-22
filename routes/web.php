@@ -10,6 +10,9 @@ Route::prefix('google')->namespace('Auth')->group(function(){
     Route::get('login','GoogleController@login')->name('google.login');
     Route::get('redirect','GoogleController@redirect');
 });
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 Route::group(['middleware' => ['auth']], function () { 
     Route::prefix('admin')->namespace('Admin')->group(function(){
         Route::resource('filial', 'FilialController');

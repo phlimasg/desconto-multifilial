@@ -23,7 +23,7 @@
             @endif
             @if ($aluno->status == 'Deferido')
                 <p><b>Parabéns!</b></p>
-                <p>Seu desconto de <b>VAR</b> foi deferido.</p>
+                <p>Seu desconto de <b>{{$aluno->desconto_deferido}}</b> foi deferido.</p>
                 @if (!empty($mensagem))
                     {!!$mensagem->msg_usuario!!}
                 @endif

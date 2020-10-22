@@ -19,8 +19,8 @@ class PublicoAlunoController extends Controller
      */
     public function index($filial,$processo)
     {
-        $processo = Filial::where('url',$filial)->first()
-                    ->ListarProcessos()->where('url',$processo)->first();
+        $filial = Filial::where('url',$filial)->first();
+        $processo = $filial->ListarProcessos()->where('url',$processo)->first();
         $processo ? '': abort('404','Processo não encontrado');
         return view('publico.aluno.index',compact('filial','processo'));
     }
@@ -141,6 +141,7 @@ class PublicoAlunoController extends Controller
     {
         try {
             $filial = Filial::where('url',$request->filial)->first();
+            
             $processo = $filial->ListarProcessos()->where('url',$request->processo)                
                 ->first();
             $aluno = $processo->alunos()->where('ra',$request->ra)->first();

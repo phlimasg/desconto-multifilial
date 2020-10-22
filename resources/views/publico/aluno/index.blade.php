@@ -60,12 +60,12 @@
             </nav>
             <form action="{{ route('pAluno.login', ['filial'=>$filial,'processo'=>$processo->url]) }}" method="post" id="login">
               @csrf
-            <input type="hidden" name="filial" value="{{$filial}}">
+            <input type="hidden" name="filial" value="{{$filial->url}}">
             <input type="hidden" name="processo" value="{{$processo->url}}">
               <div class="login_ra">
                 <div class="login_box text-center">
                   
-                  <img src="https://lasalle.edu.br/public/uploads/images/abel/5af5fc44d4812(BRANCA-HORIZONTAL)_Abel.png" alt="" srcset="" style="max-width: 450px;  max-height: 100px">    
+                  <img src="{{$filial->logo_url}}" alt="" srcset="" style="max-width: 450px;  max-height: 100px">    
                   <div class="row">
                     <div class="col-sm-12 ">
                       <label for="">Ra/Matricula/Id:</label>

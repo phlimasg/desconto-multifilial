@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Admin\Filial;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -55,6 +56,16 @@ class UserProfile
         foreach ($user->userFilial as $i) {
             foreach($i->Profiles as $j){
                 if($j->nome == 'Supervisão Administrativa' || $j->nome == 'Administrador' || $j->nome == 'Root')
+                return true;
+            }
+        }
+    }
+
+    public function Filial(User $user, $filial)
+    {        
+        foreach ($user->userFilial as $i) {
+            foreach($i->Profiles as $j){
+                if($i->filial_id == $filial->id || $j->nome == 'Administrador' || $j->nome == 'Root')
                 return true;
             }
         }

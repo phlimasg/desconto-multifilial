@@ -23,8 +23,8 @@ class AnalisarController extends Controller
     
     public function index($filial, $processo)
     {
-        $filial = Filial::where('url',$filial)->first();
-        $processo = $filial->ListarProcessos->where('url',$processo)->first();
+        $filial = Filial::where('url',$filial)->first();        
+        $processo = $filial->ListarProcessos()->where('url',$processo)->first();
         $data = PublicAluno::where('processo_id', $processo->id)->get();
         //dd($data);
         return view('admin.analise.index',compact('filial','processo','data'));
@@ -157,9 +157,9 @@ class AnalisarController extends Controller
                 ]);
             }
             $aluno = PublicAluno::find($request->public_aluno_id);
-            if($request->status == 'Deferido'){
+            /*if($request->status == 'Deferido'){
                 Mail::to($aluno->pResponsavelFinanceiro->email)->send(new DeferidoMail($aluno));
-            }
+            }*/
             if($request->status == 'Falta Documento' && !empty($request->msg_usuario) || $request->status == 'Deferido'){
                 empty($mensagem) ? $mensagem = null : '';
                 Mail::to($aluno->pResponsavelFinanceiro->email)->send(new StatusMail($aluno, $mensagem));

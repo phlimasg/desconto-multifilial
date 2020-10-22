@@ -7,6 +7,7 @@ use App\Http\Requests\ProcessoRequest;
 use App\Models\Admin\Filial;
 use App\Models\Admin\Processo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProcessoController extends Controller
 {
@@ -18,7 +19,9 @@ class ProcessoController extends Controller
     public function index($filial)
     {        
         //dd(PHP_OS);
-        $data = Filial::where('url',$filial)->first()->ListarProcessos()->latest()->paginate(5);        
+        $filial = Filial::where('url',$filial)->first();         
+        //$this->authorize('Filial', Auth::user(),$filial);       
+        $data = $filial->ListarProcessos()->latest()->paginate(5);
         return view('admin.processo.index', compact('data','filial'));
     }
 
@@ -44,6 +47,7 @@ class ProcessoController extends Controller
             $filial = Filial::select('id')->where('url',$request->filial)->firstOrFail();            
             Processo::create([
                 'nome' => $request->nome,
+                'tipo' => $request->tipo,
                 'periodo_ini' => $request->periodo_ini.' '.$request->hora_ini,
                 'periodo_fim' => $request->periodo_fim.' '.$request->hora_fim,
                 'filial_id' => $filial->id,

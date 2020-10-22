@@ -61,7 +61,7 @@
                       <i class="fa fa-cog"></i> Opções
                     </button>
                     <div class="dropdown-menu">
-                      <a class="dropdown-item" href="{{ route('analisar.index', ['filial'=> $filial,'processo'=> $i->url]) }}"><i class="fa fa-eye"></i> Analisar</a>
+                      <a class="dropdown-item" href="{{ route('analisar.index', ['filial'=> $filial->url,'processo'=> $i->url]) }}"><i class="fa fa-eye"></i> Analisar</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Alunos adicionados</a>                      
                       <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalImportar{{$i->id}}"><i class="fa fa-file-excel"></i> Importar Alunos</a>
