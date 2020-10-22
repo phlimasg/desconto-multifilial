@@ -1,15 +1,14 @@
  <!-- Modal -->
-<form 
-@can('AssistenteSocial', Auth::user())
-    action="{{ route('analisar.store', ['filial'=>$filial->url, 'processo'=>$processo->url]) }}" 
-    method="POST"
+ @can('AssistenteSocial', Auth::user())
+ <form action="{{ route('analisar.store', ['filial'=>$filial->url, 'processo'=>$processo->url]) }}" 
+    method="POST">
 @else
-    action="{{ route('analisar.update', ['filial'=>$filial->url, 'processo'=>$processo->url,'analisar'=>$dados->Analise->id]) }}"     
+<form action="{{ route('analisar.update', ['filial'=>$filial->url, 'processo'=>$processo->url,'analisar'=>$dados->Analise->id]) }}"     
     method="post">
     @method('PUT')
 @endcan
-    @csrf
-    <input type="hidden" name="public_aluno_id" value="{{$dados->id}}">
+@csrf
+<input type="hidden" name="public_aluno_id" value="{{$dados->id}}">
     <div class="modal fade" id="alterarStatus" role="dialog">
         <div class="modal-dialog modal-md  modal-dialog-scrollable" style="min-width: 100vw; margin:0 auto; height: 100vh">
             <div class="modal-content">
