@@ -34,6 +34,6 @@ class StatusMail extends Mailable
             'aluno' => $this->aluno,
             'mensagem' => $this->mensagem
         ]
-        )->replyTo('bolsa.abel@lasalle.org.br', 'Bolsa Social')->subject(date('d/m/Y H:m').' - Processo de Bolsa Social - '.$this->aluno->ra);
+        )->replyTo($this->aluno->Processo->email, 'SBD La Salle')->subject('Atualização do Processo de '.$this->aluno->nome.' | '.date('d/m/Y H:m'));
     }
 }

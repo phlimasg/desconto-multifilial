@@ -33,7 +33,7 @@ class AnaliseAsRequest extends FormRequest
             'deficiencia' => 'string|nullable|max:240',
             
             'irmao' => 'string|sometimes|required|max:240',
-            'irmao_nome' => 'nullable|required_if:irmao,=,S|string|max:240',
+            'irmao_nome' => 'nullable|sometimes|required_if:irmao,=,S|string|max:240',
             
             'irmao_desconto' => 'string|sometimes|required|max:240',
             'irmao_bolsa' => 'nullable|string|required_if:irmao_desconto,=,S|max:240',

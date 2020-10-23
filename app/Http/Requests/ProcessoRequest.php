@@ -25,10 +25,20 @@ class ProcessoRequest extends FormRequest
     {
         return [            
             'nome' => 'required|string|max:250',
+            'tipo' => 'required|string|max:250',
+            'email' => 'required|string|max:250|regex:(@lasalle)',
             'periodo_ini' => 'required|date_format:Y-m-d|max:15',
             'periodo_fim' => 'required|date_format:Y-m-d|max:15',
             'hora_ini' => 'required|date_format:H:i|max:15',
             'hora_fim' => 'required|date_format:H:i|max:15',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'required' => '*Obrigatório',
+            'required_if' => '*Obrigatório',
+            'regex' => 'Utilize um e-mail institucional'
         ];
     }
 }

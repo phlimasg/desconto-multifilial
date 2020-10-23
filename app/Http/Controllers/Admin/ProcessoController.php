@@ -48,6 +48,7 @@ class ProcessoController extends Controller
             Processo::create([
                 'nome' => $request->nome,
                 'tipo' => $request->tipo,
+                'email' => $request->tipo,
                 'periodo_ini' => $request->periodo_ini.' '.$request->hora_ini,
                 'periodo_fim' => $request->periodo_fim.' '.$request->hora_fim,
                 'filial_id' => $filial->id,

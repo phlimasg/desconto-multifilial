@@ -16,16 +16,7 @@
             <h4 class="modal-title">Alterar Status</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            <div class="modal-body">
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+            <div class="modal-body">                
                 <div class="row">
                     <div class="col-md-3">
                         <label for="">Status</label>
@@ -105,7 +96,7 @@
                         <label for="">Reside próximo a escola?</label>
                         <div class="form-check">
                             <label class="form-check-label">
-                              <input type="radio" class="form-check-input" name="reside_proximo" value="S"
+                              <input type="radio" required class="form-check-input" name="reside_proximo" value="S"
                                 @if (old('reside_proximo') =='S')
                                     checked
                                 @elseif(!empty($dados->Analise->reside_proximo) && $dados->Analise->reside_proximo == 'S')
@@ -135,7 +126,7 @@
                             <div class="col-md-3">
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                      <input type="radio" class="form-check-input" name="programa_renda_chk" value="S" 
+                                      <input type="radio" required class="form-check-input" name="programa_renda_chk" value="S" 
                                         @if (old('programa_renda_chk') =='S')
                                             checked
                                         @elseif(!empty($dados->Analise->programa_renda) && $dados->Analise->programa_renda != 'N')
@@ -194,7 +185,7 @@
                             <div class="col-md-3">
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                      <input type="radio" class="form-check-input" name="irmao" value="S" 
+                                      <input type="radio" required class="form-check-input" name="irmao" value="S" 
                                         @if (old('irmao')=='S')
                                             checked
                                         @elseif(!empty($dados->Analise->irmao_nome))
@@ -238,7 +229,7 @@
                             <div class="col-md-6">
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                      <input type="radio" class="form-check-input" name="irmao_desconto" value="S"
+                                      <input type="radio" required class="form-check-input" name="irmao_desconto" value="S"
                                       @if (old('irmao_desconto')=="S")
                                             checked
                                         @elseif(!empty($dados->Analise->irmao_bolsa) && $dados->Analise->irmao_bolsa!= null)

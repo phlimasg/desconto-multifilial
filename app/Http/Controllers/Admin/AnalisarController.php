@@ -59,14 +59,14 @@ class AnalisarController extends Controller
                 $request->except(['_token','msg_interna','msg_usuario','irmao','status'])
             );
             if($request->msg_usuario){
-                MensagemUsuario::create([
+                $mensagem = MensagemUsuario::create([
                     'msg_usuario' => $request->msg_usuario,
                     'public_aluno_id' => $request->public_aluno_id,
                     'processo_id' => $processo->id,
                 ]);
             }
             if($request->msg_interna){
-                MensagemInterna::create([
+                $mensagem = MensagemInterna::create([
                     'msg_interna' => $request->msg_interna,
                     'public_aluno_id' => $request->public_aluno_id,
                     'processo_id' => $processo->id,

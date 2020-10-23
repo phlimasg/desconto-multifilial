@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Processo extends Model
 {
     protected $fillable = [
-        'nome', 'periodo_ini','periodo_fim','tipo','user_create','user_update','filial_id',
+        'nome', 'periodo_ini','periodo_fim','tipo','email','user_create','user_update','filial_id',
     ];
 
     public function filial()
