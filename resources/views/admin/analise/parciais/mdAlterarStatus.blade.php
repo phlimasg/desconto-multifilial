@@ -2,8 +2,12 @@
  @can('AssistenteSocial', Auth::user())
  <form action="{{ route('analisar.store', ['filial'=>$filial->url, 'processo'=>$processo->url]) }}" 
     method="POST">
-@else
+@elseif(!empty($dados->Analise->id))
 <form action="{{ route('analisar.update', ['filial'=>$filial->url, 'processo'=>$processo->url,'analisar'=>$dados->Analise->id]) }}"     
+    method="post">
+    @method('PUT')
+@else
+<form action="{{ route('analisar.update', ['filial'=>$filial->url, 'processo'=>$processo->url,'analisar'=>0]) }}"     
     method="post">
     @method('PUT')
 @endcan
