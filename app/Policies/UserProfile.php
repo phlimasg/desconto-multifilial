@@ -63,11 +63,11 @@ class UserProfile
 
     public function Filial(User $user, Filial $filial)
     {        
-        dd($user, $filial);
+        //dd($user, $filial);
         foreach ($user->userFilial as $i) {
             foreach($i->Profiles as $j){
                 //dd($user, $filial, $i,$j);
-                if($i->filial_id == $filial->id || $j->nome == 'Administrador' || $j->nome == 'Root')
+                if($i->filial_id == $filial->id || $j->nome == 'Root')
                 return true;
             }
         }

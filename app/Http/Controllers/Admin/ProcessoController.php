@@ -15,12 +15,12 @@ class ProcessoController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */
+     */    
     public function index($filial)
     {        
         //dd(PHP_OS);
         $filial = Filial::where('url',$filial)->first();         
-        //$this->authorize('Filial', Auth::user(),$filial);       
+        $this->authorize('Filial', $filial,Auth::user());       
         $data = $filial->ListarProcessos()->latest()->paginate(5);
         return view('admin.processo.index', compact('data','filial'));
     }
@@ -32,6 +32,8 @@ class ProcessoController extends Controller
      */
     public function create($filial)
     {
+        $filial = Filial::where('url', $filial)->first();
+        $this->authorize('Filial', $filial,Auth::user()); 
         return view('admin.processo.create',compact('filial'));
     }
 
@@ -80,6 +82,7 @@ class ProcessoController extends Controller
     public function edit($filial, $id)
     {
         $filial = Filial::where('url',$filial)->firstOrFail();
+        $this->authorize('Filial', $filial,Auth::user()); 
         $processo = $filial->ListarProcessos->where('url',$id)->first();        
         return view('admin.processo.create',compact('filial', 'processo'));
     }

@@ -51,8 +51,7 @@
             </thead>
             <tbody>
               @foreach ($filials as $i)
-              
-                
+                @can('Filial', [$i,Auth::user()])
                   <tr>
                     <td>{{$i->id}}</td>
                     <td>{{$i->codigo}}</td>
@@ -61,7 +60,7 @@
                     <td><a href="{{ route('filial.show', ['filial'=> $i->id]) }}" class="btn"><i class="fa fa-edit"></i> </a></td>
                     <td><a href="{{ route('processos.index', ['filial'=> $i->url]) }}" class="btn btn-primary"><i class="fa fa-eye "></i> Processos</a></td>
                   </tr> 
-                
+                @endcan
               @endforeach             
             </tbody>
           </table>
