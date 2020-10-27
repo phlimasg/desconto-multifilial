@@ -2,11 +2,11 @@
 <form action="{{route('processos.update',['filial' => $filial->url,'processo' => $processo->id ])}}" method="POST">
   @method('PUT')
 @else
-<form action="{{route('processos.store',['filial' => $filial])}}" method="POST">
+<form action="{{route('processos.store',['filial' => $filial->url])}}" method="POST">
 @endif
           @csrf          
           
-          <input type="hidden" name="filial" value="{{$filial}}">
+          <input type="hidden" name="filial" value="{{$filial->url}}">
           <div class="card-body">    
             <div class="row">
                  <div class="col-sm-6">
