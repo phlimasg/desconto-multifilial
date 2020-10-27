@@ -99,9 +99,9 @@
         $.each(data, function(index, value){
           console.log( index + ' : ' + value.periodo_fim);
           if(date.getTime() > new Date(value.periodo_fim).getTime())
-          $("#encerrados").append('<li><a href="'+filial +'/' +value.url+'">Encerrado - '+value.nome+'</a></li>');
+          $("#encerrados").append('<li style="color: gray"><a href="'+filial +'/' +value.url+'">Encerrado - '+value.nome+'</a></li>').hide().fadeIn(250);
           else
-          $("#abertos").append('<li><a href="'+filial +'/' +value.url+'">'+value.nome+'</a></li>');
+          $("#abertos").append('<li><a href="'+filial +'/' +value.url+'">'+value.nome+'</a></li>').hide().fadeIn(250);;
         });
           //alert("Data: " + data + "\nStatus: " + status);
       });
