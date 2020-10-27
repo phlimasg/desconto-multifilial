@@ -1,9 +1,8 @@
 <?php
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','Publico\PublicIndexController@index');
+Route::get('{id}','Publico\PublicIndexController@show');
 
 //Rotas de Login
 Route::prefix('google')->namespace('Auth')->group(function(){
