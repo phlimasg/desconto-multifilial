@@ -72,21 +72,14 @@
         <div class="row mt-5">
           <div class="col-md-12" style="padding: 0px">
             <ul id="abertos" class="list">
-              <li>
-                <a href="#"> PROCESSO 1</a>
-              </li>
-              <li>
-                <a href="#"> PROCESSO 2</a>
-              </li>
+              
             </ul>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12" style="padding: 0px">
             <ul class="list" id="encerrados">
-              <li>
-                <a href="#"> PROCESSO ENCERRADo</a>
-              </li>
+              
             </ul>
           </div>
         </div>
