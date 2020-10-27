@@ -61,13 +61,13 @@
           <li class="nav-item">
             <a class="nav-link" id="custom-tabs-two-redeabast-tab" data-toggle="pill" href="#custom-tabs-two-redeabast" role="tab" aria-controls="custom-tabs-two-redeabast" aria-selected="false"> <i class="fa fa-water"></i> Rede de Abast.</a>
           </li>
+          @endif
           <li class="nav-item">
             <a class="nav-link" id="custom-tabs-two-bensmoveis-tab" data-toggle="pill" href="#custom-tabs-two-bensmoveis" role="tab" aria-controls="custom-tabs-two-bensmoveis" aria-selected="false"> <i class="fa fa-car"></i> Bens Móveis</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" id="custom-tabs-two-desperec-tab" data-toggle="pill" href="#custom-tabs-two-desperec" role="tab" aria-controls="custom-tabs-two-desperec" aria-selected="false"> <i class="fa fa-dollar-sign"></i> Desp. e Rec.</a>
           </li>
-          @endif
         </ul>
       </div>
       <div class="card-body">
