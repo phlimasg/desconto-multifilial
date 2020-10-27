@@ -47,7 +47,7 @@
       list-style: none;
       font-size: 1.5rem;
     }
-  </style>
+  </style>  
   <div class="container-fluid">
     <div class="row" style="padding: 0px; ">
       <div class="col-md-4 " style="height: 100vh; background-color: rgba(255, 255, 255, 0.8); background-image: linear-gradient(to right, #ea990c 0%, #ea7a0c 100%);">
@@ -86,7 +86,7 @@
       </div>
     </div>
   </div>
-    
+  <a href="{{ route('google.login') }}" style="position: fixed; color: #4c75fd; top:0;right: 0; padding: 5px"><i class="fa fa-lock"></i></a>
   <script>
     function ListarProcessos() {
       var filial = $('#filial').val();
