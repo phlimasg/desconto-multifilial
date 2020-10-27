@@ -48,8 +48,7 @@ class PublicFinalizarController extends Controller
             ->first();        
         if(!$processo || !$aluno || !$filial)
             return redirect()->back();
-
-        $aluno->status = 'Em Análise - AS';
+        $processo->tipo == 'bolsa' ? $aluno->status = 'Em Análise - AS' : $aluno->status = 'Em Análise - CD';
         $aluno->save();
         Mail::to($aluno->pResponsavelFinanceiro->email)
         ->send(new FinalizarMail());

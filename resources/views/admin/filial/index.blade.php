@@ -51,14 +51,17 @@
             </thead>
             <tbody>
               @foreach ($filials as $i)
-              <tr>
-                <td>{{$i->id}}</td>
-                <td>{{$i->codigo}}</td>
-                <td>{{$i->nome}}</td>
-                <td>{{$i->descricao}}</td>
-                <td><a href="{{ route('filial.show', ['filial'=> $i->id]) }}" class="btn"><i class="fa fa-edit"></i> </a></td>
-                <td><a href="{{ route('processos.index', ['filial'=> $i->url]) }}" class="btn btn-primary"><i class="fa fa-eye "></i> Processos</a></td>
-              </tr> 
+              
+                @can('Filial', Auth::user(), new App\Models\Admin\Filial($i))
+                  <tr>
+                    <td>{{$i->id}}</td>
+                    <td>{{$i->codigo}}</td>
+                    <td>{{$i->nome}}</td>
+                    <td>{{$i->descricao}}</td>
+                    <td><a href="{{ route('filial.show', ['filial'=> $i->id]) }}" class="btn"><i class="fa fa-edit"></i> </a></td>
+                    <td><a href="{{ route('processos.index', ['filial'=> $i->url]) }}" class="btn btn-primary"><i class="fa fa-eye "></i> Processos</a></td>
+                  </tr> 
+                @endcan
               @endforeach             
             </tbody>
           </table>

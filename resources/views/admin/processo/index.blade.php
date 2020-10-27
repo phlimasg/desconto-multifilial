@@ -10,7 +10,7 @@
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <a href="{{ route('processos.create',['filial'=> $filial]) }}" class="btn btn-primary"><i class="fa fa-plus"></i> Adicionar Processo</a>
+            <a href="{{ route('processos.create',['filial'=> $filial->url]) }}" class="btn btn-primary"><i class="fa fa-plus"></i> Adicionar Processo</a>
           </ol>
         </div>
       </div>
@@ -54,7 +54,7 @@
                 <td>{{$i->nome}}</td>
                 <td>{{date('d/m/Y H:i',strtotime($i->periodo_ini))}}</td>
                 <td>{{date('d/m/Y H:i',strtotime($i->periodo_fim))}}</td>                
-                <td><a href="{{ route('processos.show', ['filial'=> $filial,'processo'=> $i->url]) }}" class="btn btn-primary"><i class="fa fa-pen"></i> Editar</a></td>
+                <td><a href="{{ route('processos.edit', ['filial'=> $filial->url,'processo'=> $i->url]) }}" class="btn btn-primary"><i class="fa fa-pen"></i> Editar</a></td>
                 <td>
                   <div class="btn-group">
                     <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">

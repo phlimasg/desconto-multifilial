@@ -44,15 +44,16 @@ class ProcessoController extends Controller
     public function store(ProcessoRequest $request)
     {
         try {
+            //dd($request->all());
             $filial = Filial::select('id')->where('url',$request->filial)->firstOrFail();            
             Processo::create([
                 'nome' => $request->nome,
                 'tipo' => $request->tipo,
-                'email' => $request->tipo,
+                'email' => $request->email,
                 'periodo_ini' => $request->periodo_ini.' '.$request->hora_ini,
                 'periodo_fim' => $request->periodo_fim.' '.$request->hora_fim,
                 'filial_id' => $filial->id,
-            ]);
+            ]);            
             return redirect()->back()->with('message','Os dados foram salvos com sucesso!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error',$e->getMessage());            
@@ -76,9 +77,11 @@ class ProcessoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($filial, $id)
     {
-        //
+        $filial = Filial::where('url',$filial)->firstOrFail();
+        $processo = $filial->ListarProcessos->where('url',$id)->first();        
+        return view('admin.processo.create',compact('filial', 'processo'));
     }
 
     /**
@@ -88,9 +91,20 @@ class ProcessoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProcessoRequest $request, $filial, $processo)
     {
-        //
+        //dd($request->all(), $processo);
+        $processo = Processo::findOrFail($processo)
+        ->update(
+            [
+                'nome' => $request->nome,
+                'tipo' => $request->tipo,
+                'email' => $request->email,
+                'periodo_ini' => $request->periodo_ini.' '.$request->hora_ini,
+                'periodo_fim' => $request->periodo_fim.' '.$request->hora_fim,                
+            ]
+        );
+        return redirect()->back()->with('message','Os dados foram salvos com sucesso!');
     }
 
     /**

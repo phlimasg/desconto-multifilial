@@ -1,12 +1,16 @@
 @extends('adminlte::page')
 
-@section('title', 'Processo')
+@section('title', empty($processo->nome) ? 'Adicionar Processo' : $processo->nome)
 
 @section('content_header')
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
+          @if (!empty($processo))
+          <h1>Editar - {{$processo->nome}}</h1>
+          @else
           <h1>Adicionar Processo</h1>
+          @endif
         </div>        
       </div>
     </div><!-- /.container-fluid -->  
@@ -21,13 +25,8 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        @include('admin.processo.parciais.form',
-        $data = [
-          'rota' => "processos.store",
-          'filial' => $filial,
-          'metodo' => "post",
-          'input' => null
-        ])
+        
+          @include('admin.processo.parciais.form')        
       </div>
     </div>
   </div>

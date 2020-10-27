@@ -91,13 +91,13 @@
           <div class="tab-pane fade" id="custom-tabs-two-redeabast" role="tabpanel" aria-labelledby="custom-tabs-two-redeabast-tab">
             @include('admin.analise.parciais.redeabast')
           </div>
-          <div class="tab-pane fade" id="custom-tabs-two-bensmoveis" role="tabpanel" aria-labelledby="custom-tabs-two-bensmoveis-tab">
-            @include('admin.analise.parciais.bensmoveis')
-          </div>          
-          <div class="tab-pane fade" id="custom-tabs-two-desperec" role="tabpanel" aria-labelledby="custom-tabs-two-desperec-tab">
-            @include('admin.analise.parciais.desperec')
-          </div>
           @endif
+            <div class="tab-pane fade" id="custom-tabs-two-bensmoveis" role="tabpanel" aria-labelledby="custom-tabs-two-bensmoveis-tab">
+              @include('admin.analise.parciais.bensmoveis')
+            </div>          
+            <div class="tab-pane fade" id="custom-tabs-two-desperec" role="tabpanel" aria-labelledby="custom-tabs-two-desperec-tab">
+              @include('admin.analise.parciais.desperec')
+            </div>
         </div>
       </div>
       <!-- /.card -->
