@@ -117,6 +117,21 @@
           <span class="text-danger">{{$message}}</span>
         @enderror
       </div>
+    </div> 
+    <div class="row">
+      <div class="col-sm-3">
+        <label for="">Condições de moradia</label>
+        <select name="condicao_moradia" id="" class="form-control">
+          <option value=""></option>
+          <option value="Imóvel próprio" {{$dados->condicao_moradia == "Imóvel próprio" || old('condicao_moradia')=="Imóvel próprio" ? 'selected': ''}}>Imóvel próprio</option>
+          <option value="Imóvel alugado" {{$dados->condicao_moradia == "Imóvel alugado" || old('condicao_moradia')=="Imóvel alugado" ? 'selected': ''}}>Imóvel alugado</option> 
+          <option value="Casa/Ap cedido" {{$dados->condicao_moradia == "Casa/Ap cedido" || old('condicao_moradia')=="Casa/Ap cedido" ? 'selected': ''}}>Casa/Ap cedido</option> 
+          <option value="Financiado" {{$dados->condicao_moradia == "Financiado" || old('condicao_moradia')=="Financiado" ? 'selected': ''}}>Financiado</option> 
+        </select>
+        @error('condicao_moradia')
+          <span class="text-danger">{{$message}}</span>
+        @enderror
+      </div>
     </div>  
     <hr>
     <div class="row">

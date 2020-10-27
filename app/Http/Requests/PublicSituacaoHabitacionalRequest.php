@@ -32,6 +32,7 @@ class PublicSituacaoHabitacionalRequest extends FormRequest
             'outras_moradias' => 'required|string|max:250',
             'outras_moradias_vinculo' => 'required|string|max:250',
             'cad_unico' => 'required|string|max:250',
+            'condicao_moradia' => 'required|string|max:250'
         ];
     }
 }

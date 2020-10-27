@@ -6,9 +6,10 @@
       <div class="col-md-2"><small><b>Qtd. de Cômodos:</b></small><p>{{$dados->pResponsavelFinanceiro->pSituacaohabitacional->tipo_habitacao_comodos}}</p></div>           
     </div>
     <div class="row">
+      <div class="col-md-2"><small><b>Condições da moradia:</b></small> <p>{{$dados->pResponsavelFinanceiro->pSituacaohabitacional->condicao_moradia}}</p></div>      
       <div class="col-md-2"><small><b>Tipo de moradia:</b></small> <p>{{$dados->pResponsavelFinanceiro->pSituacaohabitacional->tipo_moradia}}</p></div>      
       <div class="col-md-3"><small><b>Tipo de Residência:</b></small> <p>{{$dados->pResponsavelFinanceiro->pSituacaohabitacional->tipo_residencia}}</p></div>      
-      <div class="col-md-7"><small><b>Tempo de residência:</b></small> <p>{{$dados->pResponsavelFinanceiro->pSituacaohabitacional->tempo_moradia}}</p></div>       
+      <div class="col-md-3"><small><b>Tempo de residência:</b></small> <p>{{$dados->pResponsavelFinanceiro->pSituacaohabitacional->tempo_moradia}}</p></div>       
     </div>
     <div class="row">
       <div class="col-md-3"><small><b>Outras moradias no terreno?</b></small> <p>{{$dados->pResponsavelFinanceiro->pSituacaohabitacional->outras_moradias}}</p></div>

@@ -11,6 +11,7 @@ class PublicSituacaoHabitacional extends Model
         'tipo_habitacao_comodos',
         'tipo_moradia',
         'tipo_residencia',
+        'condicao_moradia',
         'tempo_moradia',
         'outras_moradias',
         'outras_moradias_vinculo',
