@@ -24,4 +24,8 @@ class Processo extends Model
     {
         return $this->hasMany(PublicAluno::class);
     }
+    public function Opcoes()
+    {
+        return $this->hasMany(ProcessosOpcoes::class);
+    }
 }

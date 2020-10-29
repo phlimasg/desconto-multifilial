@@ -112,7 +112,19 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {        
+        try {
+            $userFilial = UserFilial::findOrFail($id);
+            $userCount = UserFilial::where('user_id',$userFilial->user_id)->count();
+            if($userCount > 1){
+                UserFilial::destroy($id);
+                return redirect()->back()->with('message','Perfil removido com sucesso!');
+            }else
+                return redirect()->back()->with('error','O usuário não pode ficar sem perfil.');
+
+            dd($userFilial);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error',$e->getMessage());
+        }
     }
 }

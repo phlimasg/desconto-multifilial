@@ -16,12 +16,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::prefix('admin')->namespace('Admin')->group(function(){
         Route::resource('filial', 'FilialController');
         Route::resource('usuarios', 'UsersController');        
-        Route::resource('{filial}/processos', 'ProcessoController');
+        Route::resource('{filial}/processos', 'ProcessoController');        
     
         Route::prefix('{filial}/{processo}')->group(function(){
             Route::post('alunos/importar', 'AlunoController@importar')->name('alunos.importar');
             Route::resource('alunos', 'AlunoController');
             Route::resource('analisar', 'AnalisarController');
+            Route::resource('processoOpcoes', 'ProcessoOpcoesController');
         });
     });
 });

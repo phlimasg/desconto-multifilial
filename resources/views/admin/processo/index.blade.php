@@ -54,7 +54,7 @@
                 <td>{{$i->nome}}</td>
                 <td>{{date('d/m/Y H:i',strtotime($i->periodo_ini))}}</td>
                 <td>{{date('d/m/Y H:i',strtotime($i->periodo_fim))}}</td>                
-                <td><a href="{{ route('processos.edit', ['filial'=> $filial->url,'processo'=> $i->url]) }}" class="btn btn-primary"><i class="fa fa-pen"></i> Editar</a></td>
+                <td><a href="{{ route('processos.show', ['filial'=> $filial->url,'processo'=> $i->url]) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a></td>
                 <td>
                   <div class="btn-group">
                     <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">

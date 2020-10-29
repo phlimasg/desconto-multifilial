@@ -19,9 +19,16 @@
 @section('content')
 <div class="row">
     <div class="col-12">
-      <div class="card card-secondary">
+      <div class="card card-gray-dark">
         <div class="card-header">
-          <h3 class="card-title">Preencha os campos e cadastre um novo processo</h3>
+          <h3 class="card-title">
+            @if (!empty($processo))
+              Preencha os campos e edite o processo <b>{{$processo->nome}}</b>
+            @else
+              Preencha os campos e cadastre um novo processo
+            @endif
+            
+          </h3>
         </div>
         <!-- /.card-header -->
         <!-- form start -->

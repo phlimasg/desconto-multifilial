@@ -10,6 +10,7 @@ use App\Models\Admin\Importacao;
 use App\Models\Admin\MensagemInterna;
 use App\Models\Admin\MensagemUsuario;
 use App\Models\Admin\Processo;
+use App\Models\Admin\ProcessosOpcoes;
 use App\Models\Admin\UserFilial;
 use App\Observers\AlunoObserver;
 use App\Observers\AnaliseObserver;
@@ -19,6 +20,7 @@ use App\Observers\ImportacaoObserver;
 use App\Observers\MensagemInternaObserver;
 use App\Observers\MensagemUsuarioObserver;
 use App\Observers\ProcessoObserver;
+use App\Observers\ProcessoOpcoesObserver;
 use App\Observers\UserFilialObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Schema;
@@ -45,6 +47,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Filial::observe(FilialObserver::class);
         Processo::observe(ProcessoObserver::class);
+        ProcessosOpcoes::observe(ProcessoOpcoesObserver::class);
         Importacao::observe(ImportacaoObserver::class);
         Aluno::observe(AlunoObserver::class);
         Analise::observe(AnaliseObserver::class);

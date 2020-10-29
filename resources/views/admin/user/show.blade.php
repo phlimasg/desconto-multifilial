@@ -57,6 +57,7 @@
             <th scope="col">#</th>
             <th scope="col">Filial</th>
             <th scope="col">Perfil</th> 
+            <th scope="col"></th> 
           </thead>
           <tbody>                 
           @forelse ($user->userFilial as $i)
@@ -64,6 +65,14 @@
             <td>{{$i->Filial->codigo}}</td>
             <td>{{$i->Filial->nome}}</td>
             <td>{{$i->Profile->nome}}</td>
+          <td>
+            <form action="{{route('usuarios.destroy', ['usuario'=>$i->id])}}" method="post">
+              @method('delete')
+              @csrf
+              <input type="hidden" name="metodo" value="user_filial">
+              <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+            </form>
+          </td>
           </tr>  
           @empty
           Nenhuma filial cadastrada para esse usuário.

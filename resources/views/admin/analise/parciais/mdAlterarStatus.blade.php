@@ -50,14 +50,19 @@
                         @error('status') <div class="alert alert-danger">{{ $message }}</div>@enderror
                     </div>
                     <div class="col-md-4">
+                        @if($processo->tipo == 'bolsa')
                         <label for="">Sugerido por AS: <span class="text-danger"> {{!empty($dados->Analise->desconto_sugerido)?$dados->Analise->desconto_sugerido:''}}</span></label> <br>
+                        @elseif(!empty($dados->DescontoHistorico()->latest()->first()->percentual))
+                        <label for="">Ultima sugestão: <span class="text-danger">{{$dados->DescontoHistorico()->latest()->first()->percentual}}</span></label>                        
+                        <br>
+                        @endif
                         <button type="button" onclick="modalHistoricoOpen()" class="btn btn-primary">Histórico de sugestões</button>
                     </div>
                     <div class="col-md-3">
                         @cannot('AssistenteSocial', Auth::user())                           
                             
                             <label for="">Sugerir/Deferir</label>
-                            
+                            @if($processo->tipo == 'bolsa')
                             <select name="desconto_sugerido" id="" class="form-control @error('desconto_sugerido') is-invalid @enderror">                            
                                 <option value="" ></option>
                                 <option value="50%"
@@ -80,6 +85,9 @@
                                     selected
                                 @endif>Fora de critério de renda</option>
                             </select>
+                            @else
+                        <input type="text" name="desconto_sugerido" id="" class="form-control" data-mask="00%" value="{{!empty($dados->DescontoHistorico()->latest()->first()->percentual)?$dados->DescontoHistorico()->latest()->first()->percentual:''}}">
+                            @endif
                             @error('desconto_sugerido') <div class="alert alert-danger">{{ $message }}</div>@enderror
                         @endcannot
                     </div>                    

@@ -32,7 +32,7 @@ class ProcessoController extends Controller
      */
     public function create($filial)
     {
-        $filial = Filial::where('url', $filial)->first();
+        $filial = Filial::where('url', $filial)->firstOrFail();
         $this->authorize('Filial', $filial,Auth::user()); 
         return view('admin.processo.create',compact('filial'));
     }
@@ -68,9 +68,12 @@ class ProcessoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($filial,$url)
     {
-        //
+        $filial = Filial::where('url',$filial)->firstorFail();
+        $processo = Processo::where('url',$url)->firstOrFail();
+        return view('admin.processo.show',compact('filial','processo'));
+        dd($filial,$url);
     }
 
     /**
