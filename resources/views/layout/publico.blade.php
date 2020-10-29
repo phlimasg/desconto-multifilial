@@ -202,7 +202,28 @@
                 </div>
             </nav>
             @yield('content')
-            
+            @php
+                    $aluno = App\Models\Publico\PublicAluno::where('ra',Request::segment(4))->where('processo_id',App\Models\Admin\Processo::where('url',Request::segment(2))->first()->id)->first();                    
+                    @endphp
+                    @if ($processo->tipo == 'bolsa')
+                        @if ($aluno && 
+                        $aluno->pResponsavelFinanceiro() && 
+                        $aluno->pFiliacao()->first() && 
+                        $aluno->pComposicaoFamiliar()->first() && 
+                        $aluno->pResponsavelFinanceiro->pSituacaohabitacional && 
+                        $aluno->pRedeDeAbastecimento                    
+                        && $aluno->pDespesasEReceitas()->where('tipo','despesa')->count() > 0)
+                        <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#finalizar" style="position: fixed; right: 0; top: 0; margin: 16px 55px 0 0"><i class="fas fa-save"></i> Finalizar Processo</a>                        
+                        @endif
+                    @elseif(
+                        $aluno && 
+                        $aluno->pResponsavelFinanceiro() && 
+                        $aluno->pFiliacao()->first() && 
+                        $aluno->pComposicaoFamiliar()->first()                 
+                        && $aluno->pDespesasEReceitas()->where('tipo','despesa')->count() > 0 )
+                        <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#finalizar" style="position: fixed; right: 0; top: 0; margin: 16px 55px 0 0"><i class="fas fa-save"></i> Finalizar Processo</a>
+                    
+                    @endif
         </div>
     </div>
 
