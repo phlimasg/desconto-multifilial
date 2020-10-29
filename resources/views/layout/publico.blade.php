@@ -37,7 +37,7 @@
         <!-- Sidebar  -->
         <nav id="sidebar" class="nav-fixed">
             <div class="sidebar-header">
-                <img src="http://lasalle.edu.br/public/uploads/images/abel/5af5fc44d4812(BRANCA-HORIZONTAL)_Abel.png" alt="" srcset="" width="100%">
+                <img src="{{$processo->filial->logo_url}}" alt="" srcset="" width="100%">
             </div>
 
             <ul class="list-unstyled components">
