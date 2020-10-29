@@ -36,8 +36,8 @@
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar" class="nav-fixed">
-            <div class="sidebar-header">
-                <img src="{{$processo->filial->logo_url}}" alt="" srcset="" width="100%">
+            <div class="sidebar-header text-center">
+                <img src="{{$processo->filial->logo_url}}" alt="" srcset="" width="65%">
             </div>
 
             <ul class="list-unstyled components">

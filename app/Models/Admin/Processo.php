@@ -14,7 +14,7 @@ class Processo extends Model
 
     public function filial()
     {
-        return $this->hasOne(Filial::class);
+        return $this->hasOne(Filial::class,'id','filial_id');
     }
     public function alunos()
     {
