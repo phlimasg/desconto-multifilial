@@ -131,7 +131,7 @@ class AnalisarController extends Controller
             }elseif($request->status != 'Falta Documento'){
                 DescontoHistorico::create([
                     'percentual' => $request->desconto_sugerido,
-                    'analise_id'=> $id,
+                    'analise_id'=> null,
                     'public_aluno_id'=>$request->public_aluno_id,
                     'processo_id'=>$processo->id
                 ]);            
