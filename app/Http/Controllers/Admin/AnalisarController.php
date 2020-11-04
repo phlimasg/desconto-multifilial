@@ -145,14 +145,14 @@ class AnalisarController extends Controller
                         'status'=>$request->status
                     ]);
             }
-            if($request->msg_usuario){
+            if(!empty($request->msg_usuario)){
                 $mensagem = MensagemUsuario::create([
                     'msg_usuario' => $request->msg_usuario,
                     'public_aluno_id' => $request->public_aluno_id,
                     'processo_id' => $processo->id,
                 ]);
             }
-            if($request->msg_interna){
+            if(!empty($request->msg_interna)){
                 $mensagem = MensagemInterna::create([
                     'msg_interna' => $request->msg_interna,
                     'public_aluno_id' => $request->public_aluno_id,

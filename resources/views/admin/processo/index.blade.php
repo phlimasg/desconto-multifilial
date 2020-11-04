@@ -63,11 +63,13 @@
                     <div class="dropdown-menu">
                       <a class="dropdown-item" href="{{ route('analisar.index', ['filial'=> $filial->url,'processo'=> $i->url]) }}"><i class="fa fa-eye"></i> Analisar</a>
                       <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#liberarRa{{$i->id}}"><i class="fa fa-plus"></i> Liberar RA</a>
                       <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Alunos adicionados</a>                      
                       <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalImportar{{$i->id}}"><i class="fa fa-file-excel"></i> Importar Alunos</a>
                       <a class="dropdown-item" href="#"><i class="fa fa-graduation-cap"></i> Adicionar Aluno</a>
                     </div>
-                  </div>                  
+                  </div>  
+                  @include('admin.processo.parciais.mdLiberarRa')                
                 </td>
               </tr>
               <div class="modal fade" id="modalImportar{{$i->id}}" tabindex="-1" role="dialog" aria-hidden="true">
