@@ -93,13 +93,39 @@
                     </div>                    
                 </div>
                 @cannot('AssistenteSocial', Auth::user())
+                @if ($processo->tipo == 'bolsa')
                 <hr>
                 <div class="row">
                     <div class="col-sm-12 callout callout-warning">
                         <label for="">Parecer AS:</label>
                         {!! !empty($dados->Analise->parecer)?$dados->Analise->parecer:'' !!}
                     </div>
-                </div>                    
+                </div> 
+                @else
+                <hr>
+                <div class="row callout callout-warning">
+                    <label for="">Mensagens Internas</label>
+                    <div class="col-md-12 direct-chat-primary" style="max-height: 250px; overflow-y: scroll">
+                        @forelse ($dados->MensagensInternas as $i)                    
+                          <div class="direct-chat-msg @if (Auth::user()->email == $i->user_create) right @endif">
+                            <div class="direct-chat-infos clearfix">
+                              <span class="direct-chat-name float-right">{{$i->user_create}}</span>
+                              <span class="direct-chat-timestamp float-left">{{date('d/m/Y H:i',strtotime($i->created_at))}}</span>
+                            </div>
+                            
+                            <img class="direct-chat-img" src="{{$i->User->profile_image}}">
+                            
+                            <div class="direct-chat-text">
+                                {!!$i->msg_interna!!}
+                            </div>
+                            
+                          </div>
+                        @empty
+                            Nenhuma mensagem salva.
+                        @endforelse                    
+                    </div>                
+                  </div> 
+                @endif                   
                 @endcannot
 
                 @can('AssistenteSocial', Auth::user())                
