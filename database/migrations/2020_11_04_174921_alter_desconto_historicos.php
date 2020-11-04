@@ -15,7 +15,7 @@ class AlterDescontoHistoricos extends Migration
     {
         Schema::table('desconto_historicos', function (Blueprint $table) {
             $table->unsignedBigInteger('analise_id')->nullable()->change();
-            $table->foreign('analise_id')->references('id')->on('analises')->onDelete('cascade');
+            //$table->foreign('analise_id')->references('id')->on('analises')->onDelete('cascade');
         });
     }
 
