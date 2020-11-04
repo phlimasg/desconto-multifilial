@@ -119,8 +119,7 @@ class AnalisarController extends Controller
         try {
             //dd($request->all());
         $filial = Filial::where('url',$filial)->first();
-        $processo = $filial->ListarProcessos->where('url',$processo)->first();
-        
+        $processo = $filial->ListarProcessos->where('url',$processo)->first();        
         if($processo){
             if($request->status=='Deferido'){
                 $aluno = PublicAluno::where('id',$request->public_aluno_id)->update(
@@ -129,18 +128,23 @@ class AnalisarController extends Controller
                         'desconto_deferido'=>$request->desconto_sugerido
                     ]
                 );                
+            }elseif($request->status != 'Falta Documento'){
+                DescontoHistorico::create([
+                    'percentual' => $request->desconto_sugerido,
+                    'analise_id'=> $id,
+                    'public_aluno_id'=>$request->public_aluno_id,
+                    'processo_id'=>$processo->id
+                ]);            
+                $aluno = PublicAluno::where('id',$request->public_aluno_id)->update(
+                    [
+                        'status'=>$request->status
+                    ]);
             }else{
                 $aluno = PublicAluno::where('id',$request->public_aluno_id)->update(
                     [
                         'status'=>$request->status
                     ]);
             }
-            $descHistorico = DescontoHistorico::create([
-                'percentual' => $request->desconto_sugerido,
-                'analise_id'=> $id,
-                'public_aluno_id'=>$request->public_aluno_id,
-                'processo_id'=>$processo->id
-            ]);
             if($request->msg_usuario){
                 $mensagem = MensagemUsuario::create([
                     'msg_usuario' => $request->msg_usuario,
@@ -166,7 +170,7 @@ class AnalisarController extends Controller
             return redirect()->back()->with('message','Dados salvos/atualizados com sucesso!');
         }  
         } catch (\Exception $e) {
-            redirect()->back()->with('message',$e->getMessage());
+            redirect()->back()->with('error',$e->getMessage());
         }
     }
 

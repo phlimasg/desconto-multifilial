@@ -25,7 +25,7 @@ class AnaliseComissaoRequest extends FormRequest
     {
         return [
             'status' => 'string|required|max:240',
-            'desconto_sugerido' => 'string|required|max:240',
+            'desconto_sugerido' => 'nullable|string|required_unless:status,"Falta Documento"|max:240',
             'msg_interna' => 'string|nullable|max:100000',
             'msg_usuario' => 'string|nullable|required_if:status,==,"Falta Documento"|max:100000',
         ];
