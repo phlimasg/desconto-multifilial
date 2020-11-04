@@ -107,9 +107,39 @@
 @stop
 
 @section('css')
-    
-@stop
-
+<style>
+    html, body{ margin: 0 !important}
+</style>    
+@endsection
 @section('js')
-  @include('parciais.alert')
-@stop
+@include('parciais.alert')
+@if ($errors->any())
+    <script>$('#alterarStatus').modal('show');</script>
+@endif
+<script>
+    $(document).ready(function(){
+        $('#numero_familiares').change(function(){            
+            $('#renda_capita').unmask();
+            $('#renda_capita').val('');
+            var renda_bruta = $('#renda_bruta').val().replace(',', '');
+            var renda_percapita;
+            renda_bruta = renda_bruta.replace('.','');
+            renda_percapita = renda_bruta / $('#numero_familiares').val();
+            $('#renda_capita').val(renda_percapita.toFixed(0));
+            //alert($('#renda_capita').val() + renda_percapita)
+            $('#renda_capita').mask('#.##0,00', {reverse: true});
+        })
+        CKEDITOR.replace('obsAssintente');
+        CKEDITOR.replace('msg_interna');
+        CKEDITOR.replace('msg_usuario');  
+    }); 
+    function modalHistoricoOpen()   {
+        $('#alterarStatus').modal('hide'); 
+        setTimeout(() => { $('#historico').modal('show'); }, 150);
+    }
+    function modalHistoricoClose()   {
+        $('#historico').modal('hide');
+        setTimeout(() => { $('#alterarStatus').modal('show'); }, 150);
+    }
+</script>  
+@endsection
