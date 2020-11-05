@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProcessoRequest;
 use App\Models\Admin\Filial;
 use App\Models\Admin\Processo;
+use App\Models\Admin\RaLiberado;
+use App\Models\Publico\PublicAluno;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ProcessoController extends Controller
 {
@@ -100,7 +103,8 @@ class ProcessoController extends Controller
     public function update(ProcessoRequest $request, $filial, $processo)
     {
         //dd($request->all(), $processo);
-        $processo = Processo::findOrFail($processo)
+        try {
+            $processo = Processo::findOrFail($processo)
         ->update(
             [
                 'nome' => $request->nome,
@@ -111,6 +115,9 @@ class ProcessoController extends Controller
             ]
         );
         return redirect()->back()->with('message','Os dados foram salvos com sucesso!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error',$e->getMessage());
+        }
     }
 
     /**
@@ -122,5 +129,31 @@ class ProcessoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function liberarRa(Request $request)
+    {
+        $validator =Validator::make($request->all(),[
+            'ra' => 'required|numeric',
+            'processo_id' => 'required|numeric'
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->with('processo_id',$request->processo_id);
+        }
+        dd($validator);
+        
+        try {
+            $aluno = PublicAluno::where('ra',$request->ra)->where('processo_id',$request->processo_id)->first();
+            if(empty($aluno))
+                return redirect()->back()->with('error','O Aluno não participa desse processo!');
+            RaLiberado::create([
+                'ra' => $request->ra,
+                'processo_id' => $request->processo_id,
+                'user_create' => Auth::user()->email,
+            ]);
+            return redirect()->back()->with('message','Os dados foram salvos com sucesso!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error',$e->getMessage());
+        }
     }
 }

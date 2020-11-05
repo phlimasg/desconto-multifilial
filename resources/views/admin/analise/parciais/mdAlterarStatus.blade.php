@@ -366,6 +366,10 @@
                     </div>
                     <div class="col-md-4">
                         <label for="">Percentual se beneficiário de bolsa nessa instituição:</label>
+                        <input type="text" name="desconto_anterior" id="" data-mask="#00%" class="form-control" data-mask-reverse="true" value="@if (!empty($dados->Analise->desconto_anterior)) {{$dados->Analise->desconto_anterior}}
+                            
+                        @endif">
+                        <!--
                         <select name="desconto_anterior" id="" class="form-control @error('desconto_anterior') is-invalid @enderror">
                             <option value=""></option>
                             <option value="50%"
@@ -383,6 +387,7 @@
                             @endif
                             >100%</option>                            
                         </select>
+                    -->
                         @error('desconto_anterior') <div class="alert alert-danger">{{ $message }}</div>@enderror
                     </div>
                 </div>                

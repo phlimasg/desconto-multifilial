@@ -3,8 +3,8 @@
 <div class="modal fade" id="liberarRa{{$i->id}}">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-            <form action="" method="POST">
-            
+            <form action="{{ route('processo.liberarRa', ['filial'=>$filial->url]) }}" method="POST">
+                <input type="hidden" name="processo_id" value="{{$i->id}}">
                 @csrf
                 <!-- Modal Header -->
                 <div class="modal-header">
@@ -24,7 +24,10 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="">Ra/Matricula/Id</label>
-                            <input type="text" name="ra" id="" class="form-control" placeholder="Somente números">
+                            <input type="text" name="ra" id="" class="form-control @error('ra') is-invalid  @enderror" placeholder="Somente números">
+                            @error('ra')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                 

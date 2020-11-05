@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PublicAlunoRequest;
 use App\Models\Admin\Filial;
 use App\Models\Admin\Processo;
+use App\Models\Admin\RaLiberado;
 use App\Models\Publico\PublicAluno;
 use Illuminate\Support\Facades\Session;
 
@@ -157,6 +158,18 @@ class PublicoAlunoController extends Controller
                     'processo'=>$request->processo,
                     'pAluno' => $aluno->ra
                     ]);
+            }else{
+                $ra_liberado = RaLiberado::where('ra',$request->ra)->where('processo_id',$processo->id)->first();
+                if(!empty($ra_liberado)){
+                    Session::put('ra',$ra_liberado->ra);
+                    return redirect()
+                    ->route('pAluno.show',
+                    [
+                        'filial'=>$request->filial,
+                        'processo'=>$request->processo,
+                        'pAluno' => $ra_liberado->ra
+                        ]);
+                }
             }
             $processo = $filial->ListarProcessos()->where('url',$request->processo)    
                 ->where('periodo_ini','<=',date('Y-m-d H:i:s'))

@@ -116,6 +116,7 @@
 @if ($errors->any())
     <script>$('#alterarStatus').modal('show');</script>
 @endif
+
 <script>
     $(document).ready(function(){
         $('#numero_familiares').change(function(){            
