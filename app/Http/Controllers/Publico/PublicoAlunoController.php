@@ -168,7 +168,7 @@ class PublicoAlunoController extends Controller
                 $intervalo = $horaLibera->diff($horaAtual);
                 
                 //dd($intervalo,intval($intervalo->format('%d')));
-                if(!empty($ra_liberado) && empty($aluno->status) && intval($intervalo->format('%d')) <= 2){
+                if(!empty($ra_liberado) && empty($aluno->status) && intval($intervalo->format('%d')) < 2){
                     Session::put('ra',$ra_liberado->ra);
                     return redirect()
                     ->route('pAluno.show',
