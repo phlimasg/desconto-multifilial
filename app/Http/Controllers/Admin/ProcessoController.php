@@ -133,14 +133,13 @@ class ProcessoController extends Controller
 
     public function liberarRa(Request $request)
     {
-        $validator =Validator::make($request->all(),[
+        $validator = Validator::make($request->all(),[
             'ra' => 'required|numeric',
-            'processo_id' => 'required|numeric'
+            'processo_id' => 'required|numeric',
         ]);
         if($validator->fails()){
-            return redirect()->back()->with('processo_id',$request->processo_id);
+            return redirect()->back()->withErrors($validator)->withInput()->with('processo_id',$request->processo_id);
         }
-        dd($validator);
         
         try {
             $aluno = PublicAluno::where('ra',$request->ra)->where('processo_id',$request->processo_id)->first();

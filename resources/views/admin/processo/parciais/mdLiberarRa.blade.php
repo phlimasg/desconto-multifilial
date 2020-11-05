@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="">Ra/Matricula/Id</label>
-                            <input type="text" name="ra" id="" class="form-control @error('ra') is-invalid  @enderror" placeholder="Somente números">
+                        <input type="text" name="ra" id="" class="form-control @error('ra') is-invalid  @enderror" placeholder="Somente números" value="{{old('ra')}}">
                             @error('ra')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror

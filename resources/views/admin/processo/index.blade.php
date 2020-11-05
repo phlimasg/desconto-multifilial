@@ -125,7 +125,7 @@
 
 @section('js')
     @include('parciais.alert')
-    @if ($errors->any())
+    @if (Session::get('processo_id'))
       <script>$("#liberarRa{{Session::get('processo_id')}}").modal('show');</script>
     @endif
 @stop
