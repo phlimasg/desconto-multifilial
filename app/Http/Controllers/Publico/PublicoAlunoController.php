@@ -9,6 +9,7 @@ use App\Models\Admin\Filial;
 use App\Models\Admin\Processo;
 use App\Models\Admin\RaLiberado;
 use App\Models\Publico\PublicAluno;
+use DateTime;
 use Illuminate\Support\Facades\Session;
 
 class PublicoAlunoController extends Controller
@@ -159,8 +160,15 @@ class PublicoAlunoController extends Controller
                     'pAluno' => $aluno->ra
                     ]);
             }else{
-                $ra_liberado = RaLiberado::where('ra',$request->ra)->where('processo_id',$processo->id)->first();
-                if(!empty($ra_liberado)){
+                $ra_liberado = RaLiberado::where('ra',$request->ra)->where('processo_id',$processo->id)->orderBy('created_at','asc')->first();
+                $aluno = $processo->pAlunos->where('ra',$request->ra)->first();
+
+                $horaLibera = new DateTime($ra_liberado->created_at);
+                $horaAtual = new DateTime(date('Y-m-d H:i:s'));
+                $intervalo = $horaLibera->diff($horaAtual);
+                
+                //dd($intervalo,intval($intervalo->format('%d')));
+                if(!empty($ra_liberado) && empty($aluno->status) && intval($intervalo->format('%d')) <= 2){
                     Session::put('ra',$ra_liberado->ra);
                     return redirect()
                     ->route('pAluno.show',
