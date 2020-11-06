@@ -13,7 +13,7 @@ class CreateMensagemUsuáriosTable extends Migration
      */
     public function up()
     {
-        Schema::create('mensagem_usuários', function (Blueprint $table) {
+        Schema::create('mensagem_usuarios', function (Blueprint $table) {
             $table->bigIncrements('id');            
             $table->text('msg_usuario');
             $table->unsignedBigInteger('public_aluno_id');
@@ -30,6 +30,6 @@ class CreateMensagemUsuáriosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mensagem_usuários');
+        Schema::dropIfExists('mensagem_usuarios');
     }
 }

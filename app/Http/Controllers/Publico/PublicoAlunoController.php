@@ -161,22 +161,24 @@ class PublicoAlunoController extends Controller
                     ]);
             }else{
                 $ra_liberado = RaLiberado::where('ra',$request->ra)->where('processo_id',$processo->id)->orderBy('created_at','asc')->first();
-                $aluno = $processo->pAlunos->where('ra',$request->ra)->first();
+                $aluno_processo = $processo->pAlunos->where('ra',$request->ra)->first();
 
-                $horaLibera = new DateTime($ra_liberado->created_at);
-                $horaAtual = new DateTime(date('Y-m-d H:i:s'));
-                $intervalo = $horaLibera->diff($horaAtual);
                 
                 //dd($intervalo,intval($intervalo->format('%d')));
-                if(!empty($ra_liberado) && empty($aluno->status) && intval($intervalo->format('%d')) < 2){
-                    Session::put('ra',$ra_liberado->ra);
-                    return redirect()
-                    ->route('pAluno.show',
-                    [
-                        'filial'=>$request->filial,
-                        'processo'=>$request->processo,
-                        'pAluno' => $ra_liberado->ra
-                        ]);
+                if(!empty($ra_liberado) && empty($aluno_processo->status)){
+                    $horaLibera = new DateTime($ra_liberado->created_at);
+                    $horaAtual = new DateTime(date('Y-m-d H:i:s'));
+                    $intervalo = $horaLibera->diff($horaAtual);
+                    if(intval($intervalo->format('%d')) < 2){
+                        Session::put('ra',$ra_liberado->ra);
+                        return redirect()
+                        ->route('pAluno.show',
+                        [
+                            'filial'=>$request->filial,
+                            'processo'=>$request->processo,
+                            'pAluno' => $ra_liberado->ra
+                            ]);
+                    }
                 }
             }
             $processo = $filial->ListarProcessos()->where('url',$request->processo)    
