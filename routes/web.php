@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 
-Route::get('/','Publico\PublicIndexController@index');
+Route::get('/','Publico\PublicIndexController@index')->name('public.index');
 Route::get('{id}','Publico\PublicIndexController@show');
 
 //Rotas de Login
