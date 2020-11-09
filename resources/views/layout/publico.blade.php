@@ -207,19 +207,19 @@
                     @endphp
                     @if ($processo->tipo == 'bolsa')
                         @if ($aluno && 
-                        $aluno->pResponsavelFinanceiro() && 
-                        $aluno->pFiliacao()->first() && 
-                        $aluno->pComposicaoFamiliar()->first() && 
-                        $aluno->pResponsavelFinanceiro->pSituacaohabitacional && 
-                        $aluno->pRedeDeAbastecimento                    
+                        !empty($aluno->pResponsavelFinanceiro()) && 
+                        !empty($aluno->pFiliacao()->first()) && 
+                        !empty($aluno->pComposicaoFamiliar()->first()) && 
+                        !empty($aluno->pResponsavelFinanceiro->pSituacaohabitacional) && 
+                        !empty($aluno->pRedeDeAbastecimento)
                         && $aluno->pDespesasEReceitas()->where('tipo','despesa')->count() > 0)
                         <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#finalizar" style="position: fixed; right: 0; top: 0; margin: 16px 55px 0 0"><i class="fas fa-save"></i> Finalizar Processo</a>                        
                         @endif
                     @elseif(
                         $aluno && 
-                        $aluno->pResponsavelFinanceiro() && 
-                        $aluno->pFiliacao()->first() && 
-                        $aluno->pComposicaoFamiliar()->first()                 
+                        !empty($aluno->pResponsavelFinanceiro()) && 
+                        !empty($aluno->pFiliacao()->first()) && 
+                        !empty($aluno->pComposicaoFamiliar()->first())
                         && $aluno->pDespesasEReceitas()->where('tipo','despesa')->count() > 0 )
                         <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#finalizar" style="position: fixed; right: 0; top: 0; margin: 16px 55px 0 0"><i class="fas fa-save"></i> Finalizar Processo</a>
                     
