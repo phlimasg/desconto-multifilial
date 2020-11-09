@@ -52,7 +52,7 @@ class PublicSituacaoHabitacionalController extends Controller
      */
     public function show($filial, $processo, $pSituacaoHabitacional)
     {
-        //dd(Session::get('ra'));
+        //dd($filial,$processo,$pSituacaoHabitacional);
         if (Session::get('ra') != $pSituacaoHabitacional)
             return redirect()->route('FilialProcesso.index', [
                 'filial' => $filial,
@@ -61,7 +61,20 @@ class PublicSituacaoHabitacionalController extends Controller
         $processo = Filial::where('url', $filial)->first()
             ->ListarProcessos()->where('url', $processo)->first();
         $processo ? '' : abort('404', 'Processo não encontrado');        
-        $dados = PublicAluno::where('ra',$pSituacaoHabitacional)->where('processo_id',$processo->id)->first()->pResponsavelFinanceiro->pSituacaohabitacional;
+        $dados = PublicAluno::where('ra',$pSituacaoHabitacional)->where('processo_id',$processo->id)->first();
+        if(!empty($dados->pResponsavelFinanceiro)){
+            $dados= $dados->pResponsavelFinanceiro->pSituacaohabitacional;
+            //dd($dados);
+        }
+        else{
+            //dd($filial, $processo->url, $pSituacaoHabitacional);
+            return redirect()->route('pRespFin.show',[
+                'filial'=> $filial,
+                'processo' => $processo->url,
+                'pRespFin'=>$pSituacaoHabitacional,
+                ]);
+        }
+        
         !$dados ? $dados = $processo : '';        
         $aluno = $processo->pAlunos()->where('ra', $pSituacaoHabitacional)->latest()->first();
        
