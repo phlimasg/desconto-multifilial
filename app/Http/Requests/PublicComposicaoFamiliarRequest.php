@@ -31,7 +31,7 @@ class PublicComposicaoFamiliarRequest extends FormRequest
             'escolaridade' =>  'required|string|max:250',
             'profissao' =>  'required|string|max:250',
             'salario' =>  'required|string|max:250',
-            'documentos.*' =>  'required|file|max:5000',
+            'documentos.*' =>  'required|file|mimes:jpeg,jpg,pdf|max:5000',
         ];
     }
 }

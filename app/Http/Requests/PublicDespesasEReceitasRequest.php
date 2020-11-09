@@ -24,7 +24,7 @@ class PublicDespesasEReceitasRequest extends FormRequest
     public function rules()
     {
         return [
-            'documentos.*' => 'required|file|max:5000',
+            'documentos.*' => 'required|file|mimes:jpeg,jpg,pdf|max:5000',
             'tipo' => 'required|string|max:250',
             'descricao' => 'required|string|max:250',
             'valor' => 'required|string|max:250',

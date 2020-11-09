@@ -24,7 +24,7 @@ class PublicReceitasDocumentosRequest extends FormRequest
     public function rules()
     {
         return [
-            'documentos.*' =>  'required|file|max:5000',
+            'documentos.*' =>  'required|mimes:jpeg,jpg,pdf|file|max:5000',
         ];
     }
 }
