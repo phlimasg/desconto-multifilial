@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProcessoRequest;
+use App\Models\Admin\Aluno;
 use App\Models\Admin\Filial;
 use App\Models\Admin\Processo;
 use App\Models\Admin\RaLiberado;
@@ -142,10 +143,15 @@ class ProcessoController extends Controller
         }
         
         try {
-            /*
-            $aluno = PublicAluno::where('ra',$request->ra)->where('processo_id',$request->processo_id)->first();
-            if(empty($aluno))
-                return redirect()->back()->with('error','O Aluno não participa desse processo!');*/
+            
+            $aluno = Aluno::where('ra',$request->ra)->where('processo_id',$request->processo_id)->first();
+            if(empty($aluno)){
+                Aluno::create([
+                    'ra' => $request->ra,
+                    'processo_id' => $request->processo_id,
+                    'user_create' => Auth::user()->email,
+                ]);
+            }
             RaLiberado::create([
                 'ra' => $request->ra,
                 'processo_id' => $request->processo_id,

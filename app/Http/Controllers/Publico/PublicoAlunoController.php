@@ -160,7 +160,7 @@ class PublicoAlunoController extends Controller
                     'pAluno' => $aluno->ra
                     ]);
             }else{
-                $ra_liberado = RaLiberado::where('ra',$request->ra)->where('processo_id',$processo->id)->latest()->first();
+                $ra_liberado = RaLiberado::where('ra',$request->ra)->where('processo_id',$processo->id)->latest()->first();                
                 $aluno_processo = $processo->pAlunos->where('ra',$request->ra)->first();
 
                 

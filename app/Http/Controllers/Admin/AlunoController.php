@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Imports\AlunosImport;
+use App\Models\Admin\Aluno;
 use App\Models\Admin\Importacao;
+use App\Models\Admin\RaLiberado;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Str;
 
@@ -39,7 +43,35 @@ class AlunoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'ra' => 'required|numeric',
+            'nome_aluno' => 'required|string',
+            'processo_id' => 'required|numeric',
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput()->with('modal','modalAdicionarAluno'.$request->processo_id);
+        }
+        //dd($request->all());
+
+        try {            
+                Aluno::create([
+                'ra' => $request->ra,
+                'nome_aluno' => $request->nome_aluno,
+                'processo_id' => $request->processo_id,
+                'user_create' => Auth::user()->email,
+            ]);
+            if(!empty($request->liberar_ra) && $request->liberar_ra == 1){
+                RaLiberado::create([
+                    'ra' => $request->ra,                    
+                    'processo_id' => $request->processo_id,
+                    'user_create' => Auth::user()->email,
+                ]);
+            }
+            return redirect()->back()->with('message','Os dados foram salvos com sucesso!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error',$e->getMessage());
+        }
+
     }
 
     /**
