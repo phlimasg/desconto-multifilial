@@ -146,11 +146,12 @@ class ProcessoController extends Controller
             $aluno = PublicAluno::where('ra',$request->ra)->where('processo_id',$request->processo_id)->first();
             if(empty($aluno))
                 return redirect()->back()->with('error','O Aluno não participa desse processo!');*/
-            RaLiberado::create([
+            $ra = RaLiberado::create([
                 'ra' => $request->ra,
                 'processo_id' => $request->processo_id,
-                'user_create' => Auth::user()->email,
+                'user_create' => Auth::user()->email
             ]);
+            dd($ra);
             return redirect()->back()->with('message','Os dados foram salvos com sucesso!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error',$e->getMessage());
