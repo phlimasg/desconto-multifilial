@@ -62,6 +62,7 @@
                     </button>
                     <div class="dropdown-menu">
                       <a class="dropdown-item" href="{{ route('analisar.index', ['filial'=> $filial->url,'processo'=> $i->url]) }}"><i class="fa fa-eye"></i> Analisar</a>
+                      <div class="dropdown-divider"></div>
                       <a class="dropdown-item"  href="#" onclick="donwloadFile('{{ route('alunos.downloadDeferidos', ['filial'=> $filial->url,'processo'=> $i->url]) }}')"><i class="fa fa-download"></i> Baixar Deferidos</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="#" data-toggle="modal" data-target="#liberarRa{{$i->id}}"><i class="fa fa-plus"></i> Liberar RA</a>

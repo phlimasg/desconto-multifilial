@@ -169,7 +169,10 @@ class PublicoAlunoController extends Controller
                     $horaLibera = new DateTime($ra_liberado->created_at);
                     $horaAtual = new DateTime(date('Y-m-d H:i:s'));
                     $intervalo = $horaLibera->diff($horaAtual);
-                    if(intval($intervalo->format('%d')) < 2){
+
+                    //dd($intervalo, $intervalo->invert ,$horaLibera,$horaAtual );
+
+                    if(intval($intervalo->format('%d')) < 2 || $intervalo->invert == 1){
                         Session::put('ra',$ra_liberado->ra);
                         return redirect()
                         ->route('pAluno.show',
