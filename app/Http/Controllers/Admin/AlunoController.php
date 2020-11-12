@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\DeferidosExport;
 use App\Http\Controllers\Controller;
 use App\Imports\AlunosImport;
 use App\Models\Admin\Aluno;
+use App\Models\Admin\Filial;
 use App\Models\Admin\Importacao;
+use App\Models\Admin\Processo;
 use App\Models\Admin\RaLiberado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -148,5 +151,16 @@ class AlunoController extends Controller
             $doc->save();
             return $doc;
           
+    }
+    public function deferidosExport($filial, $url)
+    {
+        try {
+            $filial = Filial::where('url', $filial)->first();
+            $processo = Processo::where('url',$url)->where('filial_id',$filial->id)->first();            
+            
+            return Excel::download(new DeferidosExport($processo->id), date('d-m-Y_H:i:s_').$processo->url.'_Deferidos.xlsx');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error',$e->getMessage());
+        }
     }
 }

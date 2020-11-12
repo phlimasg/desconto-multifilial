@@ -27,6 +27,7 @@
             <thead>
               <tr>
                 <th>ID</th>
+                <th>RA</th>
                 <th>Nome</th>
                 <th>Status</th>
                 <th>Concedido</th>                
@@ -38,6 +39,7 @@
               @foreach ($data as $i)
               <tr>
                 <td>{{$i->id}}</td>
+                <td>{{$i->ra}}</td>
                 <td>{{$i->nome}}</td>
                 <td>{{$i->status}}</td>
                 <td>{{$i->desconto_deferido}}</td>                

@@ -62,6 +62,7 @@
                     </button>
                     <div class="dropdown-menu">
                       <a class="dropdown-item" href="{{ route('analisar.index', ['filial'=> $filial->url,'processo'=> $i->url]) }}"><i class="fa fa-eye"></i> Analisar</a>
+                      <a class="dropdown-item"  href="#" onclick="donwloadFile('{{ route('alunos.downloadDeferidos', ['filial'=> $filial->url,'processo'=> $i->url]) }}')"><i class="fa fa-download"></i> Baixar Deferidos</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="#" data-toggle="modal" data-target="#liberarRa{{$i->id}}"><i class="fa fa-plus"></i> Liberar RA</a>
                       <a class="dropdown-item" href="#" ><i class="fa fa-user"></i> Alunos adicionados</a>                      
@@ -71,6 +72,7 @@
                   </div>  
                   @include('admin.processo.parciais.mdLiberarRa')                
                   @include('admin.processo.parciais.mdAdicionarAluno')
+                  @include('admin.processo.parciais.mdLoading')
                 </td>
               </tr>
               <div class="modal fade" id="modalImportar{{$i->id}}" tabindex="-1" role="dialog" aria-hidden="true">
@@ -132,4 +134,15 @@
     @if (Session::get('modal'))
       <script>$("#{{Session::get('modal')}}").modal('show');</script>
     @endif
+    <script>
+      function donwloadFile(url) {        
+        $('#loading').modal('show')
+        window.location.href = url;
+        //window.open(url,'_blank')
+        setTimeout(
+          function(){             
+            $('#loading').modal('hide')
+            }, 5000)        
+      }
+    </script>
 @stop

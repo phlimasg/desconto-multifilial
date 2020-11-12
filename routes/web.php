@@ -21,6 +21,7 @@ Route::group(['middleware' => ['auth']], function () {
     
         Route::prefix('{filial}/{processo}')->group(function(){
             Route::post('alunos/importar', 'AlunoController@importar')->name('alunos.importar');
+            Route::get('alunos/download_deferidos', 'AlunoController@deferidosExport')->name('alunos.downloadDeferidos');
             Route::resource('alunos', 'AlunoController');
             Route::resource('analisar', 'AnalisarController');
             Route::resource('processoOpcoes', 'ProcessoOpcoesController');
