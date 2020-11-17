@@ -16,11 +16,11 @@ class DeferidosExport implements FromCollection
     }
     public function headings()
     {
-        return ['ra','nome','serie','escolaridade','status','desconto_deferido'];
+        return ['ra','nome','serie','escolaridade','status','desconto_deferido','updated_at'];
     }
     public function collection()
     {
-        return PublicAluno::select('ra','nome','serie','escolaridade','status','desconto_deferido')
+        return PublicAluno::select('ra','nome','serie','escolaridade','status','desconto_deferido','updated_at')
         ->where('status','Deferido')
         ->where('processo_id',$this->processo_id)
         ->get();
