@@ -182,6 +182,9 @@
                   <h5>Adicione mais documentos para {{$i->nome}}.</h5>
                   <input type="hidden" name="comp_id" value="{{$i->id}}">
                   <input type="file" name="documentos[]" class="form-control" accept="application/pdf, image/jpg, image/jpeg" multiple>
+                  @error('documentos.*')
+                      <span class="text-danger">{{ $message }}</span>
+                  @enderror
                 </div>  
                 <!-- Modal footer -->
                 <div class="modal-footer">
@@ -261,6 +264,16 @@
 @stop
 
 @section('js')
+@if (Session::has('comp_id'))
+    <script>
+      $("#addDoc{{Session::get('comp_id')}}").modal('show');
+    </script>    
+@endif
+@if ($errors->any() && !Session::has('comp_id'))  
+  <script>
+  $('#AddMembro').modal('show'); 
+  </script>
+@endif 
 <script>
   $('#formulario').submit(function(){
     $('#btnsubmit').prop('disabled', true);
@@ -269,12 +282,5 @@
     $('#btnsubmitdoc').prop('disabled', true);
   });  
 </script>
-  @if ($errors->any())  
-    <script>
-      $(document).ready(function(){
-        $("#addMembro").modal("show");    
-        console.log('modalOpen');
-      });
-    </script>
-  @endif 
+  
 @stop

@@ -12,6 +12,7 @@ use App\Models\Publico\PublicReceitasDocumentos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class PublicReceitasDocumentosController extends Controller
@@ -42,9 +43,22 @@ class PublicReceitasDocumentosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($filial, $processo, PublicReceitasDocumentosRequest $request)
+    public function store($filial, $processo, Request $request)
     {
-        //dd($filial, $processo, $request->all());
+        //dd($request->all());
+        $validator = Validator::make($request->all(),[
+            'documentos.*' =>  'required|mimes:jpeg,jpg,pdf|file|max:5000',
+        ],
+        [
+            'required' => 'Campo obrigatório',
+            'mimes' => 'Permitido somente jpeg, jpg e pdf',
+            'file' => 'Falha no upload. Máximo de 5mb.',
+            'max' => 'Máximo de 5mb.',
+            'uploaded' => 'Falha no upload. Máximo de 5mb.',
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput()->with('comp_id',$request->comp_id);
+        }
         try {            
             $processo = Processo::where('url',$processo)->first();            
             $filial = Filial::where('url',$filial)->first();

@@ -34,4 +34,17 @@ class PublicComposicaoFamiliarRequest extends FormRequest
             'documentos.*' =>  'required|file|mimes:jpeg,jpg,pdf|max:5000',
         ];
     }
+    public function messages()
+    {
+        return [
+            'required' => '* :attribute Obrigatório',
+            'required_if' => '* :attribute Obrigatório',
+            'string' => '* :attribute Insira um texto',
+            'max' => '* :attribute Maximo de 5mb por arquivo',
+            'required' => 'Campo obrigatório',
+            'mimes' => 'Permitido somente jpeg, jpg e pdf',
+            'file' => 'Falha no upload. Máximo de 5mb.',
+            'uploaded' => 'Falha no upload. Máximo de 5mb.',
+        ];
+    }
 }

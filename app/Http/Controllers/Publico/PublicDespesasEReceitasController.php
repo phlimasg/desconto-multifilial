@@ -13,6 +13,7 @@ use App\Models\Publico\PublicVeiculos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class PublicDespesasEReceitasController extends Controller
@@ -92,8 +93,26 @@ class PublicDespesasEReceitasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function store($filial, $processo, PublicDespesasEReceitasRequest $request)
-    {
+    public function store($filial, $processo, Request $request)
+    {        
+        //dd($request->all());
+        $validator = Validator::make($request->all(),[
+            'documentos.*' => 'required|file|mimes:jpeg,jpg,pdf|max:5000',
+            'tipo' => 'required|string|max:250',
+            'descricao' => 'required|string|max:250',
+            'valor' => 'required|string|max:250',
+            'observacao' => 'nullable|string|max:250',
+        ],
+        [
+            'required' => 'Campo obrigatório',
+            'mimes' => 'Permitido somente jpeg, jpg e pdf',
+            'file' => 'Falha no upload. Máximo de 5mb.',
+            'max' => 'Máximo de 5mb.',
+            'uploaded' => 'Falha no upload. Máximo de 5mb.',
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput()->with('tipo',$request->tipo);
+        }
         try {            
             //dd($filial, $processo,$request->all());
             $processo = Processo::where('url',$processo)->first();            

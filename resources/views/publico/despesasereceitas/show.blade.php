@@ -204,5 +204,15 @@
   $('#formreceitas').submit(function(){
     $('#btnreceitas').prop('disabled', true);
   });  
-</script>  
+</script>
+
+@if (Session::has('tipo') && Session::get('tipo')=='receita')  
+  <script>
+  $('#addReceita').modal('show');
+  </script>
+  @elseif(Session::has('tipo')  && Session::get('tipo')=='despesa')
+  <script>
+    $('#addDespesa').modal('show');
+    </script>
+@endif 
 @stop
