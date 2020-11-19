@@ -67,6 +67,7 @@ class PublicoRespFinController extends Controller
         if(!$dados){
             $dados = $processo;
             $dados->nome = '';
+            $dados->email = '';
         }        
         return view('publico.respfin.show', compact('filial', 'processo', 'dados'))->with('aluno', $pAluno);
     }
