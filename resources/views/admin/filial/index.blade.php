@@ -6,7 +6,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Listagem de Filiais</h1>
+          <h1>Filiais</h1>
         </div>
         @can('Administrador', Auth::user())
         <div class="col-sm-6">
@@ -21,7 +21,33 @@
 
 @section('content')
 <div class="row">
-    <div class="col-12">
+  @foreach ($filials as $i)
+  @can('Filial', [$i,Auth::user()])
+      <div class="col-md-3">
+        <div class="card bg-dark">                         
+          <div class="card-tools" style="right: 0; position: absolute">              
+            <a href="{{ route('filial.show', ['filial'=> $i->id]) }}" class="btn btn-tool"><i class="fa fa-pen"></i> </a>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12 text-center" style="min-height: 150px">
+                <div style="min-height: 100px; align-content: center" class="">
+                  <img src="{{ url($i->logo_url) }}" alt="" srcset="" style="width: 100%">
+                </div>
+                <h4 for="">{{$i->nome}}</h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <a href="{{ route('processos.index', ['filial'=> $i->url]) }}" class="btn btn-primary btn-block"><i class="fa fa-eye "></i> Processos</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      @endcan
+  @endforeach
+    <!--<div class="col-12">
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">Filiais cadastradas</h3>
@@ -36,7 +62,7 @@
             </div>
           </div>
         </div>
-        <!-- /.card-header -->
+        <!-- /.card-header 
         <div class="card-body table-responsive p-0" style="height: 70vh;">
           <table class="table table-head-fixed text-nowrap">
             <thead>
@@ -65,14 +91,14 @@
             </tbody>
           </table>
         </div>
-        <!-- /.card-body -->
+        /.card-body 
 
-        <div class="card-footer clearfix">
-            {{ $filials->links() }}
+         /.card
+      </div>-->
+            <div class="card-footer clearfix">
+                {{ $filials->links() }}
+              </div>
           </div>
-      </div>
-      <!-- /.card -->
-    </div>
   </div>
 @stop
 

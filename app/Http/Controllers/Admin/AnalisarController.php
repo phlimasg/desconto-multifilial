@@ -26,8 +26,20 @@ class AnalisarController extends Controller
         $filial = Filial::where('url',$filial)->first();        
         $processo = $filial->ListarProcessos()->where('url',$processo)->first();
         $data = PublicAluno::where('processo_id', $processo->id)->get();
-        //dd($data);
-        return view('admin.analise.index',compact('filial','processo','data'));
+        
+        $deferidos = PublicAluno::where('status','Deferido')
+        ->where('processo_id',$processo->id)
+        ->selectRaw('desconto_deferido,count(*) as total')
+        ->groupBy('desconto_deferido')
+        ->orderBy('desconto_deferido','asc')
+        ->get();
+        $falta = PublicAluno::where('status','!=','Deferido')
+        ->where('processo_id',$processo->id)
+        ->selectRaw('status,count(*) as total')
+        ->groupBy('status')
+        ->orderBy('status','asc')
+        ->get();
+        return view('admin.analise.index',compact('filial','processo','data','deferidos','falta'));
     }
 
     /**

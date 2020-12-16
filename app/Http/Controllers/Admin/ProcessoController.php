@@ -26,7 +26,19 @@ class ProcessoController extends Controller
         $filial = Filial::where('url',$filial)->first();         
         $this->authorize('Filial', $filial,Auth::user());       
         $data = $filial->ListarProcessos()->latest()->paginate(5);
-        return view('admin.processo.index', compact('data','filial'));
+        $deferidos = PublicAluno::where('status','Deferido')
+        ->whereIn('processo_id',$filial->ListarProcessos()->select('id')->get())
+        ->selectRaw('desconto_deferido,count(*) as total')
+        ->groupBy('desconto_deferido')
+        ->orderBy('desconto_deferido','asc')
+        ->get();
+        $falta = PublicAluno::where('status','!=','Deferido')
+        ->whereIn('processo_id',$filial->ListarProcessos()->select('id')->get())
+        ->selectRaw('status,count(*) as total')
+        ->groupBy('status')
+        ->orderBy('status','asc')
+        ->get();
+        return view('admin.processo.index', compact('data','filial','deferidos','falta'));
     }
 
     /**
@@ -52,7 +64,7 @@ class ProcessoController extends Controller
         try {
             //dd($request->all());
             $filial = Filial::select('id')->where('url',$request->filial)->firstOrFail();            
-            Processo::create([
+            $processo = Processo::create([
                 'nome' => $request->nome,
                 'tipo' => $request->tipo,
                 'email' => $request->email,
@@ -60,7 +72,7 @@ class ProcessoController extends Controller
                 'periodo_fim' => $request->periodo_fim.' '.$request->hora_fim,
                 'filial_id' => $filial->id,
             ]);            
-            return redirect()->back()->with('message','Os dados foram salvos com sucesso!');
+            return redirect()->back()->with('message','Os dados foram salvos com sucesso!')->with($processo);
         } catch (\Exception $e) {
             return redirect()->back()->with('error',$e->getMessage());            
         }

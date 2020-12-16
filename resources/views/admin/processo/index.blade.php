@@ -6,7 +6,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Listagem de Processos</h1>
+          <h1>Processos</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -18,6 +18,33 @@
 @stop
 
 @section('content')
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card card-dark">
+      <div class="card-header">
+        <h3 class="card-title">Estatíticas</h3>
+  
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse">
+            <span><i class="fas fa-minus"></i> Expandir/Fechar <i class="fas fa-minus"></i></span>
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <canvas id="myChart"></canvas>
+          </div>
+          <div class="col-md-6">
+            <canvas id="donut"></canvas>
+          </div>
+        </div>
+      </div>
+      <!-- /.card-body -->
+    </div>
+  </div>
+</div>
 <div class="row">
     <div class="col-12">
       <div class="card">
@@ -145,5 +172,47 @@
             $('#loading').modal('hide')
             }, 5000)        
       }
+    
+      var ctx = document.getElementById('myChart').getContext('2d');
+      var chart = new Chart(ctx, {
+          // The type of chart we want to create
+          type: 'bar',
+
+          // The data for our dataset
+          data: {
+              labels: [@foreach($deferidos as $i)'{{$i->desconto_deferido}}',@endforeach
+                ],
+              datasets: [{
+                  label: 'Deferidos',
+                  backgroundColor: [@foreach($deferidos as $i)'rgb({{rand(0,255)}}, {{rand(0,255)}}, {{rand(0,255)}})',@endforeach],
+                  borderColor: 'rgb(255, 245, 245)',
+                  data: [@foreach($deferidos as $i){{$i->total}},@endforeach]
+              }]
+          },
+
+          // Configuration options go here
+          options: {}
+      });
+
+      var ctx = document.getElementById('donut').getContext('2d');
+      var chart = new Chart(ctx, {
+          // The type of chart we want to create
+          type: 'doughnut',
+
+          // The data for our dataset
+          data: {
+              labels: [@foreach($falta as $i)'{{$i->status}}',@endforeach
+                ],
+              datasets: [{
+                  label: 'Deferidos',
+                  backgroundColor: [@foreach($falta as $i)'rgb({{rand(0,255)}}, {{rand(0,255)}}, {{rand(0,255)}})',@endforeach],
+                  borderColor: 'rgb(255, 245, 245)',
+                  data: [@foreach($falta as $i){{$i->total}},@endforeach]
+              }]
+          },
+
+          // Configuration options go here
+          options: {}
+      });
     </script>
 @stop

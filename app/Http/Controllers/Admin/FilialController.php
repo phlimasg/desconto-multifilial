@@ -24,7 +24,7 @@ class FilialController extends Controller
      */
     public function index()
     {
-        $filials = $this->repository->latest()->paginate(5);        
+        $filials = $this->repository->orderBy('nome')->paginate(5);        
         return view('admin.filial.index', compact('filials'));        
     }
 
