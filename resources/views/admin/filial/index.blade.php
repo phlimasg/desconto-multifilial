@@ -30,7 +30,7 @@
           </div>
           <div class="card-body">
             <div class="row">
-              <div class="col-sm-12 text-center" style="min-height: 150px">
+              <div class="col-sm-12 text-center" style="min-height: 150px;">
                 <div style="min-height: 100px; align-content: center" class="">
                   <img src="{{ url($i->logo_url) }}" alt="" srcset="" style="width: 100%">
                 </div>
