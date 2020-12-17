@@ -28,9 +28,9 @@ class ProcessoController extends Controller
         $data = $filial->ListarProcessos()->latest()->paginate(5);
         $deferidos = PublicAluno::where('status','Deferido')
         ->whereIn('processo_id',$filial->ListarProcessos()->select('id')->get())
-        ->selectRaw('desconto_deferido,count(*) as total')
+        ->selectRaw('REPLACE(desconto_deferido, "%", "") as desconto_deferido,count(*) as total')
         ->groupBy('desconto_deferido')
-        ->orderBy('desconto_deferido','asc')
+        ->orderByRaw('desconto_deferido * 1 asc')
         ->get();
         $falta = PublicAluno::where('status','!=','Deferido')
         ->whereIn('processo_id',$filial->ListarProcessos()->select('id')->get())

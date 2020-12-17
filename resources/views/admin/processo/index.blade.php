@@ -177,10 +177,10 @@
       var chart = new Chart(ctx, {
           // The type of chart we want to create
           type: 'bar',
-
+          
           // The data for our dataset
           data: {
-              labels: [@foreach($deferidos as $i)'{{$i->desconto_deferido}}',@endforeach
+              labels: [@foreach($deferidos as $i)'{{$i->desconto_deferido}}%',@endforeach
                 ],
               datasets: [{
                   label: 'Deferidos',

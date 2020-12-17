@@ -29,9 +29,9 @@ class AnalisarController extends Controller
         
         $deferidos = PublicAluno::where('status','Deferido')
         ->where('processo_id',$processo->id)
-        ->selectRaw('desconto_deferido,count(*) as total')
+        ->selectRaw('REPLACE(desconto_deferido, "%", "") as desconto_deferido,count(*) as total')
         ->groupBy('desconto_deferido')
-        ->orderBy('desconto_deferido','asc')
+        ->orderByRaw('desconto_deferido * 1 asc')
         ->get();
         $falta = PublicAluno::where('status','!=','Deferido')
         ->where('processo_id',$processo->id)
