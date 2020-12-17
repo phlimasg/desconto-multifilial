@@ -33,8 +33,10 @@ class AnalisarController extends Controller
         ->groupBy('desconto_deferido')
         ->orderByRaw('desconto_deferido * 1 asc')
         ->get();
-        $falta = PublicAluno::where('status','!=','Deferido')
-        ->where('processo_id',$processo->id)
+        $falta = PublicAluno::
+        //where('status','!=','Deferido')
+        //->
+        where('processo_id',$processo->id)
         ->selectRaw('status,count(*) as total')
         ->groupBy('status')
         ->orderBy('status','asc')

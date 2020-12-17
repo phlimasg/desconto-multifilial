@@ -32,8 +32,10 @@ class ProcessoController extends Controller
         ->groupBy('desconto_deferido')
         ->orderByRaw('desconto_deferido * 1 asc')
         ->get();
-        $falta = PublicAluno::where('status','!=','Deferido')
-        ->whereIn('processo_id',$filial->ListarProcessos()->select('id')->get())
+        $falta = PublicAluno::
+        //where('status','!=','Deferido')
+        //->
+        whereIn('processo_id',$filial->ListarProcessos()->select('id')->get())
         ->selectRaw('status,count(*) as total')
         ->groupBy('status')
         ->orderBy('status','asc')
