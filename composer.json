@@ -15,6 +15,8 @@
         "laravel/framework": "^6.18.35",
         "laravel/socialite": "^5.0",
         "laravel/tinker": "^2.0",
+        "league/flysystem": "1.0.70",
+        "league/flysystem-aws-s3-v3": "1.0.29",
         "maatwebsite/excel": "^3.1",
         "unisharp/laravel-filemanager": "^2.1"
     },
